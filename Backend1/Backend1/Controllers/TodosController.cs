@@ -48,13 +48,13 @@ namespace APIWithDatabase.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Note>> GetNote(int id)
+        public ActionResult<Note> GetNote(int id)
         {
             if (_database.Notes == null)
             {
                 return NotFound();
             }
-            var note = await _database.Notes.FindAsync(id);
+            var note = _database.Notes.Find(id);
 
             if (note == null)
             {
@@ -65,7 +65,7 @@ namespace APIWithDatabase.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<ActionResult> UpdateNote(int Id, [FromBody] Note note)
+        public ActionResult UpdateNote(int Id, [FromBody] Note note)
         {
             if (Id != note.Id)
             {
@@ -73,45 +73,45 @@ namespace APIWithDatabase.Controllers
             }
 
             _database.Entry(note).State = EntityState.Modified;
-            await _database.SaveChangesAsync();
+            _database.SaveChanges();
 
             return Ok(note);
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ActionResult> DeleteNote(int Id)
+        public ActionResult DeleteNote(int Id)
         {
-            var note = await _database.Notes.FindAsync(Id);
+            var note = _database.Notes.FindAsync(Id);
 
             if (note == null)
             {
                 return NotFound();
             }
 
-            _database.Notes.Remove(note);
-            await _database.SaveChangesAsync();
+            _database.Notes.RemoveRange();
+            _database.SaveChangesAsync();
 
             return Ok(note);
         }
 
         [HttpPost("toggle-all")]
-        public async Task<ActionResult> ToggleAll()
+        public ActionResult ToggleAll()
         {
             var allDone = _database.Notes.All(n => n.IsDone);
             foreach (var note in _database.Notes)
             {
                 note.IsDone = !allDone;
             }
-            await _database.SaveChangesAsync();
+            _database.SaveChangesAsync();
             return Ok();
         }
 
         [HttpPost("clear-completed")]
-        public async Task<ActionResult> ClearCompleted()
+        public ActionResult ClearCompleted()
         {
             var completedNotes = _database.Notes.Where(n => n.IsDone);
             _database.Notes.RemoveRange(completedNotes);
-            await _database.SaveChangesAsync();
+            _database.SaveChangesAsync();
             return Ok();
         }
     }
