@@ -18,13 +18,18 @@ namespace APIWithDatabase.Controllers
         }
 
         [HttpGet("notes")]
-        public async Task<ActionResult<IEnumerable<Note>>> GetNote()
+        public ActionResult<IEnumerable<Note>> GetNotes(bool? completed)
         {
-            if (_database.Notes == null)
+            IQueryable<Note> query = _database.Notes;
+
+            if (completed.HasValue)
             {
-                return NotFound();
+                query = query.Where(n => n.Completed == !completed.Value);
             }
-            return await _database.Notes.ToListAsync();
+
+            var notes = query.ToList();
+
+            return Ok(notes);
         }
 
         [HttpPost("notes")]
@@ -64,55 +69,62 @@ namespace APIWithDatabase.Controllers
             return note;
         }
 
-        [HttpPut("{Id}")]
-        public ActionResult UpdateNote(int Id, [FromBody] Note note)
+        [HttpDelete("{id}")]
+        public ActionResult DeleteNote(int id)
         {
-            if (Id != note.Id)
-            {
-                return BadRequest();
-            }
-
-            _database.Entry(note).State = EntityState.Modified;
-            _database.SaveChanges();
-
-            return Ok(note);
-        }
-
-        [HttpDelete("{Id}")]
-        public ActionResult DeleteNote(int Id)
-        {
-            var note = _database.Notes.FindAsync(Id);
-
+            var note = _database.Notes.Find(id);
             if (note == null)
             {
                 return NotFound();
             }
 
-            _database.Notes.RemoveRange();
-            _database.SaveChangesAsync();
+            _database.Notes.Remove(note);
+            _database.SaveChanges();
 
-            return Ok(note);
+            return NoContent();
         }
 
         [HttpPost("toggle-all")]
-        public ActionResult ToggleAll()
+        public ActionResult ToggleAllNotes()
         {
-            var allDone = _database.Notes.All(n => n.IsDone);
-            foreach (var note in _database.Notes)
+            var allNotes = _database.Notes.ToList();
+            bool toggleToCompleted = allNotes.All(n => n.Completed);
+
+            foreach (var note in allNotes)
             {
-                note.IsDone = !allDone;
+                note.Completed = !toggleToCompleted;
+                _database.Entry(note).State = EntityState.Modified;
             }
-            _database.SaveChangesAsync();
-            return Ok();
+
+            _database.SaveChanges();
+
+            return NoContent();
         }
 
+
         [HttpPost("clear-completed")]
-        public ActionResult ClearCompleted()
+        public ActionResult ClearCompletedNotes()
         {
-            var completedNotes = _database.Notes.Where(n => n.IsDone);
+            var completedNotes = _database.Notes.Where(n => n.Completed).ToList();
             _database.Notes.RemoveRange(completedNotes);
-            _database.SaveChangesAsync();
-            return Ok();
+            _database.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpGet("{completed}")]
+        public IActionResult GetCompletedNotes(bool? completed)
+        {
+            IQueryable<Note> query = _database.Notes;
+
+            if (completed.HasValue)
+            {
+                query = query.Where(n => n.Completed == completed.Value);
+            }
+
+            var notes = query.ToList();
+
+            return Ok(notes);
         }
     }
 }
