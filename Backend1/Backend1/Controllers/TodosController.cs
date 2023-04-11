@@ -3,10 +3,11 @@ using Backend1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace TodoApp.Controllers
+
+namespace APIWithDatabase.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("")]
     public class NotesController : ControllerBase
     {
         private readonly TodoContext _database;
@@ -16,65 +17,72 @@ namespace TodoApp.Controllers
             _database = database;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Note>>> GetNotes(bool? completed)
+        [HttpGet("notes")]
+        public async Task<ActionResult<IEnumerable<Note>>> GetNote()
         {
-            var notes = _database.Notes.AsQueryable();
-            if (completed.HasValue)
+            if (_database.Notes == null)
             {
-                notes = notes.Where(n => n.IsDone == completed.Value);
+                return NotFound();
             }
-            return await notes.ToListAsync();
+            return await _database.Notes.ToListAsync();
+        }
+
+        [HttpPost("notes")]
+        public ActionResult<Note> PostNote(Note note)
+        {
+            if (_database.Notes == null)
+            {
+                return NotFound();
+            }
+            _database.Notes.Add(note);
+            _database.SaveChanges();
+
+            return Ok();
         }
 
         [HttpGet("remaining")]
-        public async Task<ActionResult<int>> GetRemaining()
+        public ActionResult GetRemaining()
         {
-            return await _database.Notes.CountAsync(n => !n.IsDone);
+            var remaining = _database.Notes.Count(n => !n.IsDone);
+            return Ok(remaining);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutNote(long id, Note note)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Note>> GetNote(int id)
         {
-            if (id != note.Id)
+            if (_database.Notes == null)
+            {
+                return NotFound();
+            }
+            var note = await _database.Notes.FindAsync(id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            return note;
+        }
+
+        [HttpPut("{Id}")]
+        public async Task<ActionResult> UpdateNote(int Id, [FromBody] Note note)
+        {
+            if (Id != note.Id)
             {
                 return BadRequest();
             }
 
             _database.Entry(note).State = EntityState.Modified;
-
-            try
-            {
-                await _database.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_database.Notes.Any(n => n.Id == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Note>> PostNote(Note note)
-        {
-            _database.Notes.Add(note);
             await _database.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetNotes), new { id = note.Id }, note);
+            return Ok(note);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNote(long id)
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> DeleteNote(int Id)
         {
-            var note = await _database.Notes.FindAsync(id);
+            var note = await _database.Notes.FindAsync(Id);
+
             if (note == null)
             {
                 return NotFound();
@@ -83,30 +91,28 @@ namespace TodoApp.Controllers
             _database.Notes.Remove(note);
             await _database.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(note);
         }
 
         [HttpPost("toggle-all")]
-        public async Task<IActionResult> ToggleAll()
+        public async Task<ActionResult> ToggleAll()
         {
-            var allDone = await _database.Notes.AllAsync(n => n.IsDone);
-            await _database.Notes.ForEachAsync(n => n.IsDone = !allDone);
+            var allDone = _database.Notes.All(n => n.IsDone);
+            foreach (var note in _database.Notes)
+            {
+                note.IsDone = !allDone;
+            }
             await _database.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPost("clear-completed")]
-        public async Task<IActionResult> ClearCompleted()
+        public async Task<ActionResult> ClearCompleted()
         {
-            var completedNotes = await _database.Notes.Where(n => n.IsDone).ToListAsync();
+            var completedNotes = _database.Notes.Where(n => n.IsDone);
             _database.Notes.RemoveRange(completedNotes);
             await _database.SaveChangesAsync();
-            return NoContent();
-        }
-
-        private bool NoteExists(long id)
-        {
-            return _database.Notes.Any(e => e.Id == id);
+            return Ok();
         }
     }
 }

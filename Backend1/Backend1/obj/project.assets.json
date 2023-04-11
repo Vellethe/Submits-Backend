@@ -2231,11 +2231,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\Backend1\\Backend1\\Backend1.csproj",
+      "projectUniqueName": "C:\\Users\\User\\OneDrive\\Dokument\\GitHub\\Submits-Backend\\Backend1\\Backend1\\Backend1.csproj",
       "projectName": "Backend1",
-      "projectPath": "C:\\Users\\User\\source\\repos\\Backend1\\Backend1\\Backend1.csproj",
+      "projectPath": "C:\\Users\\User\\OneDrive\\Dokument\\GitHub\\Submits-Backend\\Backend1\\Backend1\\Backend1.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\Backend1\\Backend1\\obj\\",
+      "outputPath": "C:\\Users\\User\\OneDrive\\Dokument\\GitHub\\Submits-Backend\\Backend1\\Backend1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

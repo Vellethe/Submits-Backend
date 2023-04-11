@@ -5,7 +5,6 @@ namespace Backend.Data
 {
     public class TodoContext : DbContext
     {
-        public DbSet<Note> Todos { get; set; }
 
         public TodoContext(DbContextOptions<TodoContext> options)
             : base(options)

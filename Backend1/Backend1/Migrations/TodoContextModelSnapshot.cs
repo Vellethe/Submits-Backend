@@ -37,7 +37,7 @@ namespace Backend1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Note");
+                    b.ToTable("Notes");
                 });
 #pragma warning restore 612, 618
         }
