@@ -24,13 +24,14 @@ namespace APIWithDatabase.Controllers
 
             if (completed.HasValue)
             {
-                query = query.Where(n => n.Completed == !completed.Value);
+                query = query.Where(n => n.Completed == completed.Value);
             }
 
             var notes = query.ToList();
 
             return Ok(notes);
         }
+
 
         [HttpPost("notes")]
         public ActionResult<Note> PostNote(Note note)
@@ -52,7 +53,7 @@ namespace APIWithDatabase.Controllers
             return Ok(remaining);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/notes/{id}")]
         public ActionResult<Note> GetNote(int id)
         {
             if (_database.Notes == null)
@@ -69,7 +70,24 @@ namespace APIWithDatabase.Controllers
             return note;
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("/notes/{id}")]
+        public ActionResult<Note> UpdateStatus(int id, [FromBody] Note updatedNote)
+        {
+            var note = _database.Notes.Find(id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            note.Completed = updatedNote.Completed;
+            _database.Entry(note).State = EntityState.Modified;
+            _database.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpDelete("/notes/{id}")]
         public ActionResult DeleteNote(int id)
         {
             var note = _database.Notes.Find(id);
@@ -92,13 +110,13 @@ namespace APIWithDatabase.Controllers
 
             foreach (var note in allNotes)
             {
-                note.Completed = !toggleToCompleted;
+                note.Completed = toggleToCompleted;
                 _database.Entry(note).State = EntityState.Modified;
             }
 
             _database.SaveChanges();
 
-            return NoContent();
+            return Ok(allNotes);
         }
 
 
@@ -113,7 +131,7 @@ namespace APIWithDatabase.Controllers
         }
 
         [HttpGet("{completed}")]
-        public IActionResult GetCompletedNotes(bool? completed)
+        public ActionResult GetCompletedNotes(bool? completed)
         {
             IQueryable<Note> query = _database.Notes;
 
