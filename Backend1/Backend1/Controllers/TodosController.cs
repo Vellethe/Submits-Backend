@@ -24,7 +24,7 @@ namespace APIWithDatabase.Controllers
 
             if (completed.HasValue)
             {
-                query = query.Where(n => n.Completed == completed.Value);
+                query = query.Where(n => n.IsDone == completed.Value);
             }
 
             var notes = query.ToList();
@@ -80,7 +80,8 @@ namespace APIWithDatabase.Controllers
                 return NotFound();
             }
 
-            note.Completed = updatedNote.Completed;
+            note.IsDone = updatedNote.IsDone;
+            //_database.Notes.Update(note);
             _database.Entry(note).State = EntityState.Modified;
             _database.SaveChanges();
 
@@ -106,11 +107,11 @@ namespace APIWithDatabase.Controllers
         public ActionResult ToggleAllNotes()
         {
             var allNotes = _database.Notes.ToList();
-            bool toggleToCompleted = allNotes.All(n => n.Completed);
+            bool toggleToCompleted = allNotes.Any(n => !n.IsDone);
 
             foreach (var note in allNotes)
             {
-                note.Completed = toggleToCompleted;
+                note.IsDone = toggleToCompleted;
                 _database.Entry(note).State = EntityState.Modified;
             }
 
@@ -123,7 +124,7 @@ namespace APIWithDatabase.Controllers
         [HttpPost("clear-completed")]
         public ActionResult ClearCompletedNotes()
         {
-            var completedNotes = _database.Notes.Where(n => n.Completed).ToList();
+            var completedNotes = _database.Notes.Where(n => n.IsDone).ToList();
             _database.Notes.RemoveRange(completedNotes);
             _database.SaveChanges();
 
@@ -137,7 +138,7 @@ namespace APIWithDatabase.Controllers
 
             if (completed.HasValue)
             {
-                query = query.Where(n => n.Completed == completed.Value);
+                query = query.Where(n => n.IsDone == completed.Value);
             }
 
             var notes = query.ToList();

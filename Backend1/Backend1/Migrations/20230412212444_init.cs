@@ -15,8 +15,7 @@ namespace Backend1.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
-                    Completed = table.Column<bool>(type: "bit", nullable: false)
+                    IsDone = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
