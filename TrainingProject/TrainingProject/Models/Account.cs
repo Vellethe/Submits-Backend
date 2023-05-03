@@ -10,7 +10,8 @@
         public int Height { get; set; }
         public int CurentWeight {get; set; }
         public bool IsMale { get; set; }
-
+        public int TargetWeight { get; set; }
+        public DateTime TargetDate { get; set; }
 
     }
 }
