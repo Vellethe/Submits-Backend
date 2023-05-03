@@ -32,13 +32,34 @@ namespace TrainingProject.Pages.Workout
             else
             {
                 SelectedWorkout = context.Workouts.Include(x=>x.WorkoutExecises).ThenInclude(x=>x.Exercise).Where(x=>Id == x.Id).FirstOrDefault();
-                Exercises = context.Exercises.ToList();
                 if(SelectedWorkout == null)
                 {
                     return NotFound();
                 }
+                Exercises = context.Exercises.Where(x=>!SelectedWorkout.WorkoutExecises.Select(y=>y.Exercise).Contains(x)).ToList();
             }
             return Page();
+        }
+
+        public IActionResult OnPost(int id, int intesnity, int exersieId)
+        { 
+            Id = id;
+
+            SelectedWorkout = context.Workouts.Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
+            if (SelectedWorkout == null)
+            {
+                return NotFound();
+            }
+            SelectedWorkout.WorkoutExecises.Add(new WorkoutExecise
+            {
+                Workout = SelectedWorkout,
+                Intensity = intesnity,
+                Exercise = context.Exercises.Find(exersieId)
+            });
+            context.SaveChanges();
+
+
+            return Redirect($"./{SelectedWorkout.Id}");
         }
     }
 }

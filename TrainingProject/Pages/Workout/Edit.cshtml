@@ -41,17 +41,34 @@
             <td>Name</td>
             <td>Muscle Group</td>
             <td>Description</td>
+            <td>Intensity</td>
+            <td>Add button</td>
 
         </tr>
     </thead>
     <tbody>
         @foreach(var exersie in Model.Exercises)
         {
+            <form method="post">
+
             <tr>
                 <td>@exersie.Name</td>
                 <td>@exersie.MuscleGroup</td>
                 <td>@exersie.Description</td>
+                <td>
+                <select name="intesnity">
+                    <option value="3">High</option>
+                    <option value="2">Medium</option>
+                    <option value="1">Low</option>
+                </select>
+                </td>
+                <td>
+                    <input type="hidden" value="@exersie.Id" name="exersieId">
+                    <button type="submit">add to workout</button>
+                </td>
             </tr>
+
+            </form>
         }
     </tbody>
 </table>
