@@ -29,6 +29,21 @@ namespace TrainingProject.Data
                     Name = "Will"
                 });
             }
+            if (!database.Exercises.Any())
+            {
+                database.Exercises.Add(new Exercise
+                {
+                    Description = "armhävning",
+                    MuscleGroup = "armar",
+                    Name = "armhävning"
+                });
+                database.Exercises.Add(new Exercise
+                {
+                    Description = "testing",
+                    MuscleGroup = "armar",
+                    Name = "testing"
+                });
+            }
 
             database.SaveChanges();
         }
