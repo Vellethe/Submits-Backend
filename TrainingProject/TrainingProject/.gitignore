@@ -2,7 +2,6 @@
 bin/
 obj/
 *.csproj.user
-TrainingProject
 Migrations/
 .vscode/
 appsettings.Development.json
