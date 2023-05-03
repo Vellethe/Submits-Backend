@@ -12,6 +12,7 @@
         public bool IsMale { get; set; }
         public int TargetWeight { get; set; }
         public DateTime TargetDate { get; set; }
+        public virtual List<Workout> Workouts { get; set; }
 
     }
 }
