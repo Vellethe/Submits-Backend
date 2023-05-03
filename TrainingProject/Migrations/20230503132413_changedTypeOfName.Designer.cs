@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingProject.Data;
 
@@ -11,9 +12,10 @@ using TrainingProject.Data;
 namespace TrainingProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230503132413_changedTypeOfName")]
+    partial class changedTypeOfName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace TrainingProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts", (string)null);
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Exercise", b =>
@@ -87,7 +89,7 @@ namespace TrainingProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercises", (string)null);
+                    b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>
@@ -109,7 +111,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Workouts", (string)null);
+                    b.ToTable("Workouts");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.WorkoutExecise", b =>
@@ -135,7 +137,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("WorkoutExecises", (string)null);
+                    b.ToTable("WorkoutExecises");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>

@@ -1,0 +1,31 @@
+﻿@page 
+@model TrainingProject.Pages.Workout.IndexModel
+@{
+
+}
+
+<form>
+    
+</form>
+<a asp-page="Edit">testing</a>
+
+<table>
+    <thead>
+<tr>
+    <th>Name</th>
+    <th><a>Link to edit</a></th>
+    <th><a>Link to show</a></th>
+</tr>
+    </thead>
+    @foreach(var workout in Model.Workouts)
+    {
+        <tr>
+            <th>@workout.Name</th>
+            <th><a></a></th>
+            <th><a></a></th>
+        </tr>
+    }
+
+</table>
+
+

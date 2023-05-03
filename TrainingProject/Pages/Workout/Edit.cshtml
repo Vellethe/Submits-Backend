@@ -1,0 +1,57 @@
+﻿@page "{id:int?}"
+@model TrainingProject.Pages.Workout.EditModel
+@{
+
+}
+
+<h1>@Model.Id</h1>
+
+
+
+<h2>Exercises in wokout</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Muscle Group</td>
+            <td>Description</td>
+            <td>Intensity</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
+        {
+            <tr>
+                <td>@workoutExercise.Exercise.Name</td>
+                <td>@workoutExercise.Exercise.MuscleGroup</td>
+                <td>@workoutExercise.Exercise.Description</td>
+                <td>@workoutExercise.Intensity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<h2>Exercises to chose from</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Muscle Group</td>
+            <td>Description</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var exersie in Model.Exercises)
+        {
+            <tr>
+                <td>@exersie.Name</td>
+                <td>@exersie.MuscleGroup</td>
+                <td>@exersie.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
