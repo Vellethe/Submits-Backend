@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2klK9fu7+U2BJ3Tac4sEKgAAAAACAAAAAAAQZgAAAAEAACAAAAA/osKQ3pz8KSLFs7fgmetoKc478hoJqHcpzM5eIkVrWwAAAAAOgAAAAAIAACAAAACMgTIVcrZrFyoR1Auyv/Mu5ocjiWBLzNjMFsZUqU3BA4AAAADbvyrfPE5WC9nw0J0LiJM+7NHQrdEyXgigWnXFDjN9lum6R9aOROrDCimCVgKXv8JSq6dcC23W0P/uRm8V0LRPbeZjZ8jwVs2X8/zWtrIha3JPf83Fz1lcsc78yGwlY8ZnktLphBJsYa9FhGB9hniJCWhWibUtqAqkpS7SrwyIa0AAAADjljPHVKdizSXEsVOpz5/v49XL9rG00NbkOKQiNGKnGSkVJVgZZTUBRGhvRNB/yCxNgk7JmTt8SOldJgI491vR</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="TrainingProject.Data.AppDbContext">
+      <Value>Data Source=tcp:workoutproject.database.windows.net,1433%3bInitial Catalog=workoutStorage%3bUser Id=strongMan%40workoutproject%3bPassword=84SeCE5Zh%25a%2am%24</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
