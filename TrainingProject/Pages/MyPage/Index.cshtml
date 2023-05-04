@@ -1,0 +1,43 @@
+﻿@page
+@model TrainingProject.Pages.MyPage.IndexModel
+@{
+
+}
+
+<h1>My Page</h1>
+<h2>@Model.loggedInID</h2>
+
+<form method="post">
+	<table>
+		<tr>
+			<lable for="age">Age</lable>
+			<input id="age" type="number" name="age" />
+		</tr>
+		<tr>
+			<lable for="height">Height in cm</lable>
+			<input id="height" type="number" name="height" />
+		</tr>
+		<tr>
+			<lable for="weight">Weight</lable>
+			<input id="weight" type="number" name="curentweight" />
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<lable for="gender">Gender</lable>
+			<select id="gender" name="gender">
+				<option value="true">Male</option>
+				<option value="false">Female</option>
+			</select>
+		</tr>
+		<tr>
+			<lable for="targetWeight">Goal Weight</lable>
+			<input id="targetWeight" type="number" name="targetWeight" />
+		</tr>
+		<tr>
+			<lable for="targetDate">Goal Date</lable>
+			<input id="targetDate" type="date" name="targetDate" />
+		</tr>
+	</table>
+	<button type="submit">Submit</button>
+</form>
