@@ -1,12 +1,10 @@
-﻿#containerValue {
-    font-weight: bold;
-    font-size: 20px;
-    display: grid;
-    grid-template:
-        "a b c"
+﻿body {
+    width: 90%;
+    margin-left: 5%;
 }
-
-#containerGoal {
+#containerValue {
+    text-align: center;
+    position: relative;
     font-weight: bold;
     font-size: 20px;
     display: grid;
@@ -15,6 +13,22 @@
         "b"
         "c"
 }
+
+#containerGoal {
+    margin-top: 2%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template:
+        "a b c"
+}
+
+#myPageSubmit {
+    margin-top: 1%;
+}
+
 #graph {
     margin-top: 10%;
     font-size: 30px;
