@@ -8,6 +8,7 @@ namespace TrainingProject.Pages.MyPage
 	public class IndexModel : PageModel
 	{
 		public int loggedInID { get; set; }
+		public Account Account { get; set; }
 
 		private readonly AppDbContext context;
 		public IndexModel(AppDbContext context, AccessControl access)
@@ -32,7 +33,7 @@ namespace TrainingProject.Pages.MyPage
 
 			context.SaveChanges();
 
-			return Page();
+			return RedirectToPage();
 		}
 	}
 }
