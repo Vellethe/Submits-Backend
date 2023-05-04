@@ -4,40 +4,65 @@
 
 }
 
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/MyPage.css">
 <h1>My Page</h1>
 
 <form method="post">
-	<table>
-		<tr>
-			<lable for="age">Age</lable>
-			<input id="age" type="number" name="age" />
-		</tr>
-		<tr>
-			<lable for="height">Height in cm</lable>
-			<input id="height" type="number" name="height" />
-		</tr>
-		<tr>
-			<lable for="weight">Weight</lable>
-			<input id="weight" type="number" name="weight" />
-		</tr>
-	</table>
-	<table>
-		<tr>
-			<lable for="gender">Gender</lable>
-			<select id="gender" name="gender">
-				<option value="true">Male</option>
-				<option value="false">Female</option>
-			</select>
-		</tr>
-		<tr>
-			<lable for="targetWeight">Goal Weight</lable>
-			<input id="targetWeight" type="number" name="targetWeight" />
-		</tr>
-		<tr>
-			<lable for="targetDate">Goal Date</lable>
-			<input id="targetDate" type="date" name="targetDate" />
-		</tr>
-	</table>
-	<button type="submit">Submit</button>
+    <div id="containerValue">
+        <table>
+            <tr>
+                <lable for="age">Age</lable>
+                <lable for="height">Height in cm</lable>
+                <lable for="weight">Weight in kg</lable>
+            </tr>
+            <tr>
+                <input id="age" type="number" name="age" />
+                <input id="height" type="number" name="height" />
+                <input id="weight" type="number" name="weight" />
+            </tr>
+        </table>
+    </div>
+    <div id="containerGoal">
+        <table>
+            <tr>
+                <lable for="gender">Gender</lable>
+                <select id="gender" name="gender">
+                    <option value="true">Male</option>
+                    <option value="false">Female</option>
+                </select>
+            </tr>
+            <tr>
+                <lable for="goal">Goal</lable>
+                <select id="goal" name="goal">
+                    <option value="lw">Lose Weight</option>
+                    <option value="m">Maintain</option>
+                    <option value="bm">Build Muscle</option>
+                </select>
+            </tr>
+            <tr>
+                <lable for="targetWeight">Goal Weight</lable>
+                <input id="targetWeight" type="number" name="targetWeight" />
+            </tr>
+            <tr>
+                <lable for="targetDate">Goal Date</lable>
+                <input id="targetDate" type="date" name="targetDate" />
+            </tr>
+        </table>
+    </div>
+    <button type="submit">Submit</button>
 </form>
+@if (Model.calorieCount == 0)
+{
+    <script>alert('For an individual of your height, your goal weight would put you in the underweight BMI category.');</script>
+}
+
+<p>Daily Calories: @if (Model.calorieCount > 0) { @Model.calorieCount } </p>
+
+
+
+@*--------Graph Here-----------*@
+
+
+
 <a asp-page="/Index">Start Page</a>

@@ -8,13 +8,15 @@ namespace TrainingProject.Pages.MyPage
 	public class IndexModel : PageModel
 	{
 		public int loggedInID { get; set; }
-		public Account Account { get; set; }
+		public double? calorieCount { get; set; }
+		public Account account { get; set; }
 
 		private readonly AppDbContext context;
 		public IndexModel(AppDbContext context, AccessControl access)
 		{
 			this.context = context;
 			loggedInID = access.LoggedInAccountID;
+			account = new Account();
 		}
 		public void OnGet()
 		{
@@ -33,7 +35,9 @@ namespace TrainingProject.Pages.MyPage
 
 			context.SaveChanges();
 
-			return RedirectToPage();
+			calorieCount = account.CalorieCalculator(user);
+
+            return Page();
 		}
 	}
 }
