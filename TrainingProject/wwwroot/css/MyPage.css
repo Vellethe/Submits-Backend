@@ -1,0 +1,22 @@
+﻿#containerValue {
+    font-weight: bold;
+    font-size: 20px;
+    display: grid;
+    grid-template:
+        "a b c"
+}
+
+#containerGoal {
+    font-weight: bold;
+    font-size: 20px;
+    display: grid;
+    grid-template:
+        "a"
+        "b"
+        "c"
+}
+#graph {
+    margin-top: 10%;
+    font-size: 30px;
+}
+

@@ -4,10 +4,13 @@
 
 }
 
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/MyPage.css">
 <h1>My Page</h1>
 <h2>@Model.loggedInID</h2>
 
 <form method="post">
+	<div id="containerValue">
 	<table>
 		<tr>
 			<lable for="age">Age</lable>
@@ -22,6 +25,8 @@
 			<input id="weight" type="number" name="weight" />
 		</tr>
 	</table>
+	</div>
+	<div id="containerGoal">
 	<table>
 		<tr>
 			<lable for="gender">Gender</lable>
@@ -39,6 +44,7 @@
 			<input id="targetDate" type="date" name="targetDate" />
 		</tr>
 	</table>
+	</div>
 	<button type="submit">Submit</button>
 </form>
 <a asp-page="/Index">Start Page</a>
