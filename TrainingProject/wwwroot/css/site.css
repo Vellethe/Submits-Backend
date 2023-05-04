@@ -1,5 +1,14 @@
 body {
     text-align: center;
     background-color: #A9A9A9;
-    margin: 0;
+}
+
+#StartPage {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+ul {
+    list-style-type: none;
+    font-size: 25px;
 }
