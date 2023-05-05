@@ -1,4 +1,5 @@
 ﻿@page "{id:int?}"
+@using TrainingProject.Models;
 @model TrainingProject.Pages.Workout.EditModel
 @{
 
@@ -8,8 +9,10 @@
 <link rel="stylesheet" href="~/css/Workout.css">
 
 <h1>@Model.Id</h1>
-
-
+<form method="post" asp-page-handler="ChangeName">
+    <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name"/>
+    <button type="submit">Change name</button>
+</form>
 
 <h2>Exercises in wokout</h2>
 <table>
@@ -32,10 +35,7 @@
                 <td>@workoutExercise.Exercise.Description</td>
                 <td>
                     <form method="post" asp-page-handler="change">
-                        <select name="intesnity" onchange="this.form.submit()">
-                            <option value="3">High</option>
-                            <option value="2" selected>Medium</option>
-                            <option value="1">Low</option>
+                        <select name="intesnity" onchange="this.form.submit()" asp-for="@workoutExercise.Intensity" asp-items="@(Html.GetEnumSelectList<InetensityLevel>())">
                         </select>
                         <input type="hidden" value="@workoutExercise.Id" name="workoutExerciseId">
                     </form>
@@ -91,3 +91,4 @@
         }
     </tbody>
 </table>
+<a id="StartPage" asp-page="/Index">Start Page</a>

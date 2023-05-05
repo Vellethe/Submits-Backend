@@ -19,9 +19,10 @@
     </thead>
     @foreach (var workout in Model.Workouts)
     {
+        //TODO change links to buttons
         <tr>
             <th>@workout.Name</th>
-            <th><a></a></th>
+            <th><a asp-page="Edit" asp-route-id="@workout.Id">edit test</a></th>
             <th><a></a></th>
         </tr>
     }
