@@ -32,6 +32,10 @@
             <p id="goalWeight">@Model.user.TargetWeight kg</p>
         </tr>
         <tr>
+            <label id="goalLabel" for="goal">Goal: </label>
+            <p id="goal">@Model.user.Goal</p>
+        </tr>
+        <tr>
             <label for="dailyCalories">Daily Calories: </label>
             <p id="dailyCalories">@Model.calorieCount.FinishedBMR kcal</p>
         </tr>
@@ -72,9 +76,9 @@
                     <tr>
                         <label for="goal">Goal</label>
                         <select id="goal" name="goal">
-                            <option value="lw">Lose Weight</option>
-                            <option value="m">Maintain</option>
-                            <option value="bm">Build Muscle</option>
+                            <option value="Lose Weight">Lose Weight</option>
+                            <option value="Maintain">Maintain</option>
+                            <option value="Build Muscle">Build Muscle</option>
                         </select>
                     </tr>
                     <tr>
@@ -86,15 +90,11 @@
             <button type="submit">Submit</button>
         </form>
     </details>
+
     @if (Model.calorieCount.FinishedBMR == "0")
     {
         <script>alert('For an individual of your height, your goal weight would put you in the underweight BMI category.');</script>
     }
-
-
-
-    
-
 
     <a id="StartPage" asp-page="/Index">Start Page</a>
 </div>

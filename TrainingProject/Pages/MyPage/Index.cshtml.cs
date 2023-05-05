@@ -22,7 +22,7 @@ namespace TrainingProject.Pages.MyPage
         }
 		public void OnGet()
 		{
-			calorieCount = account.CalorieCalculator(user, "lw");
+			calorieCount = account.CalorieCalculator(user);
         }
 
 		public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight)
@@ -34,10 +34,11 @@ namespace TrainingProject.Pages.MyPage
 			user.CurentWeight = weight;
 			user.IsMale = gender;
 			user.TargetWeight = targetWeight;
+			user.Goal = goal;
 
 			context.SaveChanges();
 
-			calorieCount = account.CalorieCalculator(user, goal);
+			calorieCount = account.CalorieCalculator(user);
 
             return Page();
 		}
