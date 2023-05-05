@@ -9,9 +9,15 @@
 <link rel="stylesheet" href="~/css/Workout.css">
 
 <h1>@Model.Id</h1>
-<form method="post" asp-page-handler="ChangeName">
+<form method="post" asp-page-handler="changeName">
     <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name"/>
     <button type="submit">Change name</button>
+</form>
+
+<form method="post" asp-page-handler="changeAccessLevel">
+    <select name="newAccessLevel" onchange="this.form.submit()" asp-for="@Model.SelectedWorkout.AccessLevel" asp-items="@(Html.GetEnumSelectList<AccessLevel>())">
+
+    </select>
 </form>
 
 <h2>Exercises in wokout</h2>
@@ -36,6 +42,7 @@
                 <td>
                     <form method="post" asp-page-handler="change">
                         <select name="intesnity" onchange="this.form.submit()" asp-for="@workoutExercise.Intensity" asp-items="@(Html.GetEnumSelectList<InetensityLevel>())">
+
                         </select>
                         <input type="hidden" value="@workoutExercise.Id" name="workoutExerciseId">
                     </form>

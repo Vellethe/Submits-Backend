@@ -19,5 +19,14 @@ namespace TrainingProject.Data
             LoggedInAccountID = db.Accounts.Single(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject).Id;
             LoggedInAccountName = user.FindFirst(ClaimTypes.Name).Value;
         }
+
+        public bool AllowedToEdit(int id)
+        {
+            if (LoggedInAccountID == id)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using TrainingProject.Data;
 using TrainingProject.Models;
 
@@ -15,16 +16,28 @@ namespace TrainingProject.Pages.Workout
 
 
         private readonly AppDbContext context;
-        public EditModel(AppDbContext context)
+        private readonly AccessControl accessControl;
+
+        public EditModel(AppDbContext context, AccessControl accessControl)
         {
             this.context = context;
+            this.accessControl = accessControl;
+
         }
+
+        private bool LoadWorkout()
+        {
+            SelectedWorkout = context.Workouts.Include(x => x.Owner).Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
+            return SelectedWorkout != null;
+        }
+
+
         public IActionResult OnGet(int id)
         {
             Id = id;
             if (id == 0)
             {
-                SelectedWorkout = new Models.Workout { Owner = context.Accounts.First(), Id = 0, Name = "test" };
+                SelectedWorkout = new Models.Workout { Owner = context.Accounts.Find(accessControl.LoggedInAccountID), Id = 0, Name = "test",AccessLevel = AccessLevel.Owner};
                 context.Workouts.Add(SelectedWorkout);
                 context.SaveChanges();
                 //dose not work if user navigates directly to workout/edit/
@@ -32,24 +45,32 @@ namespace TrainingProject.Pages.Workout
             }
             else
             {
-                SelectedWorkout = context.Workouts.Include(x=>x.WorkoutExecises).ThenInclude(x=>x.Exercise).Where(x=>Id == x.Id).FirstOrDefault();
-                if(SelectedWorkout == null)
+                if(LoadWorkout() == false)
                 {
                     return NotFound();
                 }
-                Exercises = context.Exercises.Where(x=>!SelectedWorkout.WorkoutExecises.Select(y=>y.Exercise).Contains(x)).ToList();
+                if (!accessControl.AllowedToEdit(SelectedWorkout.Owner.Id))
+                {
+                    return Forbid();
+                }
+
+                Exercises = context.Exercises.Where(x => !SelectedWorkout.WorkoutExecises.Select(y => y.Exercise).Contains(x)).ToList();
             }
             return Page();
         }
 
         public IActionResult OnPost(int id, int intesnity, int exersieId)
-        { 
+        {
             Id = id;
 
-            SelectedWorkout = context.Workouts.Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
-            if (SelectedWorkout == null)
+            if (LoadWorkout() == false)
             {
                 return NotFound();
+            }
+
+            if (!accessControl.AllowedToEdit(SelectedWorkout.Owner.Id))
+            {
+                return Forbid();
             }
             SelectedWorkout.WorkoutExecises.Add(new WorkoutExecise
             {
@@ -66,10 +87,15 @@ namespace TrainingProject.Pages.Workout
         public IActionResult OnPostDelete(int id, int exersieId)
         {
             Id = id;
-            SelectedWorkout = context.Workouts.Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
-            if (SelectedWorkout == null)
+
+            if (LoadWorkout() == false)
             {
                 return NotFound();
+            }
+
+            if (!accessControl.AllowedToEdit(SelectedWorkout.Owner.Id))
+            {
+                return Forbid();
             }
             SelectedWorkout.WorkoutExecises.Remove(context.WorkoutExecises.Find(exersieId));
 
@@ -81,13 +107,17 @@ namespace TrainingProject.Pages.Workout
         {
 
             Id = id;
-            SelectedWorkout = context.Workouts.Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
-            if (SelectedWorkout == null)
+            if (LoadWorkout() == false)
             {
                 return NotFound();
             }
 
-            SelectedWorkout.WorkoutExecises.First(x=>x.Id == workoutExerciseId).Intensity = (InetensityLevel)intesnity;
+            if (!accessControl.AllowedToEdit(SelectedWorkout.Owner.Id))
+            {
+                return Forbid();
+            }
+
+            SelectedWorkout.WorkoutExecises.First(x => x.Id == workoutExerciseId).Intensity = (InetensityLevel)intesnity;
             context.SaveChanges();
             return RedirectToPage();
         }
@@ -96,12 +126,38 @@ namespace TrainingProject.Pages.Workout
         {
 
             Id = id;
-            SelectedWorkout = context.Workouts.Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
-            if (SelectedWorkout == null)
+
+            if (LoadWorkout() == false)
             {
                 return NotFound();
             }
+
+            if (!accessControl.AllowedToEdit(SelectedWorkout.Owner.Id))
+            {
+                return Forbid();
+            }
             SelectedWorkout.Name = newName;
+
+            context.SaveChanges();
+
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostChangeAccessLevel(int id, AccessLevel newAccessLevel)
+        {
+            Id = id;
+            if (LoadWorkout() == false)
+            {
+                return NotFound();
+            }
+
+            if (!accessControl.AllowedToEdit(SelectedWorkout.Owner.Id))
+            {
+                return Forbid();
+            }
+            SelectedWorkout.AccessLevel = newAccessLevel;
+
+
 
             context.SaveChanges();
 
