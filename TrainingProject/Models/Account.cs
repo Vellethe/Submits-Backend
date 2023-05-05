@@ -14,7 +14,7 @@ namespace TrainingProject.Models
         public int CurentWeight {get; set; }
         public bool IsMale { get; set; }
         public int TargetWeight { get; set; }
-        public string Goal { get; set; }
+        public string Goal { get; set; } = "None" ;
         public virtual List<Workout> Workouts { get; set; }
         public int DayCount(DateTime curentDate, DateTime targetDate)
         {
