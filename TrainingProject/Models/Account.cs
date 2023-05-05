@@ -14,7 +14,7 @@ namespace TrainingProject.Models
         public int CurentWeight {get; set; }
         public bool IsMale { get; set; }
         public int TargetWeight { get; set; }
-        //Change to Goal because TargetDate is now calculated by server and goal is needed
+        //Change to Goal because TargetDate not used and is now calculated by server and Goal is needed
         public DateTime TargetDate { get; set; }
         public virtual List<Workout> Workouts { get; set; }
         public int DayCount(DateTime curentDate, DateTime targetDate)
