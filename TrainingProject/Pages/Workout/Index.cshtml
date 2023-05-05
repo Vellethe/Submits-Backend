@@ -7,22 +7,22 @@
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/Workout.css">
 
-<a asp-page="Edit">testing</a>
+<a id="createWorkout" asp-page="Edit">Create Workout</a>
 
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th><a>Link to edit</a></th>
-            <th><a>Link to show</a></th>
+            <th>Workout name</th>
+           <th><a>Link to edit</a></th>
+            <th><a>Show exercise</a></th>
         </tr>
     </thead>
     @foreach (var workout in Model.Workouts)
     {
         //TODO change links to buttons
-        <tr>
+        <tr id="existingWorkout">
             <th>@workout.Name</th>
-            <th><a asp-page="Edit" asp-route-id="@workout.Id">edit test</a></th>
+            <th><a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a></th>
             <th><a></a></th>
         </tr>
     }
