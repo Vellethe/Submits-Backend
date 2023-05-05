@@ -2,3 +2,14 @@
 @model TrainingProject.Pages.FakeLoginModel
 @{
 }
+
+@using TrainingProject.Pages.Shared.Components.LoginMenu;
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/FakeLogin.css">
+
+<div id="loginDiv">
+    <h1 id="signIngLabel" for="signIn">Sign In</h1>
+    <environment id="signIn" names="Development">
+        @await Component.InvokeAsync(nameof(FakeLoginMenu))
+    </environment>
+</div>
