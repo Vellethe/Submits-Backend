@@ -46,25 +46,20 @@
                     <label for="targetWeight">Goal Weight</label>
                     <input id="targetWeight" type="number" name="targetWeight" />
                 </tr>
-                <tr>
-                    <label for="targetDate">Goal Date</label>
-                    <input id="targetDate" type="date" name="targetDate" />
-                </tr>
             </table>
         </div>
         <button type="submit">Submit</button>
     </form>
-    @if (Model.calorieCount == 0)
+    @if (Model.calorieCount == "0")
     {
         <script>alert('For an individual of your height, your goal weight would put you in the underweight BMI category.');</script>
     }
 
-    <p>
-        Daily Calories: @if (Model.calorieCount > 0)
-        {
-            @Model.calorieCount
-        }
-    </p>
+    @if (Model.calorieCount != "0")
+    {
+        <p>@Model.calorieCount</p>
+        <p>For a healthy process</p>
+    }
 
 
 
