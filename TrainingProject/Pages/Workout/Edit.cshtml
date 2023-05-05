@@ -16,6 +16,7 @@
             <td>Muscle Group</td>
             <td>Description</td>
             <td>Intensity</td>
+            <td>Remove button</td>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +27,22 @@
                 <td>@workoutExercise.Exercise.Name</td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>
-                <td>@workoutExercise.Intensity</td>
+                <td>
+                    <form method="post" asp-page-handler="change">
+                        <select name="intesnity" onchange="this.form.submit()">
+                            <option value="3">High</option>
+                            <option value="2" selected>Medium</option>
+                            <option value="1">Low</option>
+                        </select>
+                        <input type="hidden" value="@workoutExercise.Id" name="workoutExerciseId">
+                    </form>
+                </td>
+                <td>
+                    <form method="post" asp-page-handler="delete">
+                        <input type="hidden" name="exersieId" value="@workoutExercise.Id">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
@@ -47,7 +63,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var exersie in Model.Exercises)
+        @foreach (var exersie in Model.Exercises)
         {
             <form method="post">
 
@@ -56,11 +72,11 @@
                 <td>@exersie.MuscleGroup</td>
                 <td>@exersie.Description</td>
                 <td>
-                <select name="intesnity">
-                    <option value="3">High</option>
-                    <option value="2">Medium</option>
-                    <option value="1">Low</option>
-                </select>
+                    <select name="intesnity">
+                        <option value="3">High</option>
+                        <option value="2">Medium</option>
+                        <option value="1">Low</option>
+                    </select>
                 </td>
                 <td>
                     <input type="hidden" value="@exersie.Id" name="exersieId">

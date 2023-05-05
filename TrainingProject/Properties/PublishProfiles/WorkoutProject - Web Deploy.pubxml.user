@@ -7,6 +7,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2klK9fu7+U2BJ3Tac4sEKgAAAAACAAAAAAAQZgAAAAEAACAAAAA/osKQ3pz8KSLFs7fgmetoKc478hoJqHcpzM5eIkVrWwAAAAAOgAAAAAIAACAAAACMgTIVcrZrFyoR1Auyv/Mu5ocjiWBLzNjMFsZUqU3BA4AAAADbvyrfPE5WC9nw0J0LiJM+7NHQrdEyXgigWnXFDjN9lum6R9aOROrDCimCVgKXv8JSq6dcC23W0P/uRm8V0LRPbeZjZ8jwVs2X8/zWtrIha3JPf83Fz1lcsc78yGwlY8ZnktLphBJsYa9FhGB9hniJCWhWibUtqAqkpS7SrwyIa0AAAADjljPHVKdizSXEsVOpz5/v49XL9rG00NbkOKQiNGKnGSkVJVgZZTUBRGhvRNB/yCxNgk7JmTt8SOldJgI491vR</EncryptedPassword>
+    <History>True|2023-05-04T14:01:03.0746560Z;False|2023-05-04T15:56:56.3930431+02:00;False|2023-05-04T15:31:15.6639947+02:00;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <EFMigrations Include="TrainingProject.Data.AppDbContext">
