@@ -8,8 +8,9 @@ namespace TrainingProject.Pages.MyPage
 	public class IndexModel : PageModel
 	{
 		public int loggedInID { get; set; }
-		public double? calorieCount { get; set; }
+		public (string FinishedBMR, string FinishedDate) calorieCount { get; set; }
 		public Account account { get; set; }
+		public Account user { get; set; }
 
 		private readonly AppDbContext context;
 		public IndexModel(AppDbContext context, AccessControl access)
@@ -17,12 +18,14 @@ namespace TrainingProject.Pages.MyPage
 			this.context = context;
 			loggedInID = access.LoggedInAccountID;
 			account = new Account();
-		}
+			user = context.Accounts.First(u => u.Id == loggedInID);
+        }
 		public void OnGet()
 		{
-		}
+			calorieCount = account.CalorieCalculator(user, "lw");
+        }
 
-		public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight, DateTime targetDate)
+		public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight)
 		{
 			var user = context.Accounts.First(u => u.Id == loggedInID);
 
@@ -31,7 +34,6 @@ namespace TrainingProject.Pages.MyPage
 			user.CurentWeight = weight;
 			user.IsMale = gender;
 			user.TargetWeight = targetWeight;
-			user.TargetDate = targetDate;
 
 			context.SaveChanges();
 
