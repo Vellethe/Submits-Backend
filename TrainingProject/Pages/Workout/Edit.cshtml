@@ -9,8 +9,10 @@
 <link rel="stylesheet" href="~/css/Workout.css">
 
 <h1>@Model.Id</h1>
-
-
+<form method="post" asp-page-handler="ChangeName">
+    <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name"/>
+    <button type="submit">Change name</button>
+</form>
 
 <h2>Exercises in wokout</h2>
 <table>

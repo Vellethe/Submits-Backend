@@ -60,7 +60,7 @@ namespace TrainingProject.Pages.Workout
             context.SaveChanges();
 
 
-            return Redirect($"./{SelectedWorkout.Id}");
+            return RedirectToPage();
         }
 
         public IActionResult OnPostDelete(int id, int exersieId)
@@ -74,8 +74,7 @@ namespace TrainingProject.Pages.Workout
             SelectedWorkout.WorkoutExecises.Remove(context.WorkoutExecises.Find(exersieId));
 
             context.SaveChanges();
-
-            return Redirect($"./{SelectedWorkout.Id}");
+            return RedirectToPage();
         }
 
         public IActionResult OnPostChange(int id, int intesnity, int workoutExerciseId)
@@ -90,7 +89,23 @@ namespace TrainingProject.Pages.Workout
 
             SelectedWorkout.WorkoutExecises.First(x=>x.Id == workoutExerciseId).Intensity = (InetensityLevel)intesnity;
             context.SaveChanges();
-            return Redirect($"./{SelectedWorkout.Id}");
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostChangeName(int id, string newName)
+        {
+
+            Id = id;
+            SelectedWorkout = context.Workouts.Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
+            if (SelectedWorkout == null)
+            {
+                return NotFound();
+            }
+            SelectedWorkout.Name = newName;
+
+            context.SaveChanges();
+
+            return RedirectToPage();
         }
     }
 }
