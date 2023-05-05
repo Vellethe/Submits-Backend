@@ -14,6 +14,7 @@ namespace TrainingProject.Models
         public int CurentWeight {get; set; }
         public bool IsMale { get; set; }
         public int TargetWeight { get; set; }
+        //Change to Goal because TargetDate is now calculated by server and goal is needed
         public DateTime TargetDate { get; set; }
         public virtual List<Workout> Workouts { get; set; }
         public int DayCount(DateTime curentDate, DateTime targetDate)
@@ -45,7 +46,7 @@ namespace TrainingProject.Models
             }
             return 0;
         }
-        public string CalorieCalculator(Account account, string goal)
+        public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account account, string goal)
         {
             double bmr;
             double heightInMeters = account.Height / 100.0;
@@ -55,7 +56,7 @@ namespace TrainingProject.Models
 
             if(bmi < 19.5)
             {
-                return "0";
+                return ("0","");
             }
             else
             {
@@ -75,7 +76,7 @@ namespace TrainingProject.Models
                 int numberOfDays = caloriesTotal / 600;
                 DateTime finishedDate = DateTime.Now.AddDays(numberOfDays);
 
-                return "Daily Calories: " + finishedBMR + " Estimated Date: " + finishedDate.ToString("yyyy/MM/dd");
+                return (finishedBMR.ToString(), finishedDate.ToString("yyyy/MM/dd"));
             }
         }
     }
