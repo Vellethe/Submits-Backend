@@ -8,7 +8,14 @@ body {
     top: 7px;
     left: 7px;
 }
+
+header {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
 ul {
     list-style-type: none;
     font-size: 25px;
+    margin: 5px;
 }
