@@ -12,6 +12,12 @@
 </head>
 <body>
     <header>
+        <ul id="pageList">
+            <li><a asp-page="/MyPage/Index"><img src="Pictures/Profile.png" /></a></li>
+            <li><a asp-page="/index">Home</a></li>
+            <li><a asp-page="/Workout/Index">Workouts</a></li>
+        </ul>
+        <a asp-page="/index"><div id="logoDiv"><img id="logo" src="Pictures/Logo.png" /></div></a></li>
         <environment names="Development">
             @await Component.InvokeAsync(nameof(FakeLoginMenu))
         </environment>
