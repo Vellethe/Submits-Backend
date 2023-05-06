@@ -17,12 +17,22 @@
         "e f" */
 }
 
-.exerciseInfo{
+.exerciseInfo {
+    text-align: center;
     margin: 0 auto;
     font-weight: bold;
     font-size: 20px;
-    display: grid;
-    grid-template:
-        "a b c"
-        "d e f"
-} 
+}
+
+.createdWorkoutTables {
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+    border-spacing: 10px;
+}
+
+.createWorkoutTable {
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+}
