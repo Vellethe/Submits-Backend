@@ -6,8 +6,9 @@
     background-color: grey;
     padding: 2rem;
     margin-top: 2rem;
+    border-radius: 5px;
 }
-#signIngLabel{
+#signInLabel{
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 1rem;
