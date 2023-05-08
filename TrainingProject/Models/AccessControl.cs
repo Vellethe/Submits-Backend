@@ -20,13 +20,17 @@ namespace TrainingProject.Data
             LoggedInAccountName = user.FindFirst(ClaimTypes.Name).Value;
         }
 
-        public bool AllowedToEdit(int id)
+        public bool AllowedToEdit(int accountId)
         {
-            if (LoggedInAccountID == id)
+            if (LoggedInAccountID == accountId)
             {
                 return true;
             }
             return false;
+        }
+        public bool AllowedToSee(int accountId, Workout workout)
+        {
+            return AllowedToEdit(accountId)||workout.AccessLevel == AccessLevel.Everyone;
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@model TrainingProject.Pages.Workout.ShowModel
+@{
+}
+<table class="createdWorkoutTables">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Muscle Group</td>
+            <td>Description</td>
+            <td>Intensity</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
+        {
+            <tr>
+                <td>@workoutExercise.Exercise.Name</td>
+                <td>@workoutExercise.Exercise.MuscleGroup</td>
+                <td>@workoutExercise.Exercise.Description</td>
+                <td>@workoutExercise.Intensity</td>
+            </tr>
+        }
+    </tbody>
+</table>

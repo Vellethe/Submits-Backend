@@ -25,12 +25,12 @@
         <tr id="existingWorkout">
             <th>@workout.Name</th>
             <th><a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a></th>
-            <th><a></a></th>
+            <th><a asp-page="Show" asp-route-id="@workout.Id">Show</a></th>
         </tr>
     }
 </table>
 
-<h2>Others owrkouts</h2>
+<h2>Others workouts</h2>
 <table>
     <thead>
         <tr>
@@ -44,7 +44,7 @@
         //TODO change links to buttons
         <tr id="existingWorkout">
             <th>@workout.Name</th>
-            <th><a></a></th>
+            <th><a asp-page="Show" asp-route-id="@workout.Id">Show</a></th>
         </tr>
     }
 </table>
