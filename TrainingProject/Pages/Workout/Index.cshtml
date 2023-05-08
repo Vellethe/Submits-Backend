@@ -9,20 +9,41 @@
 
 <a id="createWorkout" asp-page="Edit">Create Workout</a>
 
+<h2>My workouts</h2>
 <table class="exerciseInfo">
     <thead>
         <tr>
             <th>Workout name</th>
-           <th><a>Link to edit</a></th>
+            <th><a>Link to edit</a></th>
             <th><a>Show exercise</a></th>
         </tr>
     </thead>
-    @foreach (var workout in Model.Workouts)
+
+    @foreach (var workout in Model.MyWorkouts)
     {
         //TODO change links to buttons
         <tr id="existingWorkout">
             <th>@workout.Name</th>
             <th><a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a></th>
+            <th><a></a></th>
+        </tr>
+    }
+</table>
+
+<h2>Others owrkouts</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Workout name</th>
+            <th><a>Show exercise</a></th>
+        </tr>
+    </thead>
+
+    @foreach (var workout in Model.Workouts)
+    {
+        //TODO change links to buttons
+        <tr id="existingWorkout">
+            <th>@workout.Name</th>
             <th><a></a></th>
         </tr>
     }
