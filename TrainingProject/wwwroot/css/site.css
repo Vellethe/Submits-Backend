@@ -70,3 +70,19 @@ ul {
         "g h i"
         "j k l"
 }
+
+table{
+    border-collapse:collapse;
+}
+
+td{
+    padding: 4px;
+}
+
+th{
+    padding:6px;
+}
+
+table,th,td{
+    border: 1px solid;
+}
