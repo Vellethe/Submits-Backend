@@ -115,21 +115,6 @@ p{
     margin-top: 1%;
 }
 
-#Diagram {
-    display: flex;
-    flex-flow:column;
-    align-content:center;
-    justify-items:center;
-    width: 90%;
-    max-width: 100%;
-    box-sizing: border-box;
-    margin: 1em;
-    padding: 1em;
-   
-    display: block;
-    vertical-align: middle;
-}
-
 svg {
     position:center;
     background-color: white;
