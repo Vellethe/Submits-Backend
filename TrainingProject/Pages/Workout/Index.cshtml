@@ -14,8 +14,8 @@
     <thead>
         <tr>
             <th>Workout name</th>
-            <th><a>Show exercise</a></th>
-            <th><a>Link to edit</a></th>
+            <th>Show workout</th>
+            <th>Link to edit</th>
         </tr>
     </thead>
 
@@ -35,7 +35,8 @@
     <thead>
         <tr>
             <th>Workout name</th>
-            <th><a>Show exercise</a></th>
+            <th>Creator</th>
+            <th>Show workout</th>
         </tr>
     </thead>
 
@@ -44,6 +45,7 @@
         //TODO change links to buttons
         <tr id="existingWorkout">
             <td>@workout.Name</td>
+            <td>@workout.Owner.Name</td>
             <td><a asp-page="Show" asp-route-id="@workout.Id">Show</a></td>
         </tr>
     }

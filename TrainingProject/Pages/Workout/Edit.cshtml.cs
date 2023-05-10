@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Specialized;
+using System.Web;
 using TrainingProject.Data;
 using TrainingProject.Models;
 
@@ -13,6 +16,8 @@ namespace TrainingProject.Pages.Workout
         public int Id { get; set; }
         public List<Exercise> Exercises { get; set; } 
         public Models.Workout SelectedWorkout { get; set; }
+
+        public MuscleGroup SelectedMucleGroup { get; set; }
 
 
         private readonly AppDbContext context;
@@ -25,6 +30,15 @@ namespace TrainingProject.Pages.Workout
 
         }
 
+        private IActionResult RedirectToSameKeepQuerry()
+        {
+            var querryString = HttpContext.Request.QueryString;
+            var currentPath = HttpContext.Request.Path;
+            var targetUrl = currentPath + querryString;
+
+            return Redirect(targetUrl);
+        }
+
         private bool LoadWorkout()
         {
             SelectedWorkout = context.Workouts.Include(x => x.Owner).Include(x => x.WorkoutExecises).ThenInclude(x => x.Exercise).Where(x => Id == x.Id).FirstOrDefault();
@@ -32,9 +46,12 @@ namespace TrainingProject.Pages.Workout
         }
 
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int id, MuscleGroup mucleGroup = MuscleGroup.all)
         {
             Id = id;
+
+            SelectedMucleGroup = mucleGroup;
+
             if (id == 0)
             {
                 SelectedWorkout = new Models.Workout { Owner = context.Accounts.Find(accessControl.LoggedInAccountID), Id = 0, Name = "test",AccessLevel = AccessLevel.Owner};
@@ -55,6 +72,10 @@ namespace TrainingProject.Pages.Workout
                 }
 
                 Exercises = context.Exercises.Where(x => !SelectedWorkout.WorkoutExecises.Select(y => y.Exercise).Contains(x)).ToList();
+                if(SelectedMucleGroup != MuscleGroup.all)
+                {
+                    Exercises = Exercises.Where(x => x.MuscleGroup == SelectedMucleGroup).ToList();
+                }
             }
             return Page();
         }
@@ -80,8 +101,7 @@ namespace TrainingProject.Pages.Workout
             });
             context.SaveChanges();
 
-
-            return RedirectToPage();
+            return RedirectToSameKeepQuerry();
         }
 
         public IActionResult OnPostDelete(int id, int exersieId)
@@ -100,7 +120,7 @@ namespace TrainingProject.Pages.Workout
             SelectedWorkout.WorkoutExecises.Remove(context.WorkoutExecises.Find(exersieId));
 
             context.SaveChanges();
-            return RedirectToPage();
+            return RedirectToSameKeepQuerry();
         }
 
         public IActionResult OnPostChange(int id, int intesnity, int workoutExerciseId)
@@ -119,7 +139,7 @@ namespace TrainingProject.Pages.Workout
 
             SelectedWorkout.WorkoutExecises.First(x => x.Id == workoutExerciseId).Intensity = (InetensityLevel)intesnity;
             context.SaveChanges();
-            return RedirectToPage();
+            return RedirectToSameKeepQuerry();
         }
 
         public IActionResult OnPostChangeName(int id, string newName)
@@ -140,7 +160,7 @@ namespace TrainingProject.Pages.Workout
 
             context.SaveChanges();
 
-            return RedirectToPage();
+            return RedirectToSameKeepQuerry();
         }
 
         public IActionResult OnPostChangeAccessLevel(int id, AccessLevel newAccessLevel)
@@ -161,7 +181,17 @@ namespace TrainingProject.Pages.Workout
 
             context.SaveChanges();
 
-            return RedirectToPage();
+            return RedirectToSameKeepQuerry();
+        }
+
+        public IActionResult OnPostFilter(MuscleGroup muscleGroup)
+        {
+            UriBuilder uriBuilder = new UriBuilder(Request.GetDisplayUrl());
+            NameValueCollection querry = HttpUtility.ParseQueryString(uriBuilder.Query);
+            querry.Clear();
+            querry.Add("mucleGroup", muscleGroup.ToString());
+            uriBuilder.Query = querry.ToString();
+            return new RedirectResult(uriBuilder.Uri.ToString());
         }
     }
 }

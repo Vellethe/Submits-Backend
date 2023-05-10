@@ -35,133 +35,133 @@ namespace TrainingProject.Data
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that primarily targets the arms muscles, where you use your body weight to push up and down from the ground.",
-                    MuscleGroup = "Arms",
+                    MuscleGroup = MuscleGroup.Arms,
                     Name = "Push-up"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A back and arms exercise that involves lifting your bodyweight by pulling your chin above a bar",
-                    MuscleGroup = "Back",
+                    MuscleGroup = MuscleGroup.Back,
                     Name = "Chins/Pull-up"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that focuses on building biceps muscles, where you lift weights by curling your arms up towards your shoulders",
-                    MuscleGroup = "Arms",
+                    MuscleGroup = MuscleGroup.Arms,
                     Name = "Bicep curls"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that targets the triceps muscles, where you extend your arms to lift weights behind your head",
-                    MuscleGroup = "Arms",
+                    MuscleGroup = MuscleGroup.Arms,
                     Name = "Triceps extensions"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A workout that targets the shoulder muscles, where you lift weights above your head",
-                    MuscleGroup = "Shoulders",
+                    MuscleGroup = MuscleGroup.Shoulders,
                     Name = "Shoulder press"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that primarily targets the chest and arms muscles, where you lift weights while lying on your back on a bench",
-                    MuscleGroup = "Chest",
+                    MuscleGroup = MuscleGroup.Chest,
                     Name = "Bench press"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A weight training exercise that focuses on the lower back and leg muscles, where you lift weights from the ground to a standing position",
-                    MuscleGroup = "Back",
+                    MuscleGroup = MuscleGroup.Back,
                     Name = "Deadlift"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A lower body exercise that targets the legs muscles, where you lower yourself down while holding weights and then stand up again",
-                    MuscleGroup = "Legs",
+                    MuscleGroup = MuscleGroup.Legs,
                     Name = "Squats"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that targets the leg muscles, where you step forward and lower your body to a lunge position, then alternate legs",
-                    MuscleGroup = "Legs",
+                    MuscleGroup = MuscleGroup.Legs,
                     Name = "Lunges"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that targets the leg muscles, where you sit on a machine and push weight away from your body using your legs",
-                    MuscleGroup = "Legs",
+                    MuscleGroup = MuscleGroup.Legs,
                     Name = "Leg press"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An abdominal exercise where you lift your upper body off the ground while keeping your feet planted",
-                    MuscleGroup = "Chest",
+                    MuscleGroup = MuscleGroup.Chest,
                     Name = "Sit-ups"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A core exercise where you hold yourself in a push-up position for a set amount of time to strengthen your abs and back muscles",
-                    MuscleGroup = "Chest",
+                    MuscleGroup = MuscleGroup.Chest,
                     Name = "Plank"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that targets the oblique muscles, where you sit with your knees bent and twist your torso while holding weights",
-                    MuscleGroup = "Chest",
+                    MuscleGroup = MuscleGroup.Chest,
                     Name = "Russian twists"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An exercise that targets the core and leg muscles, where you alternate bringing your knees towards your chest while holding a push-up position",
-                    MuscleGroup = "Chest",
+                    MuscleGroup = MuscleGroup.Chest,
                     Name = "Mountain climbers"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A full-body exercise where you jump up, drop down to a push-up position, do a push-up, jump back up, and repeat",
-                    MuscleGroup = "Full Body",
+                    MuscleGroup = MuscleGroup.Legs, //fullbody
                     Name = "Burpees"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An aerobic exercise where you jump and spread your arms and legs apart, then jump back together again",
-                    MuscleGroup = "Full Body",
+                    MuscleGroup = MuscleGroup.Legs, //fullbody
                     Name = "Jumping jacks"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "An explosive power exercise that targets the legs muscles, where you jump onto a box or platform repeatedly",
-                    MuscleGroup = "Legs",
+                    MuscleGroup = MuscleGroup.Legs,
                     Name = "Box jumps"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A workout that primarily targets the shoulders and arms muscles, where you wave long ropes up and down to build strength and endurance",
-                    MuscleGroup = "Shoulders, Arms",
+                    MuscleGroup = MuscleGroup.Shoulders, //Arms",
                     Name = "Battle ropes"
                 });
 
                 database.Exercises.Add(new Exercise
                 {
                     Description = "A full-body and explosive power exercise, where you swing a weight between your legs and then thrust it forward using your hips and legs",
-                    MuscleGroup = "Legs",
+                    MuscleGroup = MuscleGroup.Legs,
                     Name = "Kettlebell swing"
                 });
             }

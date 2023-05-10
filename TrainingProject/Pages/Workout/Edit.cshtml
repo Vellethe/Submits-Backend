@@ -66,14 +66,11 @@
         <tr>
             <th>Name</th>
             <th>
-                <select name="muscle-group">
-                    <option value="">-- Select Muscle Group --</option>
-                    <option value="chest">Chest</option>
-                    <option value="back">Back</option>
-                    <option value="legs">Legs</option>
-                    <option value="shoulders">Shoulders</option>
-                    <option value="arms">Arms</option>
-                </select>
+                    <form method="post" asp-page-handler="Filter">
+                        <select name="MuscleGroup" onchange="this.form.submit()" asp-for="@Model.SelectedMucleGroup" asp-items="@(Html.GetEnumSelectList<MuscleGroup>())">
+
+                        </select>
+                    </form>
             </th>
             <th>Description</th>
             <th>Intensity</th>
