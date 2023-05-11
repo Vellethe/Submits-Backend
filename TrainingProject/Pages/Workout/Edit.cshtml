@@ -8,16 +8,18 @@
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/Workout.css">
 
-<h1>@Model.Id</h1>
+<h1></h1>
+
 <form method="post" asp-page-handler="changeName">
     <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name"/>
     <button type="submit">Change name</button>
+    <input type="hidden" name="muscleGroup" value="@Model.SelectedMucleGroup">
 </form>
 
 <form method="post" asp-page-handler="changeAccessLevel">
     <select name="newAccessLevel" onchange="this.form.submit()" asp-for="@Model.SelectedWorkout.AccessLevel" asp-items="@(Html.GetEnumSelectList<AccessLevel>())">
-
     </select>
+    <input type="hidden" name="muscleGroup" value="@Model.SelectedMucleGroup">
 </form>
 
 <h2>Exercises in workout</h2>
@@ -42,9 +44,9 @@
                 <td>
                     <form method="post" asp-page-handler="change">
                         <select name="intesnity" onchange="this.form.submit()" asp-for="@workoutExercise.Intensity" asp-items="@(Html.GetEnumSelectList<InetensityLevel>())">
-
                         </select>
                         <input type="hidden" value="@workoutExercise.Id" name="workoutExerciseId">
+                        <input type="hidden" name="muscleGroup" value="@Model.SelectedMucleGroup">
                     </form>
                 </td>
                 <td>
@@ -67,11 +69,10 @@
         <tr>
             <th>Name</th>
             <th>
-                    <form method="post" asp-page-handler="Filter">
-                        <select name="MuscleGroup" onchange="this.form.submit()" asp-for="@Model.SelectedMucleGroup" asp-items="@(Html.GetEnumSelectList<MuscleGroup>())">
-
-                        </select>
-                    </form>
+                <form method="post" asp-page-handler="Filter">
+                    <select name="MuscleGroup" onchange="this.form.submit()" asp-for="@Model.SelectedMucleGroup" asp-items="@(Html.GetEnumSelectList<MuscleGroup>())">
+                    </select>
+                </form>
             </th>
             <th>Description</th>
             <th>Intensity</th>
@@ -94,6 +95,7 @@
                         <option value="2">Medium</option>
                         <option value="1">Low</option>
                     </select>
+                    <input type="hidden" name="muscleGroup" value="@Model.SelectedMucleGroup">
                 </td>
                 <td>
                     <input type="hidden" value="@exersie.Id" name="exersieId">

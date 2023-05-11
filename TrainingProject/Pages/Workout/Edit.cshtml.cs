@@ -30,13 +30,17 @@ namespace TrainingProject.Pages.Workout
 
         }
 
-        private IActionResult RedirectToSameKeepQuerry()
+        private IActionResult RedirectToPageWithMucleGroup(MuscleGroup muscleGroup)
         {
-            var querryString = HttpContext.Request.QueryString;
-            var currentPath = HttpContext.Request.Path;
-            var targetUrl = currentPath + querryString;
 
-            return Redirect(targetUrl);
+            UriBuilder uriBuilder = new UriBuilder(Request.GetDisplayUrl());
+            NameValueCollection querry = HttpUtility.ParseQueryString(uriBuilder.Query);
+            querry.Clear();
+            querry.Add("mucleGroup", muscleGroup.ToString());
+            uriBuilder.Query = querry.ToString();
+            var currentPath = HttpContext.Request.Path;
+
+            return Redirect(uriBuilder.Uri.ToString());
         }
 
         private bool LoadWorkout()
@@ -80,7 +84,7 @@ namespace TrainingProject.Pages.Workout
             return Page();
         }
 
-        public IActionResult OnPost(int id, int intesnity, int exersieId)
+        public IActionResult OnPost(int id, int intesnity, int exersieId, MuscleGroup muscleGroup)
         {
             Id = id;
 
@@ -101,7 +105,7 @@ namespace TrainingProject.Pages.Workout
             });
             context.SaveChanges();
 
-            return RedirectToSameKeepQuerry();
+            return RedirectToPageWithMucleGroup(muscleGroup);
         }
 
         public IActionResult OnPostDelete(int id, int exersieId, MuscleGroup muscleGroup)
@@ -120,10 +124,10 @@ namespace TrainingProject.Pages.Workout
             SelectedWorkout.WorkoutExecises.Remove(context.WorkoutExecises.Find(exersieId));
 
             context.SaveChanges();
-            return RedirectToSameKeepQuerry();
+            return RedirectToPageWithMucleGroup(muscleGroup);
         }
 
-        public IActionResult OnPostChange(int id, int intesnity, int workoutExerciseId)
+        public IActionResult OnPostChange(int id, int intesnity, int workoutExerciseId, MuscleGroup muscleGroup)
         {
 
             Id = id;
@@ -139,10 +143,10 @@ namespace TrainingProject.Pages.Workout
 
             SelectedWorkout.WorkoutExecises.First(x => x.Id == workoutExerciseId).Intensity = (InetensityLevel)intesnity;
             context.SaveChanges();
-            return RedirectToSameKeepQuerry();
+            return RedirectToPageWithMucleGroup(muscleGroup);
         }
 
-        public IActionResult OnPostChangeName(int id, string newName)
+        public IActionResult OnPostChangeName(int id, string newName, MuscleGroup muscleGroup)
         {
 
             Id = id;
@@ -160,10 +164,10 @@ namespace TrainingProject.Pages.Workout
 
             context.SaveChanges();
 
-            return RedirectToSameKeepQuerry();
+            return RedirectToPageWithMucleGroup(muscleGroup);
         }
 
-        public IActionResult OnPostChangeAccessLevel(int id, AccessLevel newAccessLevel)
+        public IActionResult OnPostChangeAccessLevel(int id, AccessLevel newAccessLevel, MuscleGroup muscleGroup)
         {
             Id = id;
             if (LoadWorkout() == false)
@@ -181,7 +185,7 @@ namespace TrainingProject.Pages.Workout
 
             context.SaveChanges();
 
-            return RedirectToSameKeepQuerry();
+            return RedirectToPageWithMucleGroup(muscleGroup);
         }
 
         public IActionResult OnPostFilter(MuscleGroup muscleGroup)
