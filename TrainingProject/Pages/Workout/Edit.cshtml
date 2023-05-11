@@ -50,6 +50,7 @@
                 <td>
                     <form method="post" asp-page-handler="delete">
                         <input type="hidden" name="exersieId" value="@workoutExercise.Id">
+                        <input type="hidden" name="muscleGroup" value="@Model.SelectedMucleGroup">
                         <button type="submit">Remove</button>
                     </form>
                 </td>

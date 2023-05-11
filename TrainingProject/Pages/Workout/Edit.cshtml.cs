@@ -104,7 +104,7 @@ namespace TrainingProject.Pages.Workout
             return RedirectToSameKeepQuerry();
         }
 
-        public IActionResult OnPostDelete(int id, int exersieId)
+        public IActionResult OnPostDelete(int id, int exersieId, MuscleGroup muscleGroup)
         {
             Id = id;
 
