@@ -1,0 +1,54 @@
+#randomExercises{
+    background-color: grey;
+    border-radius: 5px;
+    width: 400px;
+    display: grid;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: 1rem;
+}
+#motivation{
+    background-color: grey;
+    border-radius: 5px;
+    width: 400px;
+    padding: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+    grid-area: c;
+}
+#motivationHeader{
+    font-size: 20px;
+}
+#workout{
+    display: grid;
+    grid-template:
+    "a b c" ;
+    font-size: 20px;
+    width: 100%;
+    padding: 3px;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
+}
+#workoutLink{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+main{
+    display: grid;
+    grid-template:
+    "a a"
+    "b c" ;
+}
+h1{
+    grid-area: a;
+}
+#labelDiv{
+    display: grid;
+    grid-template:
+    "a b c" ;
+    font-size: 20px;
+    padding: 3px;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
+}
+#workoutList{
+    padding: 0;
+}

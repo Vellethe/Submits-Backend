@@ -4,25 +4,36 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/HomePage.css">
 
 <h1 id="welcome">Welcome, @accessControl.LoggedInAccountName!</h1>
 
-        <div id="randomExercise">
-        <ul>
-            <li><p>Biceps curls</p></li>
-            <li><p>Push ups</p></li>
-            <li><p>Squats</p></li>
-            <li><p>Shoulder press</p></li>
-            <li><p>Bench press</p></li>
-            <li><p>Mountain climbers</p></li>
-            <li><p>Jumping jacks</p></li>
-            <li><p>Kettlebell swing</p></li>
-            <li><p>a</p></li>
-            <li><p>b</p></li>
-            <li><p>c</p></li>
-            <li><p>d</p></li>
-        </ul>
-        </div>
+<div id="motivation">
+    <h2 id="motivationHeader">Daily Fuel</h2>
+    <p>@Model.RandomMotivation</p>
+</div>
 
+<div id="randomExercises">
+    <h2>Published Workouts</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Workout name</th>
+                <th>Creator</th>
+                <th>Show workout</th>
+            </tr>
+        </thead>
+
+        @foreach (var workout in Model.Workouts)
+        {
+            <tr id="existingWorkout">
+                <td>@workout.Name</td>
+                <td>@workout.Owner.Name</td>
+                <td><a asp-page="Show" asp-route-id="@workout.Id">Show</a></td>
+            </tr>
+        }
+    </table>
+</div>
 
