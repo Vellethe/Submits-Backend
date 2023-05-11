@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/MyPage.css">
-<script src="~/js/MyPage.js"></script>
+<script src="~/js/MyPage.js" defer></script>
 
 <h1>My Page</h1>
 
@@ -76,14 +76,14 @@
                         </select>
                     </tr>
                     <tr>
-                        <label for="goal">Goal</label>
-                        <select id="goal" name="goal">
+                        <label for="goalSelect">Goal</label>
+                        <select id="goalSelect" name="goal">
                             <option value="Lose Weight">Lose Weight</option>
                             <option value="Maintain">Maintain</option>
                             <option value="Build Muscle">Build Muscle</option>
                         </select>
                     </tr>
-                    <tr>
+                    <tr >
                         <label id="targetWeightLabel" for="targetWeight">Goal Weight</label>
                         <input id="targetWeight" type="number" name="targetWeight" />
                     </tr>
