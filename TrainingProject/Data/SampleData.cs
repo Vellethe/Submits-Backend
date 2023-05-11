@@ -1,4 +1,5 @@
-﻿using TrainingProject.Models;
+﻿using System.Security.Policy;
+using TrainingProject.Models;
 
 namespace TrainingProject.Data
 {
@@ -28,7 +29,9 @@ namespace TrainingProject.Data
                     OpenIDSubject = "3333333333",
                     Name = "Will"
                 });
+                database.SaveChanges();
             }
+            
             if (!database.Exercises.Any())
             {
 
@@ -164,6 +167,174 @@ namespace TrainingProject.Data
                     MuscleGroup = MuscleGroup.Legs,
                     Name = "Kettlebell swing"
                 });
+                database.SaveChanges();
+            }
+
+            if (database.Workouts.Count() < 5)
+            {
+                var brad = database.Accounts.Single(a => a.Name == "Brad");
+                var will = database.Accounts.Single(a => a.Name == "Will");
+                var angelina = database.Accounts.Single(a => a.Name == "Angelina");
+
+                var pushUp = database.Exercises.Single(a => a.Name == "Push-up");
+                var pullUp = database.Exercises.Single(a => a.Name == "Chins/Pull-up");
+                var squats = database.Exercises.Single(a => a.Name == "Squats");
+                var boxJumps = database.Exercises.Single(a => a.Name == "Box jumps");
+                var plank = database.Exercises.Single(a => a.Name == "Plank");
+                var tricepsExtensions = database.Exercises.Single(a => a.Name == "Triceps extensions");
+                var bicepCurls = database.Exercises.Single(a => a.Name == "Bicep curls");
+                var deadlift = database.Exercises.Single(a => a.Name == "Deadlift");
+                var legPress = database.Exercises.Single(a => a.Name == "Leg press");
+
+                var workout = new Workout
+                {
+                    Name = "Full Body Workout",
+                    AccessLevel = AccessLevel.Everyone,
+                    Owner = (Account)brad,
+                    WorkoutExecises = new List<WorkoutExecise>()
+                };
+                workout.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workout,
+                    Exercise = (Exercise)pushUp,
+                });
+                workout.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workout,
+                    Exercise = (Exercise)pullUp,
+                });
+                workout.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.medium,
+                    Workout = workout,
+                    Exercise = (Exercise)squats,
+                });
+                database.Workouts.Add(workout);
+
+                var workoutOne = new Workout
+                {
+                    Name = "Bodyweight Workout",
+                    AccessLevel = AccessLevel.Everyone,
+                    Owner = (Account)brad,
+                    WorkoutExecises = new List<WorkoutExecise>()
+                };
+                workoutOne.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutOne,
+                    Exercise = (Exercise)plank,
+                });
+                workoutOne.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutOne,
+                    Exercise = (Exercise)boxJumps,
+                });
+                database.Workouts.Add(workoutOne);
+
+                var workoutTwo = new Workout
+                {
+                    Name = "Cardio",
+                    AccessLevel = AccessLevel.Everyone,
+                    Owner = (Account)will,
+                    WorkoutExecises = new List<WorkoutExecise>()
+                };
+                workoutTwo.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.medium,
+                    Workout = workoutTwo,
+                    Exercise = (Exercise)squats,
+                });
+                workoutTwo.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.medium,
+                    Workout = workoutTwo,
+                    Exercise = (Exercise)boxJumps,
+                });
+                database.Workouts.Add(workoutTwo);
+
+                var workoutThree = new Workout
+                {
+                    Name = "Arms Are Power",
+                    AccessLevel = AccessLevel.Everyone,
+                    Owner = (Account)will,
+                    WorkoutExecises = new List<WorkoutExecise>()
+                };
+                workoutThree.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutThree,
+                    Exercise = (Exercise)tricepsExtensions,
+                });
+                workoutThree.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutThree,
+                    Exercise = (Exercise)bicepCurls,
+                });
+                database.Workouts.Add(workoutThree);
+
+                var workoutFour = new Workout
+                {
+                    Name = "Legs Are Power",
+                    AccessLevel = AccessLevel.Everyone,
+                    Owner = (Account)angelina,
+                    WorkoutExecises = new List<WorkoutExecise>()
+                };
+                workoutFour.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFour,
+                    Exercise = (Exercise)legPress,
+                });
+                workoutFour.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFour,
+                    Exercise = (Exercise)squats,
+                });
+                workoutFour.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFour,
+                    Exercise = (Exercise)deadlift,
+                });
+                database.Workouts.Add(workoutFour);
+
+                var workoutFive = new Workout
+                {
+                    Name = "Super Cardio",
+                    AccessLevel = AccessLevel.Everyone,
+                    Owner = (Account)angelina,
+                    WorkoutExecises = new List<WorkoutExecise>()
+                };
+                workoutFive.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFive,
+                    Exercise = (Exercise)squats,
+                });
+                workoutFive.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFive,
+                    Exercise = (Exercise)boxJumps,
+                });
+                workoutFive.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFive,
+                    Exercise = (Exercise)plank,
+                });
+                workoutFive.WorkoutExecises.Add(new WorkoutExecise
+                {
+                    Intensity = InetensityLevel.high,
+                    Workout = workoutFive,
+                    Exercise = (Exercise)pushUp,
+                });
+                database.Workouts.Add(workoutFive);
             }
 
             database.SaveChanges();
