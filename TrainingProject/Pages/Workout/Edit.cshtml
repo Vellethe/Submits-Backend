@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/Workout.css">
 
-<h1></h1>
+<h1> @Model.SelectedWorkout.MostCommonMucleGroup</h1>
 
 <form method="post" asp-page-handler="changeName">
     <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name"/>
