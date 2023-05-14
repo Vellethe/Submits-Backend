@@ -1,0 +1,8 @@
+﻿aside{
+    display: grid;
+    grid-template: "a" "b" "c";
+    text-align: left;
+    justify-items: center;
+    grid-area: "aside";
+}
+

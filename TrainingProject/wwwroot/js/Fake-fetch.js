@@ -1,4 +1,4 @@
-﻿export default function fakeFetch(urlString, options) {
+﻿function fakeFetch(urlString, options) {
     const url = new URL(urlString);
 
     if (url.hostname == "https://facegram.azurewebsites.net" && url.pathname = "/ api / posts") {

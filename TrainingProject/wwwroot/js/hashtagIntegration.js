@@ -57,4 +57,4 @@ let x = fakeFetch("https://facegram.azurewebsites.net/api/posts?tag="+mostCommon
 image.src = x.postImageURL;
 description.textContent = x.postContent;
 link.href = x.postUrl;
-link.text = "testing";
+link.text = "link to facegrab";

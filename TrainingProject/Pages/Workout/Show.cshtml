@@ -2,6 +2,19 @@
 @model TrainingProject.Pages.Workout.ShowModel
 @{
 }
+
+
+@section Scripts{
+
+    <script src="~/js/hashtagIntegration.js" defer type="module"></script>
+}
+
+<link rel="stylesheet" href="~/css/socialMediaStyle.css" />
+<link rel="stylesheet" href="~/css/viewWorkout.css" />
+
+
+<p hidden id="mostCommonGroup">@Model.SelectedWorkout.MostCommonMucleGroup</p>
+
 <table class="createdWorkoutTables">
     <thead>
         <tr>
@@ -24,3 +37,6 @@
         }
     </tbody>
 </table>
+
+<aside id="socialMedia"></aside>
+
