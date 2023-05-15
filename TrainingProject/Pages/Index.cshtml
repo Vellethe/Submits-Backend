@@ -31,7 +31,13 @@
             <tr id="existingWorkout">
                 <td>@workout.Name</td>
                 <td>@workout.Owner.Name</td>
-                <td><a asp-page="Workout/Show" asp-route-id="@workout.Id">Show</a></td>
+                <td>
+                    @*<a asp-page="Workout/Show" asp-route-id="@workout.Id">Show</a>*@
+                    <form>
+                        <button asp-page="Workout/Show" asp-route-id="@workout.Id">Show workout</button>
+                    </form>
+
+                </td>
             </tr>
         }
     </table>

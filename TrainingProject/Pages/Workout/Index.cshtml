@@ -24,8 +24,20 @@
         //TODO change links to buttons
         <tr id="existingWorkout">
             <td>@workout.Name</td>
-            <td><a asp-page="Show" asp-route-id="@workout.Id">Show</a></td>
-            <td><a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a></td>
+            <td>
+                @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
+                <form>
+                    <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
+                </form>
+            </td>
+            <td>
+                
+                <form>
+                    <button  asp-page="Edit" asp-route-id="@workout.Id">Edit Workout</button>
+                </form>
+                
+                @*<a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a>*@            
+            </td>
         </tr>
     }
 </table>
@@ -46,7 +58,12 @@
         <tr id="existingWorkout">
             <td>@workout.Name</td>
             <td>@workout.Owner.Name</td>
-            <td><a asp-page="Show" asp-route-id="@workout.Id">Show</a></td>
+            <td>
+                @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
+                <form>
+                    <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
+                </form>
+            </td>
         </tr>
     }
 </table>
