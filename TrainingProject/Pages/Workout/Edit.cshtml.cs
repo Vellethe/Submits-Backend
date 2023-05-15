@@ -14,7 +14,7 @@ namespace TrainingProject.Pages.Workout
     public class EditModel : PageModel
     {
         public int Id { get; set; }
-        public List<Exercise> Exercises { get; set; } 
+        public List<Exercise> Exercises { get; set; }
         public Models.Workout SelectedWorkout { get; set; }
 
         public MuscleGroup SelectedMucleGroup { get; set; }
@@ -58,7 +58,7 @@ namespace TrainingProject.Pages.Workout
 
             if (id == 0)
             {
-                SelectedWorkout = new Models.Workout { Owner = context.Accounts.Find(accessControl.LoggedInAccountID), Id = 0, Name = "test",AccessLevel = AccessLevel.Owner};
+                SelectedWorkout = new Models.Workout { Owner = context.Accounts.Find(accessControl.LoggedInAccountID), Id = 0, Name = "test", AccessLevel = AccessLevel.Owner };
                 context.Workouts.Add(SelectedWorkout);
                 context.SaveChanges();
                 //dose not work if user navigates directly to workout/edit/
@@ -66,7 +66,7 @@ namespace TrainingProject.Pages.Workout
             }
             else
             {
-                if(LoadWorkout() == false)
+                if (LoadWorkout() == false)
                 {
                     return NotFound();
                 }
@@ -76,7 +76,7 @@ namespace TrainingProject.Pages.Workout
                 }
 
                 Exercises = context.Exercises.Where(x => !SelectedWorkout.WorkoutExecises.Select(y => y.Exercise).Contains(x)).ToList();
-                if(SelectedMucleGroup != MuscleGroup.all)
+                if (SelectedMucleGroup != MuscleGroup.all)
                 {
                     Exercises = Exercises.Where(x => x.MuscleGroup == SelectedMucleGroup).ToList();
                 }

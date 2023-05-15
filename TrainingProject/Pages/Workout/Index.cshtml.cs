@@ -22,7 +22,7 @@ namespace TrainingProject.Pages.Workout
         public void OnGet()
         {
             MyWorkouts = context.Workouts.Include(x => x.Owner).Where(x => x.Owner.Id == accessControl.LoggedInAccountID).ToList();
-            Workouts = context.Workouts.Include(x=>x.Owner).Where(x=>x.AccessLevel == AccessLevel.Everyone && x.Owner.Id != accessControl.LoggedInAccountID).ToList();
+            Workouts = context.Workouts.Include(x => x.Owner).Where(x => x.AccessLevel == AccessLevel.Everyone && x.Owner.Id != accessControl.LoggedInAccountID).ToList();
         }
     }
 }

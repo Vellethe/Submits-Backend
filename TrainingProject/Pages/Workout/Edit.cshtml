@@ -10,7 +10,7 @@
 
 
 <form method="post" asp-page-handler="changeName">
-    <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name"/>
+    <input name="newName" type="text" asp-for="@Model.SelectedWorkout.Name" />
     <button type="submit">Change name</button>
     <input type="hidden" name="muscleGroup" value="@Model.SelectedMucleGroup">
 </form>
