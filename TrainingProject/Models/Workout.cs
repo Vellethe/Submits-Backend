@@ -22,6 +22,12 @@ namespace TrainingProject.Models
             get
             {
                 var temp = new Dictionary<MuscleGroup, int>();
+
+                if (!WorkoutExecises.Any())
+                {
+                    return MuscleGroup.all;
+                }
+
                 foreach(var exercise in WorkoutExecises )
                 {
                     var mucleGroupToFind = exercise.Exercise.MuscleGroup;

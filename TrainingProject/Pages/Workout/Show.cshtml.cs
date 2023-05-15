@@ -18,10 +18,16 @@ namespace TrainingProject.Pages.Workout
         }
         public IActionResult OnGet(int id)
         {
+
             SelectedWorkout = context.Workouts.Include(x=>x.Owner).Include(x=>x.WorkoutExecises).ThenInclude(x=>x.Exercise).FirstOrDefault(x=>x.Id==id);
             if(SelectedWorkout == null)
             {
                 return NotFound();
+            }
+
+            if (SelectedWorkout.WorkoutExecises.Any())
+            {
+                SelectedWorkout.WorkoutExecises.OrderBy(x => x.Exercise.MuscleGroup);
             }
 
             if (accessControl.AllowedToSee(SelectedWorkout.Owner.Id, SelectedWorkout))
