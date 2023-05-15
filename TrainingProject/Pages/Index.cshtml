@@ -11,13 +11,15 @@
 
 <div id="motivation">
     <h2 id="motivationHeader">Daily Fuel</h2>
-    <p>@Model.RandomMotivation</p>
+    <div id="motivationText">
+        <p>@Model.RandomMotivation</p>
+    </div>
 </div>
 
 <div id="randomExercises">
     <h2>Published Workouts</h2>
 
-    <table>
+    <table id="workoutTable">
         <thead>
             <tr>
                 <th>Workout name</th>
@@ -41,5 +43,13 @@
             </tr>
         }
     </table>
+</div>
+
+<div id="exampleSquare">
+   <h2 id="exampleText">Something</h2>
+</div>
+
+<div id="exampleSquare1">
+    <h2 id="exampleText1">Something Else</h2>
 </div>
 
