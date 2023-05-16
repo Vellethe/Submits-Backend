@@ -60,8 +60,9 @@ h2{
     grid-area: d;
 }
 
-.motivationText{
+.motivation_tips_text{
     color: white;
+    background-color: #202020;
     padding: 2rem;
     box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
 }
