@@ -7,51 +7,54 @@
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/HomePage.css">
 
-<video id="videoHeader" src="Video/Training-Header-Video.mp4" autoplay controls>
-    Your browser does not support the video.
-</video>
+<div class="container">
 
-<div id="motivation">
-    <h2 id="motivationHeader">Daily Fuel</h2>
-    <div id="motivationText">
-        <p>@Model.RandomMotivation</p>
+    <video id="videoHeader" src="Video/Training-Header-Video.mp4" autoplay controls>
+        Your browser does not support the video.
+    </video>
+
+    <div id="motivation">
+        <h2 class="motivationHeader">Motivation</h2>
+        <div class="motivationText">
+            <p>@Model.RandomMotivation</p>
+        </div>
     </div>
-</div>
 
-<div id="randomExercises">
-    <h2>Published Workouts</h2>
+    <div id="tips">
+        <h2 class="motivationHeader">Workout Tip</h2>
+        <div class="motivationText">
+            <p>@Model.RandomTip</p>
+        </div>
+    </div>
 
-    <table id="workoutTable">
-        <thead>
-            <tr>
-                <th>Workout name</th>
-                <th>Creator</th>
-                <th>Show workout</th>
-            </tr>
-        </thead>
+    <div id="randomExercises">
+        <h2>Published Workouts</h2>
 
-        @foreach (var workout in Model.Workouts)
-        {
-            <tr id="existingWorkout">
-                <td>@workout.Name</td>
-                <td>@workout.Owner.Name</td>
-                <td>
-                    @*<a asp-page="Workout/Show" asp-route-id="@workout.Id">Show</a>*@
-                    <form>
-                        <button asp-page="Workout/Show" asp-route-id="@workout.Id">Show workout</button>
-                    </form>
+        <table id="workoutTable">
+            <thead>
+                <tr>
+                    <th>Workout name</th>
+                    <th>Creator</th>
+                    <th>Show workout</th>
+                </tr>
+            </thead>
 
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+            @foreach (var workout in Model.Workouts)
+            {
+                <tr id="existingWorkout">
+                    <td>@workout.Name</td>
+                    <td>@workout.Owner.Name</td>
+                    <td>
+                        @*<a asp-page="Workout/Show" asp-route-id="@workout.Id">Show</a>*@
+                        <form>
+                            <button asp-page="Workout/Show" asp-route-id="@workout.Id">Show workout</button>
+                        </form>
 
-<div id="exampleSquare">
-   <h2 id="exampleText">Something</h2>
-</div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 
-<div id="exampleSquare1">
-    <h2 id="exampleText1">Something Else</h2>
 </div>
 

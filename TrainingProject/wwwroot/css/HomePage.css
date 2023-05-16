@@ -1,7 +1,3 @@
-#motivationHeader{
-    font-size: 20px;
-}
-
 #workout{
     display: grid;
     grid-template:
@@ -17,89 +13,70 @@
     margin-bottom: auto;
 }
 
-main{
+.container{
+    background-color: #1b1b1b;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template:
-    "f f"
     "a a"
     "b c"
-    "d e" ;
+    "d d";
 }
 
 #videoHeader{
-    grid-area: f;
-    width: 50%;
+    grid-area: a;
+    width: 100%;
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
 }
 
-#welcome{
-    grid-area: a;
-}
-
-#randomExercises{
-    background-color: grey;
-    border-radius: 5px;
-    width: 400px;
-    display: grid;
-    padding: 1rem;
-    margin-left: auto;
-    margin-right: 1rem;
-    grid-area: b;
+h2{
+    color: white;
+    font-size: 30px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #motivation{
-    background-color: grey;
     border-radius: 5px;
-    width: 400px;
     padding: 1rem;
-    margin-left: 1rem;
-    margin-right: auto;
+    grid-area: b;
+}
+
+#tips{
+    border-radius: 5px;
+    padding: 1rem;
     grid-area: c;
 }
 
-#exampleSquare{
-    background-color: grey;
-    width: 400px;
-    grid-area: d;
-    margin-top: 1rem;
-    margin-left: auto;
-    margin-right: 1rem;
-    padding: 1rem;
+#randomExercises{
     border-radius: 5px;
-}
-
-#exampleSquare1{
-    background-color: grey;
-    width: 400px;
-    grid-area: e;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-right: auto;
-    padding: 1rem;
-    border-radius: 5px;
-}
-
-#motivationText{
-    background-color: rgb(218, 218, 218);
-    border-radius: 10px;
-    padding: 2rem;
-}
-
-h1{
-    grid-area: a;
-}
-
-#labelDiv{
     display: grid;
-    grid-template:
-    "a b c" ;
-    font-size: 20px;
-    padding: 3px;
-    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
+    padding: 1rem;
+    padding-bottom: 5rem;
+    grid-area: d;
+}
+
+.motivationText{
+    color: white;
+    padding: 2rem;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
 }
 
 #workoutList{
     padding: 0;
+}
+
+@media  (max-width: 800px) {
+.container{
+    width: 100%;
+    grid-template:
+    "a"
+    "b"
+    "c"
+    "d";
+}
 }
