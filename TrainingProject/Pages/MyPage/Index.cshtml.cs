@@ -29,16 +29,23 @@ namespace TrainingProject.Pages.MyPage
 		{
 			var user = context.Accounts.First(u => u.Id == loggedInID);
 
-			user.Age = age;
+            user.Age = age;
 			user.Height = height;
 			user.CurentWeight = weight;
 			user.IsMale = gender;
 			user.TargetWeight = targetWeight;
 			user.Goal = goal;
 
-			context.SaveChanges();
-
 			calorieCount = account.CalorieCalculator(user);
+
+			if(calorieCount.FinishedBMR == "0")
+			{
+                return Page();
+            }
+			else
+			{
+                context.SaveChanges();
+            }
 
             return Page();
 		}
