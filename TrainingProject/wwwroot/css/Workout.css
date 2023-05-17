@@ -1,5 +1,6 @@
 ﻿#createWorkout {
     font-size: 20px;
+    color: white;
     font-weight: bold;
     text-align: center;
 }
@@ -16,6 +17,10 @@
         "c d"
         "e f" 
 }*/
+
+h2{
+    color: white;
+}
 
 .exerciseInfo {
     text-align: center;
