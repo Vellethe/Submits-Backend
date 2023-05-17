@@ -14,9 +14,6 @@
     <div id="myPage">
         <div id="userInfo">
             <div id="imgDiv"><img id="profileImg" src="Pictures/Sample-Profile-Pic.png" /></div>
-            <environment id="signIn" names="Development">
-                @await Component.InvokeAsync(nameof(FakeLoginMenu))
-            </environment>
             <tr>
                 <label id="userNameLabel" for="userName">Name: </label>
                 <p id="userName">@Model.user.Name</p>
