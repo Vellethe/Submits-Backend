@@ -189,3 +189,17 @@ svg {
     stroke-width: 1;
 }
 
+@media  (max-width: 1000px) {
+    .container{
+        width: 100%;
+    }
+    #myPage{
+        width: 100%;
+    }
+    #userInfo{
+        display: block;
+    }
+    #userInfo p{
+        text-align: center;
+    }
+    }

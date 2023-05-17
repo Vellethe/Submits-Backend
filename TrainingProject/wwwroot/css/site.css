@@ -42,6 +42,14 @@ ul {
     text-align: center;
 }
 
+#menuToggle {
+    display: none;
+}
+
+#menuToggleLabel {
+    display: none;
+}
+
 #pageList {
     display: flex;
     flex-direction: row-reverse;
@@ -73,3 +81,29 @@ th{
 table,th,td{
     border: 1px solid;
 }
+
+@media  (max-width: 700px) {
+    #menuToggleLabel {
+        display: block;
+        font-size: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 10px;
+        color: white;
+    }
+
+    #pageList {
+        display: none;
+    }
+
+    #menuToggle:checked ~ #pageList {
+        display: block;
+        text-align: center;
+    }
+    header{
+        display: grid;
+        grid-template:
+        "a b"
+        "c c";
+    }
+    }
