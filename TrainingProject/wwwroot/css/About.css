@@ -1,0 +1,40 @@
+.container{
+    background-color: #1b1b1b;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    color: white;
+}
+
+#aboutUs{
+    width: 70%;
+    background-color: #202020;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+#madeBy{
+    width: 70%;
+    background-color: #202020;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+#madeByList{
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#madeByList li{
+    padding: 1rem;
+}
