@@ -14,25 +14,18 @@ namespace TrainingProject.Controllers
     {
         [HttpGet]
         [Authorize("AllowAnonymousApi")]
-        public string testign()
-        {
-            return "hello world";
-        }
-
-        [HttpGet]
-        [Authorize("AllowAnonymousApi")]
         public List<string> OnGetPizza(int calories)
         {
             //Time(in minutes) = Calories to burn / Calories burned per minute
             //All values (3, 9, 15) are based on an average person.
 
-            int walkTime = calories / 3;
-            int weightTime = calories / 9;
-            int runTime = calories / 15;
+            double walkTime = ((double)calories / 3) / 60;
+            double weightTime = ((double)calories / 9) / 60;
+            double runTime = ((double)calories / 15) / 60;
 
-            string walk = "Walking: " + walkTime + " minutes";
-            string weight = "Weight training: " + weightTime + " minutes";
-            string run = "Run: " + runTime + " minutes";
+            string walk = "Walking: " + Math.Round(walkTime, 1) + " H";
+            string weight = "Weight training: " + Math.Round(weightTime, 1) + " H";
+            string run = "Run: " + Math.Round(runTime, 1) + " H";
 
             List<string> times = new List<string>();
             times.Add(walk);
