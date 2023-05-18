@@ -57,8 +57,8 @@ summary {
         "i g h"
         "i j k"
         "i l m"
-        "i n o"
-        "i p q";
+        "r n o"
+        "r p q";
 }
 
 main form{
@@ -70,6 +70,13 @@ main form{
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
+    padding-right: 2rem;
+}
+
+#fakeLogin{
+    grid-area: r;
+    display: block;
+    justify-content: start;
     padding-right: 2rem;
 }
 

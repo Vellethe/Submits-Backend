@@ -16,6 +16,7 @@
 .container{
     background-color: #1b1b1b;
     width: 70%;
+    padding-top: 1rem;
     margin-left: auto;
     margin-right: auto;
     display: grid;
@@ -27,7 +28,7 @@
 
 #videoHeader{
     grid-area: a;
-    width: 100%;
+    width: 90%;
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
