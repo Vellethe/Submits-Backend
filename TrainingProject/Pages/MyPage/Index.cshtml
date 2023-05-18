@@ -13,86 +13,85 @@
 
     <div id="myPage">
         <div id="userInfo">
-            <div id="imgDiv"><img id="profileImg" src="Pictures/Sample-Profile-Pic.png" /></div>
+            <div id="imgDiv">
+                <img id="profileImg" src="Pictures/Sample-Profile-Pic.png" />
+            </div>
             <environment names="Development">
                 @await Component.InvokeAsync(nameof(FakeLoginMenu))
             </environment>
-            <tr>
-                <label id="userNameLabel" for="userName">Name: </label>
-                <p id="userName">@Model.user.Name</p>
-            </tr>
-            <tr>
-                <label for="userGender">Gender: </label>
-                <p id="userGender">@(Model.user.IsMale ? "Male" : "Female")</p>
-            </tr>
-            <tr>
-                <label for="userAge">Age: </label>
-                <p id="userAge">@Model.user.Age y/o</p>
-            </tr>
-            <tr>
-                <label for="userWeight">Weight: </label>
-                <p id="userWeight">@Model.user.CurentWeight kg</p>
-            </tr>
-            <tr>
-                <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
-                <p id="goalWeight">@Model.user.TargetWeight kg</p>
-            </tr>
-            <tr>
-                <label id="goalLabel" for="goal">Goal: </label>
-                <p id="goal">@Model.user.Goal</p>
-            </tr>
-            <tr>
-                <label for="dailyCalories">Daily Calories: </label>
-                <p id="dailyCalories">@Model.calorieCount.FinishedBMR kcal</p>
-            </tr>
-            <tr>
-                <label for="finishDate">Finished Before: </label>
-                <p id="finishDate">@Model.calorieCount.FinishedDate</p>
-            </tr>
+
+            <ul class="userInput">
+                <li>
+                    <label id="userNameLabel" for="userName">Name: </label>
+                    <p id="userName">@Model.user.Name</p>
+                </li>
+                <li>
+                    <label for="userGender">Gender: </label>
+                    <p id="userGender">@(Model.user.IsMale ? "Male" : "Female")</p>
+                </li>
+                <li>
+                    <label for="userAge">Age: </label>
+                    <p id="userAge">@Model.user.Age y/o</p>
+                </li>
+                <li>
+                    <label for="userWeight">Weight: </label>
+                    <p id="userWeight">@Model.user.CurentWeight kg</p>
+                </li>
+                <li>
+                    <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
+                    <p id="goalWeight">@Model.user.TargetWeight kg</p>
+                </li>
+                <li>
+                    <label id="goalLabel" for="goal">Goal: </label>
+                    <p id="goal">@Model.user.Goal</p>
+                </li>
+                <li>
+                    <label for="dailyCalories">Daily Calories: </label>
+                    <p id="dailyCalories">@Model.calorieCount.FinishedBMR kcal</p>
+                </li>
+                <li>
+                    <label for="finishDate">Finished Before: </label>
+                    <p id="finishDate">@Model.calorieCount.FinishedDate</p>
+                </li>
+            </ul>
         </div>
 
         <details>
             <summary>Calculate</summary>
             <form method="post">
-                <div id="containerValue">
-                    <table>
-                        <tr>
-                            <label for="age">Age</label>
-                            <input id="age" type="number" name="age" />
-                        </tr>
-                        <tr>
-                            <label for="height">Height in cm</label>
-                            <input id="height" type="number" name="height" />
-                        </tr>
-                        <tr>
-                            <label for="weight">Weight in kg</label>
-                            <input id="weight" type="number" name="weight" />
-                        </tr>
-                    </table>
-                </div>
-                <div id="containerGoal">
-                    <table>
-                        <tr>
-                            <label for="gender">Gender</label>
-                            <select id="gender" name="gender">
-                                <option value="true">Male</option>
-                                <option value="false">Female</option>
-                            </select>
-                        </tr>
-                        <tr>
-                            <label for="goalSelect">Goal</label>
-                            <select id="goalSelect" name="goal">
-                                <option value="Lose Weight">Lose Weight</option>
-                                <option value="Maintain">Maintain</option>
-                                <option value="Build Muscle">Build Muscle</option>
-                            </select>
-                        </tr>
-                        <tr>
-                            <label id="targetWeightLabel" for="targetWeight">Goal Weight</label>
-                            <input id="targetWeight" type="number" name="targetWeight" />
-                        </tr>
-                    </table>
-                </div>
+                <ul class="userInput">
+                    <li>
+                        <label for="age">Age</label>
+                        <input id="age" type="number" name="age" />
+                    </li>
+                    <li>
+                        <label for="height">Height in cm</label>
+                        <input id="height" type="number" name="height" />
+                    </li>
+                    <li>
+                        <label for="weight">Weight in kg</label>
+                        <input id="weight" type="number" name="weight" />
+                    </li>
+                    <li>
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="true">Male</option>
+                            <option value="false">Female</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="goalSelect">Goal</label>
+                        <select id="goalSelect" name="goal">
+                            <option value="Lose Weight">Lose Weight</option>
+                            <option value="Maintain">Maintain</option>
+                            <option value="Build Muscle">Build Muscle</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label id="targetWeightLabel" for="targetWeight">Goal Weight</label>
+                        <input id="targetWeight" type="number" name="targetWeight" />
+                    </li>
+                </ul>
                 <button type="submit">Submit</button>
             </form>
         </details>

@@ -4,7 +4,7 @@
     height: 100vh;
 }
 
-h1{
+h1 {
     margin: 2rem;
 }
 
@@ -14,13 +14,13 @@ summary {
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
-  }
-  
-  details summary::-webkit-details-marker {
-    display:none;
-  }
+}
 
-.container{
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+.container {
     background-color: #1b1b1b;
     width: 70%;
     margin-left: auto;
@@ -42,128 +42,99 @@ summary {
     border-radius: 5px;
 }
 
-#userInfo{
-    font-size: 20px;
-    font-weight: bold;
+#userInfo {
     display: grid;
     margin-left: 1rem;
     margin-right: 1rem;
     padding: 1rem;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
-    grid-template:
-        "i a b"
-        "i c d"
-        "i e f"
-        "i g h"
-        "i j k"
-        "i l m"
-        "r n o"
-        "r p q";
+    grid-template-areas:  "picture list"
+                          "c list";
 }
 
-main form{
-    padding-bottom: 6px;
+#userInfo label {
+    text-align: left;
+    padding: 5px;
 }
 
-#imgDiv{
-    grid-area: i;
+#userInfo p {
+    text-align: left;
+    margin: 0;
+    padding: 5px;
+}
+
+#userInfo .userInput {
+    grid-area: list;
+}
+
+#userInfo #imgDiv {
+    grid-area: picture;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
     padding-right: 2rem;
 }
 
-#fakeLogin{
+#userInfo form {
+    grid-area: c;
+}
+
+main form {
+    padding-bottom: 6px;
+}
+
+#fakeLogin {
     grid-area: r;
     display: block;
     justify-content: start;
     padding-right: 2rem;
 }
 
-#profileImg{
+#profileImg {
     width: 200px;
 }
 
-#userInfo label{
-    text-align: left;
-    padding: 5px;
-}
-
-#userInfo p{
-    text-align: left;
-    margin: 0;
-    padding: 5px;
-}
-
-#containerValue {
+.userInput {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
     grid-gap: 10px;
-    width: 400px;
+    width: 80%;
     font-size: 20px;
     display: grid;
-    grid-template:
-        "a b"
-        "c d"
-        "e f";
 }
 
-#containerValue label{
-    width: 175px;
+.userInput li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
 }
 
-#containerValue input{
-    width: 215px;
+.userInput li label {
+    flex: 2;
 }
 
-#containerGoal {
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    display: grid;
-    grid-gap: 10px;
-    grid-template:
-        "a b"
-        "c d"
-        "e f";
-}
-
-#containerGoal label{
-    width: 175px;
-}
-
-#containerGoal input{
-    width: 215px;
-}
-
-p{
-    margin: 1rem;
-}
-
-#myPageSubmit {
-    margin-top: 1%;
+.userInput li input,
+.userInput li select {
+    flex: 2;
+    width: 100%;
 }
 
 svg {
-    position:center;
+    position: center;
     background-color: white;
-    height:500px;
-    width:50em;
-    border:solid 10px black;
-    padding:10px;
+    height: 500px;
+    width: 50em;
+    border: solid 10px black;
+    padding: 10px;
 }
-
 
 #graph {
     margin-top: 10%;
     font-size: 30px;
 }
-
 
 .graph .labels.x-labels {
     text-anchor: middle;
@@ -174,11 +145,11 @@ svg {
 }
 
 
-    .graph .grid {
-        stroke: #ccc;
-        stroke-dasharray: 0;
-        stroke-width: 1;
-    }
+.graph .grid {
+    stroke: #ccc;
+    stroke-dasharray: 0;
+    stroke-width: 1;
+}
 
 .labels {
     font-size: 13px;
@@ -196,17 +167,20 @@ svg {
     stroke-width: 1;
 }
 
-@media  (max-width: 1000px) {
-    .container{
+@media (max-width: 1000px) {
+    .container {
         width: 100%;
     }
-    #myPage{
+
+    #myPage {
         width: 100%;
     }
-    #userInfo{
+
+    #userInfo {
         display: block;
     }
-    #userInfo p{
+
+    #userInfo p {
         text-align: center;
     }
-    }
+}
