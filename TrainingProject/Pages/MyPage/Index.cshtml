@@ -62,26 +62,26 @@
                 <ul class="userInput">
                     <li>
                         <label for="age">Age</label>
-                        <input id="age" type="number" name="age" />
+                        <input asp-for="@Model.user.Age" id="age" type="number" name="age" />
                     </li>
                     <li>
                         <label for="height">Height in cm</label>
-                        <input id="height" type="number" name="height" />
+                        <input asp-for="@Model.user.Height" id="height" type="number" name="height" />
                     </li>
                     <li>
                         <label for="weight">Weight in kg</label>
-                        <input id="weight" type="number" name="weight" />
+                        <input asp-for="@Model.user.CurentWeight" id="weight" type="number" name="weight" />
                     </li>
                     <li>
                         <label for="gender">Gender</label>
-                        <select id="gender" name="gender">
+                        <select asp-for="@Model.user.IsMale" id="gender" name="gender">
                             <option value="true">Male</option>
                             <option value="false">Female</option>
                         </select>
                     </li>
                     <li>
                         <label for="goalSelect">Goal</label>
-                        <select id="goalSelect" name="goal">
+                        <select asp-for="@Model.user.Goal" id="goalSelect" name="goal">
                             <option value="Lose Weight">Lose Weight</option>
                             <option value="Maintain">Maintain</option>
                             <option value="Build Muscle">Build Muscle</option>
@@ -89,7 +89,7 @@
                     </li>
                     <li>
                         <label id="targetWeightLabel" for="targetWeight">Goal Weight</label>
-                        <input id="targetWeight" type="number" name="targetWeight" />
+                        <input asp-for="@Model.user.TargetWeight" id="targetWeight" type="number" name="targetWeight" />
                     </li>
                 </ul>
                 <button type="submit">Submit</button>
