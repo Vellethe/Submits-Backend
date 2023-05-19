@@ -11,6 +11,19 @@ namespace TrainingProject.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Account Account { get; set; }
+
+        private int caloriesToLose { get
+            {
+                return (Account.CurrentWeight - TargetWeight) * 7700;
+            } 
+        }
+
+        private int numberOfDaysToLoseWeight { get
+            {
+                return  caloriesToLose / 600;
+            } 
+        } 
+
         public int DayCount(DateTime curentDate, DateTime targetDate)
         {
             TimeSpan timeSpan = targetDate - curentDate;
@@ -23,12 +36,10 @@ namespace TrainingProject.Models
         {
             int curentWeight = account.CurrentWeight;
             int targetWeight = accountData.TargetWeight;
-            int caloriesTotal = (curentWeight - targetWeight) * 7700;
-            int numberOfDays = caloriesTotal / 600;
 
             if (accountData.Goal == "Lose")
             {
-                return caloriesTotal / numberOfDays;
+                return caloriesToLose / numberOfDaysToLoseWeight;
             }
             else if (accountData.Goal == "Gain")
             {
@@ -59,9 +70,7 @@ namespace TrainingProject.Models
 
                 double bmr = CalculateBMR(account, accountData);
                 double finishedBMR = Math.Round(bmr) - calorieCut;
-                int caloriesTotal = (account.CurrentWeight - accountData.TargetWeight) * 7700;
-                int numberOfDays = caloriesTotal / 600;
-                DateTime finishedDate = DateTime.Now.AddDays(numberOfDays);
+                DateTime finishedDate = DateTime.Now.AddDays(numberOfDaysToLoseWeight);
 
                 return (finishedBMR.ToString(), finishedDate.ToString("yyyy/MM/dd"));
             }
@@ -88,7 +97,7 @@ namespace TrainingProject.Models
         }
 
         public double CalculateBMR(Account account, AccountData accountData)
-        {
+        {   
             if (account.IsMale)
             {
                 return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5) * 1.55;
