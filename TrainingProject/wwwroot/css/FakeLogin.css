@@ -1,0 +1,16 @@
+#loginDiv{
+    width: 400px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: grey;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 5px;
+}
+#signInLabel{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-top: 0;
+}

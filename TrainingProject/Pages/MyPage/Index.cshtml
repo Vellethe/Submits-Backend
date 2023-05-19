@@ -1,5 +1,4 @@
-@page
-@using TrainingProject.Pages.Shared.Components.LoginMenu;
+﻿@page
 @model TrainingProject.Pages.MyPage.IndexModel
 @{
 
@@ -13,85 +12,83 @@
 
     <div id="myPage">
         <div id="userInfo">
-            <div id="imgDiv">
-                <img id="profileImg" src="Pictures/Sample-Profile-Pic.png" />
-            </div>
-            <environment names="Development">
-                @await Component.InvokeAsync(nameof(FakeLoginMenu))
-            </environment>
-            <button id="graphButton"><a asp-page="/Graph/index">Show Progress Graph</a></button>
-
-            <ul class="userInput">
-                <li>
-                    <label id="userNameLabel" for="userName">Name: </label>
-                    <p id="userName">@Model.user.Name</p>
-                </li>
-                <li>
-                    <label for="userGender">Gender: </label>
-                    <p id="userGender">@(Model.user.IsMale ? "Male" : "Female")</p>
-                </li>
-                <li>
-                    <label for="userAge">Age: </label>
-                    <p id="userAge">@Model.user.Age y/o</p>
-                </li>
-                <li>
-                    <label for="userWeight">Weight: </label>
-                    <p id="userWeight">@Model.user.CurentWeight kg</p>
-                </li>
-                <li>
-                    <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
-                    <p id="goalWeight">@Model.user.TargetWeight kg</p>
-                </li>
-                <li>
-                    <label id="goalLabel" for="goal">Goal: </label>
-                    <p id="goal">@Model.user.Goal</p>
-                </li>
-                <li>
-                    <label for="dailyCalories">Daily Calories: </label>
-                    <p id="dailyCalories">@Model.calorieCount.FinishedBMR kcal</p>
-                </li>
-                <li>
-                    <label for="finishDate">Finished Before: </label>
-                    <p id="finishDate">@Model.calorieCount.FinishedDate</p>
-                </li>
-            </ul>
+            <div id="imgDiv"><img id="profileImg" src="Pictures/Sample-Profile-Pic.png" /></div>
+            <tr>
+                <label id="userNameLabel" for="userName">Name: </label>
+                <p id="userName">@Model.user.Name</p>
+            </tr>
+            <tr>
+                <label for="userGender">Gender: </label>
+                <p id="userGender">@(Model.user.IsMale ? "Male" : "Female")</p>
+            </tr>
+            <tr>
+                <label for="userAge">Age: </label>
+                <p id="userAge">@Model.user.Age y/o</p>
+            </tr>
+            <tr>
+                <label for="userWeight">Weight: </label>
+                <p id="userWeight">@Model.user.CurrentWeight kg</p>
+            </tr>
+            <tr>
+                <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
+                <p id="goalWeight">@Model.user.TargetWeight kg</p>
+            </tr>
+            <tr>
+                <label id="goalLabel" for="goal">Goal: </label>
+                <p id="goal">@Model.user.Goal</p>
+            </tr>
+            <tr>
+                <label for="dailyCalories">Daily Calories: </label>
+                <p id="dailyCalories">@Model.calorieCount.FinishedBMR kcal</p>
+            </tr>
+            <tr>
+                <label for="finishDate">Finished Before: </label>
+                <p id="finishDate">@Model.calorieCount.FinishedDate</p>
+            </tr>
+        </div>
 
         <details>
             <summary>Calculate</summary>
             <form method="post">
-                <ul class="userInput">
-                    <li>
-                        <label for="age">Age</label>
-                        <input asp-for="@Model.user.Age" id="age" type="number" name="age" />
-                    </li>
-                    <li>
-                        <label for="height">Height in cm</label>
-                        <input asp-for="@Model.user.Height" id="height" type="number" name="height" />
-                    </li>
-                    <li>
-                        <label for="weight">Weight in kg</label>
-                        <input asp-for="@Model.user.CurentWeight" id="weight" type="number" name="weight" />
-                    </li>
-                    <li>
-                        <label for="gender">Gender</label>
-                        <select asp-for="@Model.user.IsMale" id="gender" name="gender">
-                            <option value="true">Male</option>
-                            <option value="false">Female</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="goalSelect">Goal</label>
-                        <select asp-for="@Model.user.Goal" id="goalSelect" name="goal">
-                            <option value="Lose Weight">Lose Weight</option>
-                            <option value="Maintain">Maintain</option>
-                            <option value="Build Muscle">Build Muscle</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label id="targetWeightLabel" for="targetWeight">Goal Weight</label>
-                        <input asp-for="@Model.user.TargetWeight" id="targetWeight" type="number" name="targetWeight" />
-                    </li>
-                </ul>
+                <div id="containerValue">
+                    <table>
+                        <tr>
+                            <label for="age">Age</label>
+                            <input id="age" type="number" name="age" />
+                        </tr>
+                        <tr>
+                            <label for="height">Height in cm</label>
+                            <input id="height" type="number" name="height" />
+                        </tr>
+                        <tr>
+                            <label for="weight">Weight in kg</label>
+                            <input id="weight" type="number" name="weight" />
+                        </tr>
+                    </table>
+                </div>
+                <div id="containerGoal">
+                    <table>
+                        <tr>
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender">
+                                <option value="true">Male</option>
+                                <option value="false">Female</option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <label for="goalSelect">Goal</label>
+                            <select id="goalSelect" name="goal">
+                                <option value="Lose Weight">Lose Weight</option>
+                                <option value="Maintain">Maintain</option>
+                                <option value="Build Muscle">Build Muscle</option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <label id="targetWeightLabel" for="targetWeight">Goal Weight</label>
+                            <input id="targetWeight" type="number" name="targetWeight" />
+                        </tr>
+                    </table>
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </details>
@@ -101,4 +98,42 @@
             <script>alert('For an individual of your height, your goal weight would put you in the underweight BMI category. Please enter new values!');</script>
         }
     </div>
+</div>
+
+<div id="Diagram">
+
+    @*--------Graph Here-----------*@
+
+    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
+        <title id="title">A line chart showing some information</title>
+        <g class="grid x-grid" id="xGrid">
+            <line x1="90" x2="90" y1="5" y2="371"></line>
+        </g>
+        <g class="grid y-grid" id="yGrid">
+            <line x1="90" x2="705" y1="370" y2="370"></line>
+        </g>
+        <g class="labels x-labels">
+            <text x="100" y="400">5/5-2024</text>
+            <text x="246" y="400">21/5-2024</text>
+            <text x="392" y="400">5/6-2024</text>
+            <text x="538" y="400">19/6-2024</text>
+            <text x="684" y="400">2/7-2024</text>
+            <text x="400" y="440" class="label-title">Insert variable here (Year/Month/Day)</text>
+        </g>
+        <g class="labels y-labels">
+            <text x="80" y="15">120kg</text>
+            <text x="80" y="131">80kg</text>
+            <text x="80" y="248">40kg</text>
+            <text x="80" y="373">0kg</text>
+            <text x="50" y="200" class="label-title">Weight</text>
+        </g>
+        <g class="data" data-setname="Our first data set">
+            <circle cx="90" cy="192" data-value="7.2" r="4"></circle>
+            <circle cx="240" cy="141" data-value="8.1" r="4"></circle>
+            <circle cx="388" cy="179" data-value="7.7" r="4"></circle>
+            <circle cx="531" cy="200" data-value="6.8" r="4"></circle>
+            <circle cx="677" cy="104" data-value="6.7" r="4"></circle>
+        </g>
+    </svg>
+
 </div>

@@ -4,14 +4,8 @@
     height: 100vh;
 }
 
-h1 {
+h1{
     margin: 2rem;
-}
-
-details{
-    grid-area: d;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 summary {
@@ -20,13 +14,13 @@ summary {
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
-}
+  }
+  
+  details summary::-webkit-details-marker {
+    display:none;
+  }
 
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-.container {
+.container{
     background-color: #1b1b1b;
     width: 70%;
     margin-left: auto;
@@ -36,7 +30,7 @@ details summary::-webkit-details-marker {
 }
 
 #myPage {
-    width: 90%;
+    width: 700px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2rem;
@@ -48,99 +42,75 @@ details summary::-webkit-details-marker {
     border-radius: 5px;
 }
 
-#userInfo {
+#userInfo{
+    font-size: 20px;
+    font-weight: bold;
     display: grid;
     margin-left: 1rem;
     margin-right: 1rem;
     padding: 1rem;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
-    grid-template-areas:  
-    "picture list"
-    "g list"
-    "c list"
-    "d d";
-
+    grid-template:
+        "i a b"
+        "i c d"
+        "i e f"
+        "i g h"
+        "i j k"
+        "i l m"
+        "i n o"
+        "i p q";
 }
 
-#userInfo label {
+main form{
+    padding-bottom: 6px;
+}
+
+#imgDiv{
+    grid-area: i;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 2rem;
+}
+
+#profileImg{
+    width: 200px;
+}
+
+#userInfo label{
     text-align: left;
     padding: 5px;
 }
 
-#userInfo p {
+#userInfo p{
     text-align: left;
     margin: 0;
     padding: 5px;
 }
 
-#userInfo .userInput {
-    grid-area: list;
-}
-
-#userInfo #imgDiv {
-    grid-area: picture;
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-main form {
-    padding-bottom: 6px;
-}
-
-#fakeLogin {
-    grid-area: c;
-    display: block;
-    margin-top: auto;
-    height: 50px;
-    justify-content: start;
-    padding: 0;
-}
-
-#graphButton{
-    margin-left: auto;
-    margin-right: auto;
-    grid-area: g;
-    width: 50%;
-    padding: 0px;
-    color: white;
-    background-color: black;
-}
-
-#profileImg {
-    width: 200px;
-}
-
-.userInput {
+#containerValue {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
     grid-gap: 10px;
-    width: 80%;
+    width: 400px;
     font-size: 20px;
     display: grid;
+    grid-template:
+        "a b"
+        "c d"
+        "e f";
 }
 
-.userInput li {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
+#containerValue label{
+    width: 175px;
 }
 
-.userInput li label {
-    flex: 2;
+#containerValue input{
+    width: 215px;
 }
 
-.userInput li input,
-.userInput li select {
-    flex: 2;
-    width: 100%;
-}
-
-
-@media (max-width: 1000px) {
 #containerGoal {
     margin-left: auto;
     margin-right: auto;
@@ -167,22 +137,69 @@ main form {
 p{
     margin: 1rem;
 }
+
+#myPageSubmit {
+    margin-top: 1%;
+}
+
+svg {
+    position:center;
+    background-color: white;
+    height:500px;
+    width:50em;
+    border:solid 10px black;
+    padding:10px;
+}
+
+
+#graph {
+    margin-top: 10%;
+    font-size: 30px;
+}
+
+
+.graph .labels.x-labels {
+    text-anchor: middle;
+}
+
+.graph .labels.y-labels {
+    text-anchor: end;
+}
+
+
+    .graph .grid {
+        stroke: #ccc;
+        stroke-dasharray: 0;
+        stroke-width: 1;
+    }
+
+.labels {
+    font-size: 13px;
+}
+
+.label-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    fill: black;
+}
+
+.data {
+    fill: red;
+    stroke-width: 1;
 }
 
 @media  (max-width: 1000px) {
     .container{
         width: 100%;
     }
-
-    #myPage {
+    #myPage{
         width: 100%;
     }
-
-    #userInfo {
+    #userInfo{
         display: block;
     }
-
-    #userInfo p {
+    #userInfo p{
         text-align: center;
     }
-}
+    }

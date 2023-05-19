@@ -1,9 +1,9 @@
 ﻿@using TrainingProject.Models;
 @model IEnumerable<SelectListItem>;
 
-<form id="fakeLogin" method="post" asp-page="/FakeLogin">
+<form method="post" asp-page="/FakeLogin">
     <label>
-        Change Account
+        Log in as:
         <select asp-items="@Model" name="AccountID" id="account-id"></select>
     </label>
     <button type="submit">Log In</button>

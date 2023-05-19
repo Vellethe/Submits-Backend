@@ -7,68 +7,63 @@
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/Workout.css">
 
-<div class="container">
-    <div id="myWorkouts">
-        <h2>My Workouts</h2>
-        <table class="exerciseInfo">
-            <thead>
-                <tr>
-                    <th>Workout name</th>
-                    <th>Show workout</th>
-                    <th>Link to edit</th>
-                </tr>
-            </thead>
+<a id="createWorkout" asp-page="Edit">Create Workout</a>
 
-            @foreach (var workout in Model.MyWorkouts)
-            {
-                //TODO change links to buttons
-                <tr id="existingWorkout">
-                    <td>@workout.Name</td>
-                    <td>
-                        @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
-                        <form>
-                            <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
-                        </form>
-                    </td>
-                    <td>
+<h2>My workouts</h2>
+<table class="exerciseInfo">
+    <thead>
+        <tr>
+            <th>Workout name</th>
+            <th>Show workout</th>
+            <th>Link to edit</th>
+        </tr>
+    </thead>
 
-                        <form>
-                            <button asp-page="Edit" asp-route-id="@workout.Id">Edit Workout</button>
-                        </form>
+    @foreach (var workout in Model.MyWorkouts)
+    {
+        //TODO change links to buttons
+        <tr id="existingWorkout">
+            <td>@workout.Name</td>
+            <td>
+                @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
+                <form>
+                    <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
+                </form>
+            </td>
+            <td>
+                
+                <form>
+                    <button  asp-page="Edit" asp-route-id="@workout.Id">Edit Workout</button>
+                </form>
+                
+                @*<a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a>*@            
+            </td>
+        </tr>
+    }
+</table>
 
-                        @*<a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a>*@
-                    </td>
-                </tr>
-            }
-        </table>
-        <button id="createWorkout"><a id="createWorkout" asp-page="Edit">Create New Workout</a></button>
-    </div>
+<h2>Others workouts</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Workout name</th>
+            <th>Creator</th>
+            <th>Show workout</th>
+        </tr>
+    </thead>
 
-    <div id="othersWorkouts">
-        <h2>Others Workouts</h2>
-        <table id="othersTable">
-            <thead>
-                <tr>
-                    <th>Workout name</th>
-                    <th>Creator</th>
-                    <th>Show workout</th>
-                </tr>
-            </thead>
-
-            @foreach (var workout in Model.Workouts)
-            {
-                //TODO change links to buttons
-                <tr id="existingWorkout">
-                    <td>@workout.Name</td>
-                    <td>@workout.Owner.Name</td>
-                    <td>
-                        @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
-                        <form>
-                            <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-</div>
+    @foreach (var workout in Model.Workouts)
+    {
+        //TODO change links to buttons
+        <tr id="existingWorkout">
+            <td>@workout.Name</td>
+            <td>@workout.Owner.Name</td>
+            <td>
+                @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
+                <form>
+                    <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

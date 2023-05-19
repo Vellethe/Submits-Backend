@@ -77,10 +77,6 @@ namespace TrainingProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Instruction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("MuscleGroup")
                         .HasColumnType("int");
 

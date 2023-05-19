@@ -1,0 +1,16 @@
+﻿@page
+@model TrainingProject.Pages.FakeSignUpModel
+@{
+}
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/FakeSignUp.css">
+
+<div id="signInDiv">
+    <h1 id="signUpLabel" for="signUp">Sign Up</h1>
+    <form method="post">
+        <input id="usernameInput" name="username" type="text" placeholder="Username" />
+        <input id="usernameInput" name="email" type="text" placeholder="Email" />
+        <p>Already a member? <a asp-page="/FakeLogin">log in</a></p>
+        <button id="signIn" type="submit">Sign In</button>
+    </form>
+</div>
