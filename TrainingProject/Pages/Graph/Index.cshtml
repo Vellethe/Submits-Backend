@@ -1,44 +1,63 @@
 ﻿@page
 @model TrainingProject.Pages.Graph.IndexModel
 @{
+    // Get Y-Axis values from an array
+    string[] yValues = { "0kg", "25kg", "50kg", "75kg", "100kg", "125kg", "150kg", "175kg", "200kg" };
+
+    // Get X-Axis values from the GetXAxisValues() method
+    string[] xValues = @Model.accountData.GetXAxisValues(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(600).ToString("yyyy-MM-dd"));
+
+    // Calculate progress data
+    double[] progress = @Model.accountData.GetProgressData(xValues);
 }
+
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/Graph.css">
 
-<div id="Diagram">
+@*--------Graph Here-----------*@
 
-    @*--------Graph Here-----------*@
+<div id="Result">
 
     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
         <title id="title">A line chart showing some information</title>
+
         <g class="grid x-grid" id="xGrid">
+
             <line x1="90" x2="90" y1="5" y2="371"></line>
+
         </g>
+
         <g class="grid y-grid" id="yGrid">
+
             <line x1="90" x2="705" y1="370" y2="370"></line>
+
         </g>
+
         <g class="labels x-labels">
-            <text x="100" y="400">5/5-2024</text>
-            <text x="246" y="400">21/5-2024</text>
-            <text x="392" y="400">5/6-2024</text>
-            <text x="538" y="400">19/6-2024</text>
-            <text x="684" y="400">2/7-2024</text>
+
+            @for (int i = 0; i < xValues.Length; i++)
+            {
+                <text><text x="@((i * 700 / (xValues.Length - 1)) + 50)" y="380">@xValues[i]</text></text>
+                <line x1="@((i * 700 / (xValues.Length - 1)) + 50)" y1="350" x2="@((i * 700 / (xValues.Length - 1)) + 50)" y2="355" stroke="black" stroke-width="2" />
+            }
+
             <text x="400" y="440" class="label-title">Insert variable here (Year/Month/Day)</text>
+
         </g>
+
         <g class="labels y-labels">
-            <text x="80" y="15">120kg</text>
-            <text x="80" y="131">80kg</text>
-            <text x="80" y="248">40kg</text>
-            <text x="80" y="373">0kg</text>
+
+            @for (int i = 0; i < yValues.Length; i++)
+            {
+                <text><text x="20" y="@((i * 300 / (yValues.Length - 1)) + 50)" font-size="12">@yValues[i]</text></text>
+                <line x1="50" y1="@((i * 300 / (yValues.Length - 1)) + 50)" x2="45" y2="@((i * 300 / (yValues.Length - 1)) + 50)" stroke="black" stroke-width="2" />
+            }
+
             <text x="50" y="200" class="label-title">Weight</text>
+
         </g>
-        <g class="data" data-setname="Our first data set">
-            <circle cx="90" cy="192" data-value="7.2" r="4"></circle>
-            <circle cx="240" cy="141" data-value="8.1" r="4"></circle>
-            <circle cx="388" cy="179" data-value="7.7" r="4"></circle>
-            <circle cx="531" cy="200" data-value="6.8" r="4"></circle>
-            <circle cx="677" cy="104" data-value="6.7" r="4"></circle>
-        </g>
+
     </svg>
+
 
 </div>
