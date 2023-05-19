@@ -31,7 +31,7 @@ namespace TrainingProject.Pages.MyPage
 
             user.Age = age;
 			user.Height = height;
-			user.CurentWeight = weight;
+			user.CurrentWeight = weight;
 			user.IsMale = gender;
 			user.TargetWeight = targetWeight;
 			user.Goal = goal;

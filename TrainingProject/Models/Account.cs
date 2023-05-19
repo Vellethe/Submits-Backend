@@ -11,7 +11,7 @@ namespace TrainingProject.Models
         public string Name { get; set; }
         public int Age { get; set; }
         public int Height { get; set; }
-        public int CurentWeight {get; set; }
+        public int CurrentWeight {get; set; }
         public bool IsMale { get; set; }
         public int TargetWeight { get; set; }
         public string Goal { get; set; } = "None" ;
@@ -26,7 +26,7 @@ namespace TrainingProject.Models
 
         public int CalorieCut(Account account)
         {
-            int curentWeight = account.CurentWeight;
+            int curentWeight = account.CurrentWeight;
             int targetWeight = account.TargetWeight;
             int caloriesTotal = (curentWeight - targetWeight) * 7700;
             int numberOfDays = caloriesTotal / 600;
@@ -46,8 +46,7 @@ namespace TrainingProject.Models
             return 0;
         }
         public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account account)
-        {
-            double bmr;
+        {          
             double heightInMeters = account.Height / 100.0;
             double bmi = account.TargetWeight / (heightInMeters * heightInMeters);
 
@@ -59,24 +58,31 @@ namespace TrainingProject.Models
             }
             else
             {
-                //Calculating according to gender
-                if (account.IsMale)
-                {
-                    bmr = ((10 * account.CurentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5) * 1.55;
-                }
-
-                else
-                {
-                    bmr = ((10 * account.CurentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161) * 1.55;
-                }
+                double bmr = CalculateBMR(account);
 
                 double finishedBMR = Math.Round(bmr) - calorieCut;
-                int caloriesTotal = (account.CurentWeight - account.TargetWeight) * 7700;
+                int caloriesTotal = (account.CurrentWeight - account.TargetWeight) * 7700;
                 int numberOfDays = caloriesTotal / 600;
                 DateTime finishedDate = DateTime.Now.AddDays(numberOfDays);
 
                 return (finishedBMR.ToString(), finishedDate.ToString("yyyy/MM/dd"));
             }
         }
+
+        public double CalculateBMR(Account account)
+        {
+            if (account.IsMale)
+            {
+                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5) * 1.55;
+            }
+
+            else
+            {
+                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161) * 1.55;
+            }
+        }
+
+      
+
     }
 }
