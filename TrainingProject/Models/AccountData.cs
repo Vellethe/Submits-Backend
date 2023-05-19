@@ -95,16 +95,11 @@ namespace TrainingProject.Models
         }
 
         public double CalculateBMR(Account account, AccountData accountData)
-        {   
-            if (account.IsMale)
-            {
-                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5) * 1.55;
-            }
+        {
+            int genderOffset = account.IsMale ? 5 : -161;
+            
+            return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + genderOffset) * 1.55;
 
-            else
-            {
-                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161) * 1.55;
-            }
         }
 
         public double[] GetProgressData(string[] xValues)
