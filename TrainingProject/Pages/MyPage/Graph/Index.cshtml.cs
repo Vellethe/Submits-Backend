@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TrainingProject.Data;
 using TrainingProject.Models;
 
-namespace TrainingProject.Pages.MyPage
+namespace TrainingProject.Pages.Graph
 {
     public class IndexModel : PageModel
     {
         public int loggedInID { get; set; }
+        public (string FinishedBMR, string FinishedDate) calorieCount { get; set; }
         public Account account { get; set; }
         public Account user { get; set; }
         public AccountData accountData { get; set; }
@@ -21,13 +22,14 @@ namespace TrainingProject.Pages.MyPage
             account = new Account();
             user = context.Accounts.First(u => u.Id == loggedInID);
             accountData = new AccountData();
+
         }
         public void OnGet()
         {
-
+            calorieCount = accountData.CalorieCalculator(user, userData);
         }
 
-        public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight, DateTime startDate, DateTime endDate)
+        public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight)
         {
             var user = context.Accounts.First(u => u.Id == loggedInID);
 
@@ -35,25 +37,14 @@ namespace TrainingProject.Pages.MyPage
             user.Height = height;
             user.CurrentWeight = weight;
             user.IsMale = gender;
-            userData.Goal = goal;
             userData.TargetWeight = targetWeight;
-            userData.StartDate = startDate;
-            userData.EndDate = endDate;
+            userData.Goal = goal;
 
-            //calorieCount = accountData.CalorieCalculator(user, userData);
-
-            //if(calorieCount.FinishedBMR == "0")
-            //{
-            //             return Page();
-            //         }
-            //else
-            //{
-            //             context.SaveChanges();
-            //         }
             context.SaveChanges();
+
+            calorieCount = accountData.CalorieCalculator(user, userData);
 
             return Page();
         }
     }
 }
-
