@@ -8,6 +8,12 @@ h1 {
     margin: 2rem;
 }
 
+details{
+    grid-area: d;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 summary {
     list-style: none;
     padding: 1rem;
@@ -30,7 +36,7 @@ details summary::-webkit-details-marker {
 }
 
 #myPage {
-    width: 700px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2rem;
@@ -48,8 +54,12 @@ details summary::-webkit-details-marker {
     margin-right: 1rem;
     padding: 1rem;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
-    grid-template-areas:  "picture list"
-                          "c list";
+    grid-template-areas:  
+    "picture list"
+    "g list"
+    "c list"
+    "d d";
+
 }
 
 #userInfo label {
@@ -72,11 +82,6 @@ details summary::-webkit-details-marker {
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
-    padding-right: 2rem;
-}
-
-#userInfo form {
-    grid-area: c;
 }
 
 main form {
@@ -84,10 +89,22 @@ main form {
 }
 
 #fakeLogin {
-    grid-area: r;
+    grid-area: c;
     display: block;
+    margin-top: auto;
+    height: 50px;
     justify-content: start;
-    padding-right: 2rem;
+    padding: 0;
+}
+
+#graphButton{
+    margin-left: auto;
+    margin-right: auto;
+    grid-area: g;
+    width: 50%;
+    padding: 0px;
+    color: white;
+    background-color: black;
 }
 
 #profileImg {
@@ -122,53 +139,38 @@ main form {
     width: 100%;
 }
 
-svg {
-    position: center;
-    background-color: white;
-    height: 500px;
-    width: 50em;
-    border: solid 10px black;
-    padding: 10px;
-}
-
-#graph {
-    margin-top: 10%;
-    font-size: 30px;
-}
-
-.graph .labels.x-labels {
-    text-anchor: middle;
-}
-
-.graph .labels.y-labels {
-    text-anchor: end;
-}
-
-
-.graph .grid {
-    stroke: #ccc;
-    stroke-dasharray: 0;
-    stroke-width: 1;
-}
-
-.labels {
-    font-size: 13px;
-}
-
-.label-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 12px;
-    fill: black;
-}
-
-.data {
-    fill: red;
-    stroke-width: 1;
-}
 
 @media (max-width: 1000px) {
-    .container {
+#containerGoal {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template:
+        "a b"
+        "c d"
+        "e f";
+}
+
+#containerGoal label{
+    width: 175px;
+}
+
+#containerGoal input{
+    width: 215px;
+}
+
+p{
+    margin: 1rem;
+}
+}
+
+@media  (max-width: 1000px) {
+    .container{
         width: 100%;
     }
 
