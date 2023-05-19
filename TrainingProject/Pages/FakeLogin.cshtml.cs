@@ -41,7 +41,7 @@ namespace TrainingProject.Pages
 
             await HttpContext.SignInAsync(principal);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/MyPage/index");
         }
     }
 }
