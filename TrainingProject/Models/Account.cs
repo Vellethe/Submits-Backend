@@ -11,7 +11,9 @@ namespace TrainingProject.Models
         public string Name { get; set; }
         public bool IsMale { get; set; }
         public int Age { get; set; }
+        public int Height { get; set; }
+        public int CurrentWeight { get; set; }
         public virtual List<Workout> Workouts { get; set; }
-        public virtual List<AccountData> AccountData { get; set; }
+        public virtual List<AccountData>? AccountData { get; set; }
     }
 }

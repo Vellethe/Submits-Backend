@@ -34,8 +34,8 @@ namespace TrainingProject.Pages.Graph
             var user = context.Accounts.First(u => u.Id == loggedInID);
 
             user.Age = age;
-            userData.Height = height;
-            userData.CurrentWeight = weight;
+            user.Height = height;
+            user.CurrentWeight = weight;
             user.IsMale = gender;
             userData.TargetWeight = targetWeight;
             userData.Goal = goal;
