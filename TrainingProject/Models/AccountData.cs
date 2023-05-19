@@ -34,8 +34,6 @@ namespace TrainingProject.Models
 
         public int CalorieCut(Account account, AccountData accountData)
         {
-            int curentWeight = account.CurrentWeight;
-            int targetWeight = accountData.TargetWeight;
 
             if (accountData.Goal == "Lose")
             {
