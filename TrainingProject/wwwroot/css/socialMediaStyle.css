@@ -4,6 +4,7 @@
     justify-items: center;
     grid-area: "aside";
     padding: 10px;
+    background-color: gray;
 }
 
 #socialMedia div{
