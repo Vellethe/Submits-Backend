@@ -29,7 +29,7 @@
         @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
         {
             <tr>
-                <td><a href="@workoutExercise.Exercise.Instruction">@workoutExercise.Exercise.Name</a> </td>
+                <td><a class="underline" href="@workoutExercise.Exercise.Instruction">@workoutExercise.Exercise.Name</a> </td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>
                 <td>@workoutExercise.Intensity</td>

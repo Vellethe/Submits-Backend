@@ -2,3 +2,7 @@ main{
     display: grid;
     grid-template: "a aside"/auto 15%;
 }
+
+.underline{
+    text-decoration:underline;
+}
