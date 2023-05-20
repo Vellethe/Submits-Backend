@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
+using TrainingProject.Data;
 
 namespace TrainingProject.Models
 {
@@ -16,6 +18,51 @@ namespace TrainingProject.Models
         public int TargetWeight { get; set; }
         public string Goal { get; set; } = "None" ;
         public virtual List<Workout> Workouts { get; set; }
+
+        public bool IsValid()
+        {
+            if (CurrentWeight < 0 || TargetWeight < 0)
+            {
+                Console.WriteLine("Please enter a positive value for weight.");
+                return false;
+            }
+            else if (CurrentWeight > 250 || TargetWeight > 150)
+            {
+                Console.WriteLine("Please enter a realistic value for weight.");
+                return false;
+            }
+            else if (Height < 0)
+            {
+                Console.WriteLine("Please enter a positive value for height.");
+                return false;
+            }
+            else if (Height > 220)
+            {
+                Console.WriteLine("Please enter a realistic value for height");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool SaveAccount()
+        {
+            if (!IsValid())
+            {
+                return false;
+            }
+            
+            using (var context = new AppDbContext(new DbContextOptions<AppDbContext>()))
+            {
+                context.Accounts.Add(this);
+                context.SaveChanges();
+            }
+
+            return true;
+        }
+
         public int DayCount(DateTime curentDate, DateTime targetDate)
         {
             TimeSpan timeSpan = targetDate - curentDate;
@@ -26,9 +73,9 @@ namespace TrainingProject.Models
 
         public int CalorieCut(Account account)
         {
-            int curentWeight = account.CurrentWeight;
+            int currentWeight = account.CurrentWeight;
             int targetWeight = account.TargetWeight;
-            int caloriesTotal = (curentWeight - targetWeight) * 7700;
+            int caloriesTotal = (currentWeight - targetWeight) * 7700;
             int numberOfDays = caloriesTotal / 600;
 
             if (account.Goal == "Lose Weight")
@@ -45,6 +92,7 @@ namespace TrainingProject.Models
             }
             return 0;
         }
+        
         public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account account)
         {          
             double heightInMeters = account.Height / 100.0;

@@ -40,6 +40,7 @@
                 <td>@workoutExercise.Exercise.Name</td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>
+                <td>@workoutExercise.Exercise.Instruction</td>
                 <td>
                     <form method="post" asp-page-handler="change">
                         <select name="intesnity" onchange="this.form.submit()" asp-for="@workoutExercise.Intensity" asp-items="@(Html.GetEnumSelectList<InetensityLevel>())">
