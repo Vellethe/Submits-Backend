@@ -1,8 +1,22 @@
-﻿aside{
+﻿#socialMedia{
     display: grid;
-    grid-template: "a" "b" "c";
     text-align: left;
     justify-items: center;
     grid-area: "aside";
+    padding: 10px;
 }
 
+#socialMedia div{
+    display: grid;
+    grid-template: "a b";
+    width: 100%;
+    justify-content: start;
+}
+
+#socialMedia div p{
+    padding-right: 10px;
+}
+
+#socialMedia img{
+    width: 100%;
+}
