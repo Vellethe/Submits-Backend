@@ -18,7 +18,7 @@
 <table class="createdWorkoutTables">
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Name/Instruction link</th>
             <th>Muscle Group</th>
             <th>Description</th>
             <th>Intensity</th>
@@ -29,7 +29,7 @@
         @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
         {
             <tr>
-                <td>@workoutExercise.Exercise.Name</td>
+                <td><a href="@workoutExercise.Exercise.Instruction">@workoutExercise.Exercise.Name</a> </td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>
                 <td>@workoutExercise.Intensity</td>
