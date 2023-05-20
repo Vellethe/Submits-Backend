@@ -15,7 +15,8 @@
                 <tr>
                     <th>Workout name</th>
                     <th>Show workout</th>
-                    <th>Link to edit</th>
+                    <th>Edit wokrout</th>
+                    <th>Delete workout</th>
                 </tr>
             </thead>
 
@@ -25,18 +26,20 @@
                 <tr id="existingWorkout">
                     <td>@workout.Name</td>
                     <td>
-                        @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
                         <form>
                             <button asp-page="Show" asp-route-id="@workout.Id">Show workout</button>
                         </form>
                     </td>
                     <td>
-
                         <form>
                             <button asp-page="Edit" asp-route-id="@workout.Id">Edit Workout</button>
                         </form>
-
-                        @*<a asp-page="Edit" asp-route-id="@workout.Id">Edit test</a>*@
+                    </td>
+                    <td>
+                        <form method="post">
+                            <button type="submit">Delete Workout</button>
+                            <input type="hidden" value="@workout.Id" name="Id">
+                        </form>
                     </td>
                 </tr>
             }

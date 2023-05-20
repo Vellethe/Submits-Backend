@@ -11,8 +11,8 @@ using TrainingProject.Data;
 namespace TrainingProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230520100358_instruction")]
-    partial class instruction
+    [Migration("20230520120811_changedName")]
+    partial class changedName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -201,7 +201,7 @@ namespace TrainingProject.Data
                 var boxJumps = database.Exercises.Single(a => a.Name == "Box jumps");
                 var plank = database.Exercises.Single(a => a.Name == "Plank");
                 var tricepsExtensions = database.Exercises.Single(a => a.Name == "Triceps extensions");
-                var bicepCurls = database.Exercises.Single(a => a.Name == "Biceps curls");
+                var bicepCurls = database.Exercises.Single(a => a.Name == "Bicep curls");
                 var deadlift = database.Exercises.Single(a => a.Name == "Deadlift");
                 var legPress = database.Exercises.Single(a => a.Name == "Leg press");
 
