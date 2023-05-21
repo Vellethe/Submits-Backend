@@ -58,7 +58,7 @@ namespace TrainingProject.Pages.Workout
 
             if (id == 0)
             {
-                SelectedWorkout = new Models.Workout { Owner = context.Accounts.Find(accessControl.LoggedInAccountID), Id = 0, Name = "test", AccessLevel = AccessLevel.Owner };
+                SelectedWorkout = new Models.Workout { Owner = context.Accounts.Find(accessControl.LoggedInAccountID), Id = 0, Name = "new workout", AccessLevel = AccessLevel.Owner };
                 context.Workouts.Add(SelectedWorkout);
                 context.SaveChanges();
                 //dose not work if user navigates directly to workout/edit/
