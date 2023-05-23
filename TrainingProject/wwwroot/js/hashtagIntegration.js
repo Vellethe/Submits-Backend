@@ -32,12 +32,13 @@
     }
 }
 
-const apiUrl = "";
 
 async function GetPost(mucleGroup) {
-    const response = await fetch(apiUrl, { method:"GET" });
+var apiUrl = "https://facegram.azurewebsites.net/posts?tag="+mucleGroup;
+    const response = await fetch(apiUrl, { method:"GET"});
     const json = await response.json();
-
+    
+    return json;
 
 }
 
@@ -66,13 +67,14 @@ rootDiv.appendChild(link);
 
 let mostCommonMucleGroup = document.getElementById("mostCommonGroup"); 
 
-let x = fakeFetch("https://facegram.azurewebsites.net/api/posts?tag="+mostCommonMucleGroup.textContent)
+//let x = fakeFetch("https://facegram.azurewebsites.net/api/posts?tag="+mostCommonMucleGroup.textContent);
+let x = await GetPost(mostCommonMucleGroup.textContent)
 
-image.src = x.postImageURL;
+image.src = x.imageURL;
 description.textContent = x.postContent;
-link.href = x.postUrl;
+link.href = x.postURL;
 link.text = "link to facegram";
 
-author.textContent = x.author;
+author.textContent = x.poster;
 
-postTime.textContent = x.postTime;
+postTime.textContent = x.datePosted;
