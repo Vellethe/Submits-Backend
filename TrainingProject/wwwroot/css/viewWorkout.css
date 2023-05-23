@@ -1,6 +1,10 @@
 main{
-    display: grid;
-    grid-template: "a aside"/auto 15%;
+    grid-template: "a "/auto ;
+}
+
+.createdWorkoutTables{
+    float: left;
+    width: 80%;
 }
 
 .underline{

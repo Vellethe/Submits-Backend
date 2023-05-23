@@ -70,6 +70,10 @@ let mostCommonMucleGroup = document.getElementById("mostCommonGroup");
 //let x = fakeFetch("https://facegram.azurewebsites.net/api/posts?tag="+mostCommonMucleGroup.textContent);
 let x = await GetPost(mostCommonMucleGroup.textContent)
 
+let dateTime = new Date(x.datePosted);
+
+let dateText = dateTime.toLocaleDateString();
+
 image.src = x.imageURL;
 description.textContent = x.postContent;
 link.href = x.postURL;
@@ -77,4 +81,4 @@ link.text = "link to facegram";
 
 author.textContent = x.poster;
 
-postTime.textContent = x.datePosted;
+postTime.textContent = dateText;

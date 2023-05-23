@@ -5,6 +5,8 @@
     grid-area: "aside";
     padding: 10px;
     background-color: gray;
+    width: 15%;
+    float: right;
 }
 
 #socialMedia div{
@@ -19,5 +21,6 @@
 }
 
 #socialMedia img{
-    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
