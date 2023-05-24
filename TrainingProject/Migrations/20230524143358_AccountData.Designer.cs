@@ -12,7 +12,7 @@ using TrainingProject.Data;
 namespace TrainingProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230519155239_AccountData")]
+    [Migration("20230524143358_AccountData")]
     partial class AccountData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,6 +104,10 @@ namespace TrainingProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Instruction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MuscleGroup")
                         .HasColumnType("int");
 
@@ -169,13 +173,11 @@ namespace TrainingProject.Migrations
 
             modelBuilder.Entity("TrainingProject.Models.AccountData", b =>
                 {
-                    b.HasOne("TrainingProject.Models.Account", "Account")
+                    b.HasOne("TrainingProject.Models.Account", null)
                         .WithMany("AccountData")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>

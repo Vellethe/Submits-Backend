@@ -5,12 +5,20 @@ namespace TrainingProject.Models
 {
     public class AccountData
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public int TargetWeight { get; set; }
         public string Goal { get; set; } = "None";
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Account Account { get; set; }
+
+        // public Account User { get; set; }
+
+        public int AccountId { get; set; }  
+
+        public AccountData()
+        {
+            
+        }
 
         public int DayCount(DateTime curentDate, DateTime targetDate)
         {
@@ -101,9 +109,11 @@ namespace TrainingProject.Models
             }
         }
 
-        public double[] GetProgressData(string[] xValues)
+        public double[] GetProgressData(string[] xValues, Account user)
         {
             double[] progress = new double[xValues.Length];
+
+            
 
             for (int i = 0; i < xValues.Length; i++)
             {
@@ -113,24 +123,24 @@ namespace TrainingProject.Models
                 {
                     double progressPercentage = (date - this.StartDate).TotalDays / (this.EndDate - this.StartDate).TotalDays;
 
-                    double targetWeight = this.TargetWeight;
-                    double currentWeight = Account.CurrentWeight;
+                    double targetWeight;
+                    double currentWeight = user.CurrentWeight;
 
                     if (this.Goal == "Lose")
                     {
-                        targetWeight = this.TargetWeight - (Account.CurrentWeight - this.TargetWeight);
+                        targetWeight = this.TargetWeight - (user.CurrentWeight - this.TargetWeight);
                     }
                     else if (this.Goal == "Gain")
                     {
-                        targetWeight = this.TargetWeight + (this.TargetWeight - Account.CurrentWeight);
+                        targetWeight = this.TargetWeight + (this.TargetWeight - user.CurrentWeight);
                     }
 
                     else
                     {
-                        targetWeight = this.TargetWeight + (this.TargetWeight - Account.CurrentWeight);
+                        targetWeight = this.TargetWeight + (this.TargetWeight - user.CurrentWeight);
                     }
 
-                    double weightDiff = targetWeight - Account.CurrentWeight;
+                    double weightDiff = targetWeight - user.CurrentWeight;
 
                     double totalDays = (this.EndDate - this.StartDate).TotalDays;
                     double remainingDays = (this.EndDate - date).TotalDays;

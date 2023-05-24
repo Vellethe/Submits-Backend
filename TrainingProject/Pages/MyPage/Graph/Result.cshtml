@@ -8,7 +8,7 @@
     string[] xValues = @Model.accountData.GetXAxisValues(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(600).ToString("yyyy-MM-dd"));
 
     // Calculate progress data
-    double[] progress = @Model.accountData.GetProgressData(xValues);
+    double[] progress = @Model.accountData.GetProgressData(xValues, @Model.user);
 }
 
 <link rel="stylesheet" href="~/css/site.css">

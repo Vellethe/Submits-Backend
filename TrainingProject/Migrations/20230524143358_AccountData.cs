@@ -30,6 +30,13 @@ namespace TrainingProject.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
+            migrationBuilder.AddColumn<string>(
+                name: "Instruction",
+                table: "Exercises",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
             migrationBuilder.CreateTable(
                 name: "AccountData",
                 columns: table => new
@@ -63,6 +70,10 @@ namespace TrainingProject.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AccountData");
+
+            migrationBuilder.DropColumn(
+                name: "Instruction",
+                table: "Exercises");
 
             migrationBuilder.RenameColumn(
                 name: "CurrentWeight",

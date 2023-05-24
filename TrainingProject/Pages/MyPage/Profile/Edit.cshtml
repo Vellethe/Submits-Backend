@@ -1,0 +1,65 @@
+﻿@page
+@using TrainingProject.Pages.Shared.Components.LoginMenu;
+@model TrainingProject.Pages.MyPage.Profile.IndexModel
+@{
+}
+
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/MyPage.css">
+<script src="~/js/MyPage.js" defer></script>
+
+<div class="container">
+
+    <div class="myPage">
+
+        <div class="userInfo">
+            <div class="imgDiv">
+                <img class="profileImg" src="Pictures/Sample-Profile-Pic.png"/>
+            </div>
+            <environment names="Development">
+                @await Component.InvokeAsync(nameof(FakeLoginMenu))
+            </environment>
+            
+            <h4>Enter your Details</h4>
+            <form method="post">
+
+                <ul class="firstLogon">
+                    <li>
+                        <label id="userNameLabel" for="userName">Name: </label>
+                        <p id="userName">@Model.User.Name</p>
+                    </li>
+
+                    <li>
+                        <label for="gender">Gender</label>
+                        <select asp-for="@Model.User.IsMale" id="gender" name="gender">
+                            <option value="true">Male</option>
+                            <option value="false">Female</option>
+                        </select>
+                    </li>
+
+                    <li>
+                        <label for="age">Age</label>
+                        <input asp-for="@Model.User.Age" id="age" type="number" name="age" />
+                    </li>
+
+                    <li>
+                        <label for="height">Height in cm</label>
+                        <input asp-for="@Model.User.Height" id="height" type="number" name="height" />
+                    </li>
+
+                    <li>
+                        <label for="weight">Weight in kg</label>
+                        <input asp-for="@Model.User.CurrentWeight" id="weight" type="number" name="weight" />
+                    </li>
+
+                </ul>
+
+                <button type="submit"><a asp-page="/MyPage/index">Submit</a></button>
+
+            </form>
+           
+
+        </div>
+
+    </div>
+</div>

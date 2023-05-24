@@ -26,7 +26,7 @@ builder.Services.AddAuthentication(options =>
         string name = context.Principal.FindFirst(ClaimTypes.Name).Value;
 
         var account = db.Accounts
-            .FirstOrDefault(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject);
+            .FirstOrDefault(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject);      
 
         if (account == null)
         {
@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(options =>
                 OpenIDSubject = subject,
                 Name = name
             };
-            db.Accounts.Add(account);
+            db.Accounts.Add(account);          
         }
         else
         {

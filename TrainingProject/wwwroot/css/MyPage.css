@@ -29,7 +29,7 @@ summary {
     color: white;
 }
 
-#myPage {
+.myPage {
     width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -142,7 +142,12 @@ p{
     margin-top: 1%;
 }
 
-svg {
+.selected {
+    border:solid 5px #000000e5; /* Add your desired styling for the selected button */
+}
+
+svg 
+{
     position:center;
     background-color: white;
     height:500px;
