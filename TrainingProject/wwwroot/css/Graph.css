@@ -2,6 +2,10 @@
     align-content:center;
 }
 
+#result {
+    font-family: 'Smooch Sans';
+}
+
 svg {
     position: center;
     align-content: center;
@@ -17,20 +21,21 @@ svg {
 
 
 #graph {
-    margin-top: 10%;
-    
+    margin-top: 10%;    
     font-size: 30px;
 }
 
 
 .graph .labels.x-labels {
-    font-size:8px;
-    text-anchor: end;
+    font-size: 12px;
+    text-anchor: middle;
+    font-family: 'Smooch Sans', sans-serif;
 }
 
 .graph .labels.y-labels {
-    font-size: 8px;
+    font-size: 12px;
     /*text-anchor: end;*/
+    font-family: 'Smooch Sans';
 }
 
 
@@ -48,7 +53,7 @@ svg {
     font-weight: bold;
     text-align:center;
     text-transform: uppercase;
-    font-size: 8px;
+    font-size: 14px;
     fill: black;
 }
 
