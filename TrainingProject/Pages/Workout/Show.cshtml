@@ -1,5 +1,6 @@
 ﻿@page "{id:int}"
 @model TrainingProject.Pages.Workout.ShowModel
+@using TrainingProject.Models;
 @{
 }
 
@@ -14,6 +15,14 @@
 
 
 <p hidden id="mostCommonGroup">@Model.SelectedWorkout.MostCommonMucleGroup</p>
+
+<form method="post" asp-page-handler="change">
+    <select name="ratingEnum" onchange="this.form.submit()" asp-for="@Model.Rating" asp-items="@(Html.GetEnumSelectList<RatingEnum>())">
+    </select>
+</form>
+<p>The avrage rating is: @Model.SelectedWorkout.GetAvrageRating()</p>
+
+
 <table class="createdWorkoutTables">
     <thead>
         <tr>

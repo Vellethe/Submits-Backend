@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using TrainingProject.Migrations;
 
 namespace TrainingProject.Models
 {
@@ -16,6 +18,7 @@ namespace TrainingProject.Models
         public AccessLevel AccessLevel { get; set; }
         public Account Owner { get; set; }
         public virtual List<WorkoutExecise> WorkoutExecises { get; set; }
+        public virtual List<Rating> Ratings { get; set; }
 
         public MuscleGroup MostCommonMucleGroup
         {
@@ -45,7 +48,20 @@ namespace TrainingProject.Models
             }
             
         }
-        
+
+        public string GetAvrageRating()
+        {
+            int listLen = Ratings.Count();
+
+            if(listLen == 0)
+            {
+                return "no ratings submited yet";
+            }
+
+            int sumRating = Ratings.Sum(x => (int)x.ChosenRating);
+            return (sumRating / listLen).ToString();
+        }
 
     }
+
 }

@@ -10,11 +10,21 @@ namespace TrainingProject.Data
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<WorkoutExecise> WorkoutExecises { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Rating>()
+                .HasOne(e=> e.Workout)
+                .WithMany(e=>e.Ratings)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

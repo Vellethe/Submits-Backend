@@ -34,7 +34,7 @@
 
 
 async function GetPost(mucleGroup) {
-var apiUrl = "https://facegram.azurewebsites.net/posts?tag="+mucleGroup;
+var apiUrl = "https://facegram.azurewebsites.net/api/posts?tag="+mucleGroup;
     const response = await fetch(apiUrl, { method:"GET"});
     const json = await response.json();
     
