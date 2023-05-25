@@ -10,13 +10,11 @@ svg {
     position: center;
     align-content: center;
     text-align: center;
-    background-color: white;
+    background-color:white;
     height: 400px;
     width: 49em;
     border: solid 5px black;
     padding: 0px;
-
-    
 }
 
 
