@@ -10,10 +10,10 @@ namespace TrainingProject.Pages.MyPage
     {
         public int LoggedInId { get; set; }
         public Account Account { get; set; }
-        public new Account User { get; set; }
+        public Account User { get; set; }
         public AccountData AccountData { get; set; }
         public AccountData? UserData { get; set; }
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = "";
 
         private readonly AppDbContext context;
         public IndexModel(AppDbContext context, AccessControl access)
@@ -22,9 +22,9 @@ namespace TrainingProject.Pages.MyPage
             LoggedInId = access.LoggedInAccountID;
             Account = new Account();
             User = context.Accounts.First(u => u.Id == LoggedInId);
-            AccountData = new AccountData();
+            AccountData = new AccountData();                       
             UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
-
+            
         }
         public void OnGet()
         {
@@ -38,9 +38,10 @@ namespace TrainingProject.Pages.MyPage
             if (ModelState.IsValid)
             {
                 userData!.Goal = goal;
+                userData.StartWeight = User.CurrentWeight;
                 userData.TargetWeight = targetWeight;
-                userData.StartDate = DateTime.Now;
-                userData.EndDate = DateTime.Now.AddDays(600);
+                userData.StartDate = DateTime.Now.AddDays(1);
+                userData.EndDate = DateTime.Now.AddDays(601);
 
                 if (goal == "Gain" && targetWeight <= User.CurrentWeight)
                 {
@@ -66,10 +67,11 @@ namespace TrainingProject.Pages.MyPage
             AccountData newAccountData = new();           
             {
                 newAccountData.AccountId = LoggedInId;
-                newAccountData.TargetWeight = User.CurrentWeight;
-                newAccountData.Goal = "Maintain";
-                newAccountData.StartDate = DateTime.Now;
-                newAccountData.EndDate = DateTime.Now;
+                newAccountData.StartWeight = 0;
+                newAccountData.TargetWeight = 0;
+                newAccountData.Goal = "None";
+                newAccountData.StartDate = DateTime.Now.AddDays(1);
+                newAccountData.EndDate = DateTime.Now.AddDays(1);
 
                 context.Add(newAccountData);
                 context.SaveChanges();

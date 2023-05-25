@@ -7,42 +7,33 @@ namespace TrainingProject.Pages.Graph
 {
     public class IndexModel : PageModel
     {
-        public int loggedInID { get; set; }
-        public (string FinishedBMR, string FinishedDate) calorieCount { get; set; }
-        public Account account { get; set; }
-        public Account user { get; set; }
-        public AccountData accountData { get; set; }
-        public AccountData userData { get; set; }
+        public int LoggedInId { get; set; }
+        public (string FinishedBMR, string FinishedDate) CalorieCount { get; set; }
+        public Account Account { get; set; }
+        public Account User { get; set; }
+        public AccountData AccountData { get; set; }
+        public AccountData UserData { get; set; }
 
         private readonly AppDbContext context;
         public IndexModel(AppDbContext context, AccessControl access)
         {
             this.context = context;
-            loggedInID = access.LoggedInAccountID;
-            account = new Account();
-            user = context.Accounts.First(u => u.Id == loggedInID);
-            accountData = new AccountData();
+            LoggedInId = access.LoggedInAccountID;
+            Account = new Account();
+            User = context.Accounts.First(u => u.Id == LoggedInId);
+            AccountData = new AccountData();
+            UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
 
         }
         public void OnGet()
         {
-            calorieCount = accountData.CalorieCalculator(user, userData);
+            CalorieCount = UserData.CalorieCalculator(User, UserData);
         }
 
         public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight)
         {
-            var user = context.Accounts.First(u => u.Id == loggedInID);
 
-            user.Age = age;
-            user.Height = height;
-            user.CurrentWeight = weight;
-            user.IsMale = gender;
-            userData.TargetWeight = targetWeight;
-            userData.Goal = goal;
-
-            context.SaveChanges();
-
-            calorieCount = accountData.CalorieCalculator(user, userData);
+            CalorieCount = AccountData.CalorieCalculator(User, UserData);
 
             return Page();
         }

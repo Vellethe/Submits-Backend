@@ -2,7 +2,7 @@
 @using TrainingProject.Pages.Shared.Components.LoginMenu;
 @model TrainingProject.Pages.MyPage.IndexModel
 @{
-
+    
 }
 
 <link rel="stylesheet" href="~/css/site.css">
@@ -15,23 +15,24 @@
 
         <div class="userInfo">
             <div class="imgDiv">
-                <img class="profileImg" src="Pictures/Sample-Profile-Pic.png" />
+                <img class="profileImg" src="/Pictures/Sample-Profile-Pic.png" />
             </div>
             <environment names="Development">
                 @await Component.InvokeAsync(nameof(FakeLoginMenu))
-            </environment>
-
-
+            </environment>          
+            
             @if (Model.UserData == null)
             {
                 Model.FirstLogon();
             }
-
+            
+            
+            @*  
             @if (Model.ErrorMessage != "")
             {
                 <script>alert(Model.ErrorMessage);</script>
                 Model.ErrorMessage = "";
-            }
+            }*@
             
                 <ul class="userInfo">
                     <li>
@@ -87,19 +88,15 @@
                         {
                             <label for="targetWeight">Target Weight:</label>
                             <input type="number" name="targetWeight" id="targetWeight" placeholder="" required>
-                            <button type="submit">Submit</button>
+                            
                         }
-
                     </form>
                 </div>
 
-
-
-                @*<button id="graphButton"><a asp-page="./Graph/Result">Show Progress Graph</a></button>*@
-
-            
-
-
+            @if (Model.UserData!.Goal != "None")
+            {
+                <button id="graphButton"><a asp-page="./Graph/Result">Show Progress Graph</a></button>
+            }
 
         </div>
 

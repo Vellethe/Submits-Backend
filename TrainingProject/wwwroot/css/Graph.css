@@ -1,0 +1,81 @@
+﻿body {
+    align-content:center;
+}
+
+svg {
+    position: center;
+    align-content: center;
+    text-align: center;
+    background-color: white;
+    height: 400px;
+    width: 49em;
+    border: solid 5px black;
+    padding: 0px;
+
+    
+}
+
+
+#graph {
+    margin-top: 10%;
+    
+    font-size: 30px;
+}
+
+
+.graph .labels.x-labels {
+    font-size:8px;
+    text-anchor: end;
+}
+
+.graph .labels.y-labels {
+    font-size: 8px;
+    /*text-anchor: end;*/
+}
+
+
+.graph .grid {
+    stroke: #ccc;
+    stroke-dasharray: 0;
+    /*stroke-width: 1;*/
+}
+
+.labels {
+    font-size: 10px;
+}
+
+.label-title {
+    font-weight: bold;
+    text-align:center;
+    text-transform: uppercase;
+    font-size: 8px;
+    fill: black;
+}
+
+.data {
+    fill: red;
+    stroke-width: 1;
+}
+
+.dataPoints {
+    fill:#0000007e;
+}
+
+@media (max-width: 1000px) 
+{
+    .container {
+        width: 100%;
+    }
+
+    #myPage {
+        width: 100%;
+    }
+
+    #userInfo {
+        display: block;
+    }
+
+        #userInfo p {
+            text-align: center;
+        }
+}

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json.Linq;
 using System.Security.Principal;
+using TrainingProject.Migrations;
 
 namespace TrainingProject.Models
 {
     public class AccountData
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
+        public int StartWeight { get; set; }
         public int TargetWeight { get; set; }
         public string Goal { get; set; } = "None";
         public DateTime StartDate { get; set; }
@@ -13,11 +16,11 @@ namespace TrainingProject.Models
 
         // public Account User { get; set; }
 
-        public int AccountId { get; set; }  
+        public int AccountId { get; set; }
 
         public AccountData()
         {
-            
+
         }
 
         public int DayCount(DateTime curentDate, DateTime targetDate)
@@ -28,18 +31,18 @@ namespace TrainingProject.Models
             return numberOfDays;
         }
 
-        public int CalorieCut(Account account, AccountData accountData)
+        public int CalorieCut(Account user, AccountData userData)
         {
-            int curentWeight = account.CurrentWeight;
-            int targetWeight = accountData.TargetWeight;
+            int curentWeight = user.CurrentWeight;
+            int targetWeight = userData.TargetWeight;
             int caloriesTotal = (curentWeight - targetWeight) * 7700;
-            int numberOfDays = caloriesTotal / 600;
+            int numberOfDays = caloriesTotal / DayCount(userData.StartDate, userData.EndDate);
 
-            if (accountData.Goal == "Lose")
+            if (userData.Goal == "Lose")
             {
                 return caloriesTotal / numberOfDays;
             }
-            else if (accountData.Goal == "Gain")
+            else if (userData.Goal == "Gain")
             {
                 return 0;
             }
@@ -49,13 +52,13 @@ namespace TrainingProject.Models
             }
 
         }
-        public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account account, AccountData accountData)
+        public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account user, AccountData userData)
         {
 
-            double heightInMeters = account.Height / 100.0;
-            double bmi = accountData.TargetWeight / (heightInMeters * heightInMeters);
+            double heightInMeters = user.Height / 100.0;
+            double bmi = userData.TargetWeight / (heightInMeters * heightInMeters);
 
-            int calorieCut = this.CalorieCut(account, accountData);
+            int calorieCut = this.CalorieCut(user, userData);
 
             if (bmi < 19.5)
             {
@@ -66,9 +69,9 @@ namespace TrainingProject.Models
                 //Calculating according to gender
 
 
-                double bmr = CalculateBMR(account, accountData);
+                double bmr = CalculateBMR(user);
                 double finishedBMR = Math.Round(bmr) - calorieCut;
-                int caloriesTotal = (account.CurrentWeight - accountData.TargetWeight) * 7700;
+                int caloriesTotal = (user.CurrentWeight - userData.TargetWeight) * 7700;
                 int numberOfDays = caloriesTotal / 600;
                 DateTime finishedDate = DateTime.Now.AddDays(numberOfDays);
 
@@ -86,17 +89,17 @@ namespace TrainingProject.Models
 
             int days = interval.Days / 10;
 
-            string[] dates = new string[10];
-            for (int i = 1; i < 10; i++)
+            string[] dates = new string[11];
+            for (int i = 0; i <= 10; i++)
             {
                 DateTime date = startDate.AddDays(i * days);
-                dates[i - 1] = date.ToString("yyyy-MM-dd");
+                dates[i] = date.ToString("yy/MM/dd");
             }
 
             return dates;
         }
 
-        public double CalculateBMR(Account account, AccountData accountData)
+        public double CalculateBMR(Account account)
         {
             if (account.IsMale)
             {
@@ -109,52 +112,73 @@ namespace TrainingProject.Models
             }
         }
 
-        public double[] GetProgressData(string[] xValues, Account user)
+
+        public (double, double)[] GetDataPoints(AccountData userData)
         {
-            double[] progress = new double[xValues.Length];
+            var dataPoints = new (double xValue, double yValue)[11];
 
-            
+            double[] weightPerDataPoint = GetWeightPerDataPoint(userData);
 
-            for (int i = 0; i < xValues.Length; i++)
+            for (int i = 0; i < 11; i++)
             {
-                DateTime date = DateTime.Parse(xValues[i]);
+                double xCoordinate = i * 700 / 10 + 50;
+                double yCoordinate = 300 - ((weightPerDataPoint[i] - 0) / 20) * 30 + 50;
 
-                if (date >= this.StartDate && date <= this.EndDate)
-                {
-                    double progressPercentage = (date - this.StartDate).TotalDays / (this.EndDate - this.StartDate).TotalDays;
-
-                    double targetWeight;
-                    double currentWeight = user.CurrentWeight;
-
-                    if (this.Goal == "Lose")
-                    {
-                        targetWeight = this.TargetWeight - (user.CurrentWeight - this.TargetWeight);
-                    }
-                    else if (this.Goal == "Gain")
-                    {
-                        targetWeight = this.TargetWeight + (this.TargetWeight - user.CurrentWeight);
-                    }
-
-                    else
-                    {
-                        targetWeight = this.TargetWeight + (this.TargetWeight - user.CurrentWeight);
-                    }
-
-                    double weightDiff = targetWeight - user.CurrentWeight;
-
-                    double totalDays = (this.EndDate - this.StartDate).TotalDays;
-                    double remainingDays = (this.EndDate - date).TotalDays;
-                    double dailyWeightLoss = weightDiff / remainingDays;
-
-                    double projectedWeight = currentWeight + (dailyWeightLoss * (totalDays - remainingDays));
-
-                    progress[i] = Math.Max(0, Math.Min(1, (currentWeight - projectedWeight) / weightDiff));
-                }
+                dataPoints[i].xValue = xCoordinate;
+                dataPoints[i].yValue = yCoordinate;
             }
 
-            return progress;
+            return dataPoints;
         }
 
+        public double[] GetWeightPerDataPoint(AccountData userData)
+        {
+            double[] outputArray = new double[11];
+
+            double startWeight = userData.StartWeight;
+            double targetWeight = userData.TargetWeight;
+            int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
+            double weightDifference = 0;
+
+            if (userData.Goal == "Gain")
+            {
+                weightDifference = targetWeight - startWeight;
+            }
+
+            else if (userData.Goal == "Lose")
+            {
+                weightDifference = startWeight - targetWeight;
+            }
+
+            double weightDifferencePerDay = weightDifference / totalDayCount;
+
+            double perDataPoint = totalDayCount / 10;
+
+            for (int i = 0; i < 11; i++)
+            {
+                double weightPerDay = 0;
+
+                if (userData.Goal == "Gain")
+                {
+                    weightPerDay = startWeight + (i * perDataPoint * weightDifferencePerDay);
+                }
+
+                else
+                {
+                    weightPerDay = startWeight - (i * perDataPoint * weightDifferencePerDay);
+                }
+                         
+                outputArray[i] = weightPerDay;
+            }
+
+            return outputArray;
+        }
+
+        public decimal ConvertToDecimal(double value)
+        {
+            decimal output = (decimal)value;
+            return Math.Round(output);
+        }
 
 
     }

@@ -9,7 +9,7 @@ namespace TrainingProject.Pages.MyPage.Profile
     {
         public int LoggedInId { get; set; }
         public Account Account { get; set; }
-        public new Account User { get; set; }
+        public Account User { get; set; }
         public AccountData? AccountData { get; set; }
         public AccountData? UserData { get; set; }
 

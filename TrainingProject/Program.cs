@@ -26,17 +26,31 @@ builder.Services.AddAuthentication(options =>
         string name = context.Principal.FindFirst(ClaimTypes.Name).Value;
 
         var account = db.Accounts
-            .FirstOrDefault(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject);      
+            .FirstOrDefault(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject);   
+        
 
         if (account == null)
         {
+
             account = new Account
             {
                 OpenIDIssuer = issuer,
                 OpenIDSubject = subject,
                 Name = name
             };
-            db.Accounts.Add(account);          
+
+            AccountData accountData = new();
+            {
+                accountData.AccountId = account.Id;
+                accountData.StartWeight = 0;
+                accountData.TargetWeight = 0;
+                accountData.Goal = "None";
+                accountData.StartDate = DateTime.Now.AddDays(1);
+                accountData.EndDate = DateTime.Now.AddDays(1);             
+            }
+
+            db.Accounts.Add(account);
+            db.AccountData.Add(accountData);
         }
         else
         {
