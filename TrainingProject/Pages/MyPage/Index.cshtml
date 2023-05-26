@@ -19,7 +19,9 @@
             <environment names="Development">
                 @await Component.InvokeAsync(nameof(FakeLoginMenu))
             </environment>
-            <button id="graphButton"><a asp-page="/Graph/index">Show Progress Graph</a></button>
+            <form>
+            <button id="graphButton" asp-page="/Graph/index">Show Progress Graph</button>
+            </form>
 
             <ul class="userInput">
                 <li>
