@@ -25,11 +25,11 @@ namespace TrainingProject.Pages.MyPage
             Account = new Account();
             User = context.Accounts.First(u => u.Id == LoggedInId);
             AccountData = new AccountData();
+            HandleAccountData();
             UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
         }
         public void OnGet()
         {
-            HandleAccountData();
         }
 
         public IActionResult OnPost(string goal, int targetWeight)
