@@ -38,13 +38,9 @@ namespace TrainingProject.Pages.MyPage
 
 			calorieCount = account.CalorieCalculator(user);
 
-			if(calorieCount.FinishedBMR == "0")
+			if(calorieCount.FinishedBMR == "0" || !user.IsValid())
 			{
                 return Page();
-            }
-			else
-			{
-                context.SaveChanges();
             }
 
             return Page();

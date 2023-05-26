@@ -21,7 +21,7 @@ namespace TrainingProject.Models
 
         public bool IsValid()
         {
-            if (CurrentWeight < 0 || TargetWeight < 0)
+            if (CurrentWeight < -1 || TargetWeight < -1)
             {
                 Console.WriteLine("Please enter a positive value for weight.");
                 return false;
@@ -31,7 +31,7 @@ namespace TrainingProject.Models
                 Console.WriteLine("Please enter a realistic value for weight.");
                 return false;
             }
-            else if (Height < 0)
+            else if (Height < -1)
             {
                 Console.WriteLine("Please enter a positive value for height.");
                 return false;
@@ -76,7 +76,11 @@ namespace TrainingProject.Models
             int currentWeight = account.CurrentWeight;
             int targetWeight = account.TargetWeight;
             int caloriesTotal = (currentWeight - targetWeight) * 7700;
-            int numberOfDays = caloriesTotal / 600;
+            int numberOfDays = 1;
+            if(caloriesTotal != 0)
+            {
+                numberOfDays = caloriesTotal / 600;
+            }
 
             if (account.Goal == "Lose Weight")
             {
