@@ -20,14 +20,7 @@
             <environment names="Development">
                 @await Component.InvokeAsync(nameof(FakeLoginMenu))
             </environment>          
-            
-            @if (Model.UserData == null)
-            {
-                Model.FirstLogon();
-            }
-            
-            
-            @*  
+          @*  
             @if (Model.ErrorMessage != "")
             {
                 <script>alert(Model.ErrorMessage);</script>
