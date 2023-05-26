@@ -29,7 +29,7 @@ namespace TrainingProject.Pages.MyPage
 
             if (userData != null)
             {
-                UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
+                UserData = userData;
             }
 
             else
