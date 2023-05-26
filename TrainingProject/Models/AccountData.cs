@@ -93,7 +93,16 @@ namespace TrainingProject.Models
             for (int i = 0; i <= 10; i++)
             {
                 DateTime date = startDate.AddDays(i * days);
-                dates[i] = date.ToString("yy/MM/dd");
+                string outputDate = date.ToString("yyyy-MM-dd");
+                string[] formatArray = outputDate.Split("-");
+
+                if (formatArray[1].Contains('0'))
+                {
+                    formatArray[1] = formatArray[1].Replace("0", "");
+                }
+
+                outputDate = formatArray[2] + "/" + formatArray[1] + " - " + formatArray[0];
+                dates[i] = outputDate;
             }
 
             return dates;

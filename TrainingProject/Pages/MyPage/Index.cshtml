@@ -87,12 +87,18 @@
                             
                         }
                     </form>
+
                 </div>
 
             <button id="editProfile" type="submit"><a asp-page="./Profile/Edit">Edit Profile</a></button>
-            @if (Model.UserData!.Goal != "None")
+            @if (Model.UserData!.Goal != "None" || Model.UserData!.TargetWeight > 0)
             {
                 <button id="graphButton"><a asp-page="./Graph/Result">Show Progress Graph</a></button>
+            }
+
+            else
+            {
+                
             }
 
         </div>
