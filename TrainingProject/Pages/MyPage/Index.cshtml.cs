@@ -34,7 +34,7 @@ namespace TrainingProject.Pages.MyPage
 
             else
             {
-                FirstLogon();
+                CreateNewAccountData();
             }
             
 
@@ -74,7 +74,7 @@ namespace TrainingProject.Pages.MyPage
             return Page();
         }
 
-        public void FirstLogon()
+        public void CreateNewAccountData()
         {
 
             AccountData newAccountData = new();           
