@@ -30,7 +30,7 @@
                 Model.ErrorMessage = "";
             }*@
             
-                <ul class="userInfo">
+                <ul class="userInput">
                     <li>
                         <label id="userNameLabel" for="userName">Name: </label>
                         <p id="userName">@Model.User.Name</p>
@@ -70,25 +70,26 @@
 
                 </ul>
 
-                <button type="submit"><a asp-page="./Profile/Edit">Edit Profile</a></button>
-
-
-
                 <div>
-                    <form method="post">
-                        <button name="goal" type="submit" value="Gain" class="@(Model.UserData!.Goal == "Gain" ? "selected" : "")">Gain</button>
-                        <button name="goal" type="submit" value="Maintain" class="@(Model.UserData!.Goal == "Maintain" ? "selected" : "")">Maintain</button>
-                        <button name="goal" type="submit" value="Lose" class="@(Model.UserData!.Goal == "Lose" ? "selected" : "")">Lose</button>
+                    <form id="goal" method="post">
+                        <button id="gain" name="goal" type="submit" value="Gain" class="@(Model.UserData!.Goal == "Gain" ? "selected" : "")">Gain</button>
+                        <button id="maintain" name="goal" type="submit" value="Maintain" class="@(Model.UserData!.Goal == "Maintain" ? "selected" : "")">Maintain</button>
+                        <button id="lose" name="goal" type="submit" value="Lose" class="@(Model.UserData!.Goal == "Lose" ? "selected" : "")">Lose</button>
 
                         @if (Model.UserData!.Goal == "Gain" || Model.UserData!.Goal == "Lose")
                         {
+                            <div id="targetInput">
+
                             <label for="targetWeight">Target Weight:</label>
                             <input type="number" name="targetWeight" id="targetWeight" placeholder="" required>
+
+                            </div>
                             
                         }
                     </form>
                 </div>
 
+            <button id="editProfile" type="submit"><a asp-page="./Profile/Edit">Edit Profile</a></button>
             @if (Model.UserData!.Goal != "None")
             {
                 <button id="graphButton"><a asp-page="./Graph/Result">Show Progress Graph</a></button>

@@ -8,18 +8,6 @@ h1{
     margin: 2rem;
 }
 
-summary {
-    list-style: none;
-    padding: 1rem;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  details summary::-webkit-details-marker {
-    display:none;
-  }
-
 .container{
     background-color: #1b1b1b;
     width: 70%;
@@ -35,30 +23,84 @@ summary {
     margin-right: auto;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    padding-top: 1rem;
+    padding-top: 2rem;
     padding-bottom: 5px;
     background-color: #202020;
     box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
 }
 
-#userInfo{
-    font-size: 20px;
-    font-weight: bold;
+.userInput{
+    width: 80%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.userInput li{
     display: grid;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: 1rem;
-    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.164);
     grid-template:
-        "i a b"
-        "i c d"
-        "i e f"
-        "i g h"
-        "i j k"
-        "i l m"
-        "i n o"
-        "i p q";
+    "a b";
+}
+
+.userInput li label{
+    margin: 1rem;
+    width: 170px;
+    margin-top: auto;
+    font-size: 20px;
+    text-align: right;
+}
+
+.userInput li p{
+    margin: 1rem;
+    width: 326px;
+    margin-top: auto;
+    font-size: 20px;
+    text-align: left;
+}
+
+#text{
+    padding-right: 1rem;
+}
+
+#editProfile{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    grid-area: g;
+    width: 30%;
+    padding: 1rem;
+    color: white;
+    background-color: black;
+}
+
+#goal button{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    grid-area: g;
+    width: 15%;
+    padding: 1rem;
+    color: white;
+    background-color: black;
+}
+
+#goal .selected{
+    background-color: rgb(27, 27, 27);
+}
+
+#graphButton{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    grid-area: g;
+    width: 30%;
+    padding: 1rem;
+    color: white;
+    background-color: black;
 }
 
 main form{
@@ -75,75 +117,6 @@ main form{
 
 #profileImg{
     width: 200px;
-}
-
-#userInfo label{
-    text-align: left;
-    padding: 5px;
-}
-
-#userInfo p{
-    text-align: left;
-    margin: 0;
-    padding: 5px;
-}
-
-#containerValue {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bold;
-    grid-gap: 10px;
-    width: 400px;
-    font-size: 20px;
-    display: grid;
-    grid-template:
-        "a b"
-        "c d"
-        "e f";
-}
-
-#containerValue label{
-    width: 175px;
-}
-
-#containerValue input{
-    width: 215px;
-}
-
-#containerGoal {
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    display: grid;
-    grid-gap: 10px;
-    grid-template:
-        "a b"
-        "c d"
-        "e f";
-}
-
-#containerGoal label{
-    width: 175px;
-}
-
-#containerGoal input{
-    width: 215px;
-}
-
-p{
-    margin: 1rem;
-}
-
-#myPageSubmit {
-    margin-top: 1%;
-}
-
-.selected {
-    border:solid 5px #000000e5; /* Add your desired styling for the selected button */
 }
 
 svg 
