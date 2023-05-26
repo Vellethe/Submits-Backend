@@ -25,23 +25,11 @@ namespace TrainingProject.Pages.MyPage
             Account = new Account();
             User = context.Accounts.First(u => u.Id == LoggedInId);
             AccountData = new AccountData();
-            var userData = context.AccountData.First(c => c.AccountId == LoggedInId);
-
-            if (userData != null)
-            {
-                UserData = userData;
-            }
-
-            else
-            {
-                CreateNewAccountData();
-            }
-            
-
+            UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
         }
         public void OnGet()
         {
-            
+            HandleAccountData();
         }
 
         public IActionResult OnPost(string goal, int targetWeight)
@@ -74,21 +62,26 @@ namespace TrainingProject.Pages.MyPage
             return Page();
         }
 
-        public void CreateNewAccountData()
+       
+
+        public void HandleAccountData()
         {
 
-            AccountData newAccountData = new();           
+            if (UserData == null || context.AccountData.First(c => c.AccountId == LoggedInId) == null)
             {
-                newAccountData.AccountId = LoggedInId;
-                newAccountData.StartWeight = 0;
-                newAccountData.TargetWeight = 0;
-                newAccountData.Goal = "None";
-                newAccountData.StartDate = DateTime.Now;
-                newAccountData.EndDate = DateTime.Now;           
-            }
+                AccountData newAccountData = new();
+                {
+                    newAccountData.AccountId = LoggedInId;
+                    newAccountData.StartWeight = 0;
+                    newAccountData.TargetWeight = 0;
+                    newAccountData.Goal = "Maintain";
+                    newAccountData.StartDate = DateTime.Now;
+                    newAccountData.EndDate = DateTime.Now;
+                }
 
-            context.AccountData.Add(newAccountData);
-            context.SaveChanges();
+                context.AccountData.Add(newAccountData);
+                context.SaveChanges();
+            }          
         }
     }
 }

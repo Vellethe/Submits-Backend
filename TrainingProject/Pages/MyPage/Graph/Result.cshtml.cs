@@ -27,6 +27,14 @@ namespace TrainingProject.Pages.Graph
         }
         public void OnGet()
         {
+                    
+                if (UserData!.Goal == "Maintain" && User.CurrentWeight != UserData.TargetWeight)
+                {
+                    UserData.TargetWeight = User.CurrentWeight;
+                }
+
+                context.SaveChanges();
+            
             CalorieCount = UserData.CalorieCalculator(User, UserData);
         }
 
