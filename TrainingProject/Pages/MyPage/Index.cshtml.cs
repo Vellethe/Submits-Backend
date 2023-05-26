@@ -25,8 +25,8 @@ namespace TrainingProject.Pages.MyPage
             Account = new Account();
             User = context.Accounts.First(u => u.Id == LoggedInId);
             AccountData = new AccountData();
-            int userDataDoesExist = context.AccountData.Count(c => c.AccountId == LoggedInId);
-            if (userDataDoesExist > 0)
+            int usersUserDataCount = context.AccountData.Count(c => c.AccountId == LoggedInId);
+            if (usersUserDataCount > 0)
             {
                 UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
             }
