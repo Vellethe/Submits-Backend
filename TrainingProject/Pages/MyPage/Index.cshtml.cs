@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 using TrainingProject.Data;
 using TrainingProject.Models;
 
@@ -12,19 +13,30 @@ namespace TrainingProject.Pages.MyPage
         public Account Account { get; set; }
         public Account User { get; set; }
         public AccountData AccountData { get; set; }
-        public AccountData? UserData { get; set; }
+        public AccountData? UserData { get; set; } 
         public string ErrorMessage { get; set; } = "";
 
         private readonly AppDbContext context;
+
         public IndexModel(AppDbContext context, AccessControl access)
         {
             this.context = context;
             LoggedInId = access.LoggedInAccountID;
             Account = new Account();
             User = context.Accounts.First(u => u.Id == LoggedInId);
-            AccountData = new AccountData();                       
-            UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
+            AccountData = new AccountData();
+            int userDataDoesExist = context.AccountData.Count(c => c.AccountId == LoggedInId);
+            if (userDataDoesExist > 0)
+            {
+                UserData = context.AccountData.First(c => c.AccountId == LoggedInId);
+            }
+
+            else
+            {
+                FirstLogon();
+            }
             
+
         }
         public void OnGet()
         {
@@ -70,12 +82,12 @@ namespace TrainingProject.Pages.MyPage
                 newAccountData.StartWeight = 0;
                 newAccountData.TargetWeight = 0;
                 newAccountData.Goal = "None";
-                newAccountData.StartDate = DateTime.Now.AddDays(1);
-                newAccountData.EndDate = DateTime.Now.AddDays(1);
+                newAccountData.StartDate = DateTime.Now;
+                newAccountData.EndDate = DateTime.Now;           
+            }
 
-                context.Add(newAccountData);
-                context.SaveChanges();
-            }     
+            context.AccountData.Add(newAccountData);
+            context.SaveChanges();
         }
     }
 }

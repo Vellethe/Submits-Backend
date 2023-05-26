@@ -38,19 +38,8 @@ builder.Services.AddAuthentication(options =>
                 OpenIDSubject = subject,
                 Name = name
             };
-
-            AccountData accountData = new();
-            {
-                accountData.AccountId = account.Id;
-                accountData.StartWeight = 0;
-                accountData.TargetWeight = 0;
-                accountData.Goal = "None";
-                accountData.StartDate = DateTime.Now.AddDays(1);
-                accountData.EndDate = DateTime.Now.AddDays(1);             
-            }
-
-            db.Accounts.Add(account);
-            db.AccountData.Add(accountData);
+          
+            db.Accounts.Add(account);           
         }
         else
         {

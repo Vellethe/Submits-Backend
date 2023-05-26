@@ -56,7 +56,7 @@ namespace TrainingProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
                 });
 
             modelBuilder.Entity("TrainingProject.Models.AccountData", b =>
@@ -90,7 +90,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("AccountData");
+                    b.ToTable("AccountData", (string)null);
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Exercise", b =>
@@ -118,7 +118,7 @@ namespace TrainingProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("Exercises", (string)null);
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>
@@ -143,7 +143,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Workouts");
+                    b.ToTable("Workouts", (string)null);
                 });
 
             modelBuilder.Entity("TrainingProject.Models.WorkoutExecise", b =>
@@ -169,7 +169,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("WorkoutExecises");
+                    b.ToTable("WorkoutExecises", (string)null);
                 });
 
             modelBuilder.Entity("TrainingProject.Models.AccountData", b =>
