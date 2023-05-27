@@ -128,13 +128,13 @@ namespace TrainingProject.Models
 
             double[] weightPerDataPoint = GetWeightPerDataPoint(userData);
 
-            double graphHeight = 300;
-            double graphBottomPadding = 50;
+            double graphHeight = 500;
+            double graphBottomPadding = 100;
 
             for (int i = 0; i < 11; i++)
             {
-                double xCoordinate = i * 700 / 10 + 50;
-                double yCoordinate = graphHeight - ((weightPerDataPoint[i] - 0) / 20) * 30 + graphBottomPadding;
+                double xCoordinate = i * 1000 / 10 + 100;
+                double yCoordinate = graphHeight - ((weightPerDataPoint[i] - 0) / 20) * 50 + graphBottomPadding;
 
                 dataPoints[i].xValue = xCoordinate;
                 dataPoints[i].yValue = yCoordinate;

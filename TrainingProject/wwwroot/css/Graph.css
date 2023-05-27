@@ -11,8 +11,8 @@ svg {
     align-content: center;
     text-align: center;
     background-color:white;
-    height: 400px;
-    width: 49em;
+    height: 740px;
+    width:75em;
     border: solid 5px black;
     padding: 0px;
 }
@@ -25,14 +25,14 @@ svg {
 
 
 .graph .labels.x-labels {
-    font-size: 12px;
+    font-size: 18px;
     text-anchor: middle;
     font-family: 'Smooch Sans', sans-serif;
     
 }
 
 .graph .labels.y-labels {
-    font-size: 12px;
+    font-size: 18px;
     /*text-anchor: end;*/
     font-family: 'Smooch Sans';
 }
@@ -52,7 +52,7 @@ svg {
     font-weight: bold;
     text-align:center;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 18px;
     fill: black;
 }
 

@@ -13,6 +13,7 @@
     var dataPointsRounded = new (decimal xCoordinate, decimal yCoordinate)[11];
 
     double[] weightPerDataPoint = @Model.AccountData.GetWeightPerDataPoint(Model.UserData); 
+
 }
 
 <link rel="stylesheet" href="~/css/site.css">
@@ -29,19 +30,19 @@
 
         <g class="grid x-grid" id="xGrid">
 
-            <line x1="50" x2="50" y1="15" y2="352"></line>
+            <line x1="100" x2="100" y1="15" y2="600"></line>
 
         </g>
 
         <g class="grid y-grid" id="yGrid">
 
-            <line x1="50" x2="750" y1="350" y2="350"></line>
+            <line x1="100" x2="1100" y1="450" y2="450"></line>
 
         </g>
 
           <g class="grid x-grid" id="xGrid">
 
-            <line x1="750" x2="750" y1="15" y2="350"></line>
+            <line x1="1100" x2="1100" y1="15" y2="600"></line>
 
         </g>
 
@@ -51,11 +52,16 @@
 
             @for (int i = 0; i < xValues.Length; i++)
             {
-                <text><text x="@((i * 700 / (xValues.Length - 1)) + 50)" y="380">@xValues[i]</text></text>
-                <line x1="@((i * 700 / (xValues.Length - 1)) + 50)" y1="347.5" x2="@((i * 700 / (xValues.Length - 1)) + 50)" y2="352.5" stroke="black" stroke-width="2" />
+                <text><text x="@((i * 1000 / (xValues.Length - 1)) + 100)" y="650">@xValues[i]</text></text>
+
+                if (i == xValues.Length - 1)
+                {
+                    <title>X: @((i * 1000 / (xValues.Length - 1))) Y: 500</title>
+                }
+                <line x1="@((i * 1000 / (xValues.Length - 1)) + 100)" y1="597.5" x2="@((i * 1000 / (xValues.Length - 1)) + 100)" y2="602.5" stroke="black" stroke-width="2" />
             }
 
-            <text x="400" y="440" class="label-title">(Year/Month/Day)</text>
+            <text x="600" y="700" class="label-title">(Year/Month/Day)</text>
 
         </g>
 
@@ -65,17 +71,19 @@
 
             @for (int i = 0; i < yValues.Length; i++)
             {
-                <text><text x="15" y="@((i * 300 / (yValues.Length - 1)) + 50)">@yValues[i]</text></text>
+                <text><text x="55" y="@((i * 500 / (yValues.Length - 1)) + 100)">@yValues[i]</text></text>
 
-                if (i < 10)
+                if (i <= 10)
                 {
-                    <g class="grid per y-value"><line x1="50" x2="750" y1="@((i * 300 / (yValues.Length - 1)) + 50)" y2="@((i * 300 / (yValues.Length - 1)) + 50)"></line></g>
+                    <g class="grid per y-value"><line x1="100" x2="1100" y1="@((i * 500 / (yValues.Length - 1)) + 100)" y2="@((i * 500 / (yValues.Length - 1)) + 100)"></line></g>
                 }
 
-                <line x1="52.5" y1="@((i * 300 / (yValues.Length - 1)) + 50)" x2="47.5" y2="@((i * 300 / (yValues.Length - 1)) + 50)" stroke="black" stroke-width="2" />
+                <line x1="102.5" y1="@((i * 500 / (yValues.Length - 1)) + 100)" x2="97.5" y2="@((i * 500 / (yValues.Length - 1)) + 100)" stroke="black" stroke-width="2" />
+
+               
             }
 
-            <text x="7" y="25" class="label-title">Weight</text>
+            <text x="50" y="65" class="label-title">Weight</text>
         </g>
 
        
@@ -88,7 +96,7 @@
 
         <path 
 
-            d="M50,@(dataPointsRounded[0].yCoordinate)
+            d="M100,@(dataPointsRounded[0].yCoordinate)
 
             C@(dataPointsRounded[1].xCoordinate),@(dataPointsRounded[1].yCoordinate),@(dataPointsRounded[2].xCoordinate),
             @(dataPointsRounded[2].yCoordinate),@(dataPointsRounded[3].xCoordinate),@(dataPointsRounded[3].yCoordinate)
@@ -119,6 +127,9 @@
                 <circle cx="@dataPointsRounded[i].xCoordinate" cy="@dataPointsRounded[i].yCoordinate" data-value="@weightPerDataPoint[i]" r="3"><title>@weightPerDataPoint[i]kg</title></circle>
             }
         </g>
+
+        
+
 
     </svg>
 
