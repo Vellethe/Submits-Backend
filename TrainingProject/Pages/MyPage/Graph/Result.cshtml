@@ -26,117 +26,115 @@
 
 <div id="Result">
 
+    <div id="PageTitle"><h1>Your results:</h1></div>
 
+    <div id="ResultValues">
 
-    <div id="pageTitle">
-        <h1>Your results:</h1>
     </div>
 
+    <div id="Graph">
 
+        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
+            <title id="title">A line chart showing some information</title>
 
-    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
-        <title id="title">A line chart showing some information</title>
+            <g class="grid x-grid" id="xGrid">
 
-        <g class="grid x-grid" id="xGrid">
+                <line x1="100" x2="100" y1="15" y2="600"></line>
 
-            <line x1="100" x2="100" y1="15" y2="600"></line>
+            </g>
 
-        </g>
+            <g class="grid y-grid" id="yGrid">
 
-        <g class="grid y-grid" id="yGrid">
+                <line x1="100" x2="1100" y1="450" y2="450"></line>
 
-            <line x1="100" x2="1100" y1="450" y2="450"></line>
+            </g>
 
-        </g>
+              <g class="grid x-grid" id="xGrid">
 
-          <g class="grid x-grid" id="xGrid">
+                <line x1="1100" x2="1100" y1="15" y2="600"></line>
 
-            <line x1="1100" x2="1100" y1="15" y2="600"></line>
+            </g>      
 
-        </g>
+            <g class="labels y-labels">
 
-
-
-        <g class="labels x-labels">
-
-            @for (int i = 0; i < xValues.Length; i++)
-            {
-                <text><text x="@((i * 1000 / (xValues.Length - 1)) + 100)" y="650">@xValues[i]</text></text>
-
-                if (i == xValues.Length - 1)
+                @for (int i = 0; i < yValues.Length; i++)
                 {
-                    <title>X: @((i * 1000 / (xValues.Length - 1))) Y: 500</title>
-                }
-                <line x1="@((i * 1000 / (xValues.Length - 1)) + 100)" y1="597.5" x2="@((i * 1000 / (xValues.Length - 1)) + 100)" y2="602.5" stroke="black" stroke-width="2" />
-            }
+                    <text><text x="55" y="@((i * 500 / (yValues.Length - 1)) + 100)">@yValues[i]</text></text>
 
-        </g>
+                    if (i <= 10)
+                    {
+                        <g class="grid per y-value"><line x1="100" x2="1100" y1="@((i * 500 / (yValues.Length - 1)) + 100)" y2="@((i * 500 / (yValues.Length - 1)) + 100)"></line></g>
+                    }
 
-        <g class="labels y-labels">
-
-            @for (int i = 0; i < yValues.Length; i++)
-            {
-                <text><text x="55" y="@((i * 500 / (yValues.Length - 1)) + 100)">@yValues[i]</text></text>
-
-                if (i <= 10)
-                {
-                    <g class="grid per y-value"><line x1="100" x2="1100" y1="@((i * 500 / (yValues.Length - 1)) + 100)" y2="@((i * 500 / (yValues.Length - 1)) + 100)"></line></g>
-                }
-
-                <line x1="102.5" y1="@((i * 500 / (yValues.Length - 1)) + 100)" x2="97.5" y2="@((i * 500 / (yValues.Length - 1)) + 100)" stroke="black" stroke-width="2" />
+                    <line x1="102.5" y1="@((i * 500 / (yValues.Length - 1)) + 100)" x2="97.5" y2="@((i * 500 / (yValues.Length - 1)) + 100)" stroke="black" stroke-width="2" />
 
                
-            }
+                }
 
-            <text x="50" y="65" class="label-title">Weight</text>
-        </g>
+                <text x="50" y="65" class="label-title">Weight</text>
+            </g>
 
+            <g class="labels x-labels">
+
+                @for (int i = 0; i < xValues.Length; i++)
+                {
+                    <text><text x="@((i * 1000 / (xValues.Length - 1)) + 100)" y="650">@xValues[i]</text></text>
+
+                    if (i == xValues.Length - 1)
+                    {
+                        <title>X: @((i * 1000 / (xValues.Length - 1))) Y: 500</title>
+                    }
+                    <line x1="@((i * 1000 / (xValues.Length - 1)) + 100)" y1="597.5" x2="@((i * 1000 / (xValues.Length - 1)) + 100)" y2="602.5" stroke="black" stroke-width="2" />
+                }
+
+            </g>
        
 
-        @for (int v = 0; v < 11; v++)
-        {
-            dataPointsRounded[v].xCoordinate = Model.UserData.ConvertToDecimal(dataPoints[v].xValue);
-            dataPointsRounded[v].yCoordinate = Model.UserData.ConvertToDecimal(dataPoints[v].yValue);
-        }
-
-        <path 
-
-            d="M100,@(dataPointsRounded[0].yCoordinate)
-
-           C@(dataPointsRounded[1].xCoordinate),@(dataPointsRounded[1].yCoordinate),
-            @(dataPointsRounded[2].xCoordinate),@(dataPointsRounded[2].yCoordinate),
-            @(dataPointsRounded[3].xCoordinate),@(dataPointsRounded[3].yCoordinate)
-
-            C@(dataPointsRounded[4].xCoordinate),@(dataPointsRounded[4].yCoordinate),
-            @(dataPointsRounded[5].xCoordinate),@(dataPointsRounded[5].yCoordinate),
-            @(dataPointsRounded[6].xCoordinate),@(dataPointsRounded[6].yCoordinate)
-
-            C@(dataPointsRounded[7].xCoordinate),@(dataPointsRounded[7].yCoordinate),
-            @(dataPointsRounded[8].xCoordinate),@(dataPointsRounded[8].yCoordinate),
-            @(dataPointsRounded[9].xCoordinate),@(dataPointsRounded[9].yCoordinate)
-
-            C@(dataPointsRounded[9].xCoordinate),@(dataPointsRounded[9].yCoordinate),
-            @(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate),
-            @(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate)"
-
-            fill="none" stroke-width="10" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)"stroke-linecap="round" stroke-dasharray="0 10" stroke-opacity="1">
-
-        </path>
-
-        <defs>
-            <linearGradient id="SvgjsLinearGradient1000" gradientTransform="rotate(39, 0.5, 0.5)">
-                <stop stop-color="hsl(30, 100%, 50%)" offset="0"></stop>
-                <stop stop-color="hsl(70, 100%, 30%)" offset="1"></stop>
-            </linearGradient>
-        </defs>
-
-        <g class="dataPoints" data-setname="Our first data set">
-            @for (int i = 0; i < 11; i++)
+            @for (int v = 0; v < 11; v++)
             {
-                <circle cx="@dataPointsRounded[i].xCoordinate" cy="@dataPointsRounded[i].yCoordinate" data-value="@weightPerDataPoint[i]" r="5"><title>@weightPerDataPoint[i]kg</title></circle>
+                dataPointsRounded[v].xCoordinate = Model.UserData.ConvertToDecimal(dataPoints[v].xValue);
+                dataPointsRounded[v].yCoordinate = Model.UserData.ConvertToDecimal(dataPoints[v].yValue);
             }
-        </g>
 
-    </svg>
+            <path 
+
+                d="M100,@(dataPointsRounded[0].yCoordinate)
+
+               C@(dataPointsRounded[1].xCoordinate),@(dataPointsRounded[1].yCoordinate),
+                @(dataPointsRounded[2].xCoordinate),@(dataPointsRounded[2].yCoordinate),
+                @(dataPointsRounded[3].xCoordinate),@(dataPointsRounded[3].yCoordinate)
+
+                C@(dataPointsRounded[4].xCoordinate),@(dataPointsRounded[4].yCoordinate),
+                @(dataPointsRounded[5].xCoordinate),@(dataPointsRounded[5].yCoordinate),
+                @(dataPointsRounded[6].xCoordinate),@(dataPointsRounded[6].yCoordinate)
+
+                C@(dataPointsRounded[7].xCoordinate),@(dataPointsRounded[7].yCoordinate),
+                @(dataPointsRounded[8].xCoordinate),@(dataPointsRounded[8].yCoordinate),
+                @(dataPointsRounded[9].xCoordinate),@(dataPointsRounded[9].yCoordinate)
+
+                C@(dataPointsRounded[9].xCoordinate),@(dataPointsRounded[9].yCoordinate),
+                @(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate),
+                @(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate)"
+
+                fill="none" stroke-width="10" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)"stroke-linecap="round" stroke-dasharray="0 10" stroke-opacity="1">
+
+            </path>
+
+            <defs>
+                <linearGradient id="SvgjsLinearGradient1000" gradientTransform="rotate(39, 0.5, 0.5)">
+                    <stop stop-color="hsl(30, 100%, 50%)" offset="0"></stop>
+                    <stop stop-color="hsl(70, 100%, 30%)" offset="1"></stop>
+                </linearGradient>
+            </defs>
+
+            <g class="dataPoints" data-setname="Our first data set">
+                @for (int i = 0; i < 11; i++)
+                {
+                    <circle cx="@dataPointsRounded[i].xCoordinate" cy="@dataPointsRounded[i].yCoordinate" data-value="@weightPerDataPoint[i]" r="5"><title>@weightPerDataPoint[i]kg</title></circle>
+                }
+            </g>
+
+        </svg>
+    </div>
 
 </div>

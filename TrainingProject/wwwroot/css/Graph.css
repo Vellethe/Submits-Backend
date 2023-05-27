@@ -1,21 +1,27 @@
 ﻿body {
-    align-content:center;
+    align-items: center;
+    text-align: center;
 }
 
 #Result {
-    display: flexbox;
-    flex-flow:row;
-    align-content: center;
-    justify-content:center;
-    position:relative;
-    text-align:center;
+
     font-family: 'Smooch Sans';
 }
 
-#pageTitle {
-    background-color:#656565;
-    width:200px; 
+#PageTitle {
+    align-content: center;
+    text-align: center;
+    background-color: #656565;
+    height: 40px;
+    width: 200px;
 }
+
+#ResultValues {
+
+}
+
+
+
 
 svg {
     position: center;
