@@ -2,17 +2,28 @@
     align-content:center;
 }
 
-#result {
+#Result {
+    display: flexbox;
+    flex-flow:row;
+    align-content: center;
+    justify-content:center;
+    position:relative;
+    text-align:center;
     font-family: 'Smooch Sans';
+}
+
+#pageTitle {
+    background-color:#656565;
+    width:200px; 
 }
 
 svg {
     position: center;
     align-content: center;
     text-align: center;
-    background-color:white;
-    height: 740px;
-    width:75em;
+    background-color: white;
+    height: 700px;
+    width: 75em;
     border: solid 5px black;
     padding: 0px;
 }
@@ -62,7 +73,7 @@ svg {
 }
 
 .dataPoints {
-    fill:#0000007e;
+    fill:#000000ca;
 }
 
 @media (max-width: 1000px) 

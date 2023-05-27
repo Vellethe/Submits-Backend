@@ -1,18 +1,19 @@
 ﻿@page
 @model TrainingProject.Pages.Graph.IndexModel
 @{
-    // Get Y-Axis values from an array
-    string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };
-
+   
     // Get X-Axis values from the GetXAxisValues() method
     string[] xValues = @Model.AccountData.GetXAxisValues(Model.UserData.StartDate.ToString("yyyy-MM-dd"), Model.UserData.EndDate.ToString("yyyy-MM-dd"));
 
-    // Calculate progress data
+    // Get Y-Axis values from an array
+    string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };
+
+    // Get X/Y coordinates
     (double xValue, double yValue)[] dataPoints = @Model.AccountData.GetDataPoints(Model.UserData);
 
     var dataPointsRounded = new (decimal xCoordinate, decimal yCoordinate)[11];
 
-    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerDataPoint(Model.UserData); 
+    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerDataPoint(Model.UserData);
 
 }
 
@@ -24,6 +25,14 @@
 @*--------Graph Here-----------*@
 
 <div id="Result">
+
+
+
+    <div id="pageTitle">
+        <h1>Your results:</h1>
+    </div>
+
+
 
     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
         <title id="title">A line chart showing some information</title>
@@ -61,11 +70,7 @@
                 <line x1="@((i * 1000 / (xValues.Length - 1)) + 100)" y1="597.5" x2="@((i * 1000 / (xValues.Length - 1)) + 100)" y2="602.5" stroke="black" stroke-width="2" />
             }
 
-            <text x="600" y="700" class="label-title">(Year/Month/Day)</text>
-
         </g>
-
-       
 
         <g class="labels y-labels">
 
@@ -114,28 +119,24 @@
             @(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate),
             @(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate)"
 
-            fill="none" stroke-width="5"stroke="url(&quot;#SvgjsLinearGradient1000&quot;)"stroke-linecap="round" stroke-dasharray="0 6" stroke-opacity="1">
+            fill="none" stroke-width="10" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)"stroke-linecap="round" stroke-dasharray="0 10" stroke-opacity="1">
 
         </path>
 
         <defs>
             <linearGradient id="SvgjsLinearGradient1000" gradientTransform="rotate(39, 0.5, 0.5)">
                 <stop stop-color="hsl(30, 100%, 50%)" offset="0"></stop>
-                <stop stop-color="hsl(30, 100%, 70%)" offset="1"></stop>
+                <stop stop-color="hsl(70, 100%, 30%)" offset="1"></stop>
             </linearGradient>
         </defs>
 
         <g class="dataPoints" data-setname="Our first data set">
             @for (int i = 0; i < 11; i++)
             {
-                <circle cx="@dataPointsRounded[i].xCoordinate" cy="@dataPointsRounded[i].yCoordinate" data-value="@weightPerDataPoint[i]" r="3"><title>@weightPerDataPoint[i]kg</title></circle>
+                <circle cx="@dataPointsRounded[i].xCoordinate" cy="@dataPointsRounded[i].yCoordinate" data-value="@weightPerDataPoint[i]" r="5"><title>@weightPerDataPoint[i]kg</title></circle>
             }
         </g>
 
-        
-
-
     </svg>
-
 
 </div>
