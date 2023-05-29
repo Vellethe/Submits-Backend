@@ -9,11 +9,11 @@
     string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };
 
     // Get X/Y coordinates
-    (double xCoordinate, double yCoordinate)[] coordinates = @Model.AccountData.GetCoordinates(Model.UserData);
+    (double xCoordinate, double yCoordinate)[] coordinates = @Model.AccountData.GetCoordinates(Model.User, Model.UserData);
 
     var roundedCoordinates = new (decimal xCoordinate, decimal yCoordinate)[11];
 
-    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerCoordinate(Model.UserData);
+    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerCoordinate(Model.User, Model.UserData);
 
     (double xCoordinate, double yCoordinate) currentCoordinate = Model.UserData.GetCoordinate(Model.UserData, Model.User.CurrentWeight, 0);
 

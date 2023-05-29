@@ -119,11 +119,11 @@ namespace TrainingProject.Models
         }
 
 
-        public (double, double)[] GetCoordinates(AccountData userData)
+        public (double, double)[] GetCoordinates(Account user, AccountData userData)
         {
             var coordinates = new (double x, double y)[11];
 
-            double[] weightPerCoordinate = GetWeightPerCoordinate(userData);
+            double[] weightPerCoordinate = GetWeightPerCoordinate(user, userData);
 
             for (int i = 0; i < 11; i++)
             {
@@ -133,28 +133,21 @@ namespace TrainingProject.Models
             return coordinates;
         }
 
-        public double[] GetWeightPerCoordinate(AccountData userData)
+        public double[] GetWeightPerCoordinate(Account user, AccountData userData)
         {
             double[] outputArray = new double[11];
-            double startWeight = userData.StartWeight;
             int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
-            double weightDifference = WeightDifference(userData);
-
-            double weightDifferencePerDay = weightDifference / totalDayCount;
+            double weightDifferencePerDay = WeightDifference(user, userData, false) / totalDayCount;
 
             double perCoordinate = totalDayCount / 10;
 
             for (int i = 0; i < 11; i++)
             {
-                double weightPerDay;
+                double weightPerDay = userData.StartWeight - (i * perCoordinate * weightDifferencePerDay); 
+
                 if (userData.Goal == "Gain")
                 {
-                    weightPerDay = startWeight + (i * perCoordinate * weightDifferencePerDay);
-                }
-
-                else
-                {
-                    weightPerDay = startWeight - (i * perCoordinate * weightDifferencePerDay);
+                    weightPerDay = userData.StartWeight + (i * perCoordinate * weightDifferencePerDay);
                 }
 
                 outputArray[i] = weightPerDay;
@@ -163,22 +156,25 @@ namespace TrainingProject.Models
             return outputArray;
         }
 
-        public double WeightDifference(AccountData userData)
+        public double WeightDifference(Account user, AccountData userData, bool currentWeightDifference)
         {
-            double weightDifference;
+            int eitherStartOrCurrentWeight = userData.StartWeight;
+            if (currentWeightDifference)
+            {
+                eitherStartOrCurrentWeight = user.CurrentWeight;
+            }
+
+            double weightDifference = eitherStartOrCurrentWeight - userData.TargetWeight;
 
             if (userData.Goal == "Gain")
             {
-                weightDifference = userData.TargetWeight - userData.StartWeight;
-            }
-
-            else 
-            {
-                weightDifference = userData.StartWeight - userData.TargetWeight;
+                weightDifference = userData.TargetWeight - eitherStartOrCurrentWeight;
             }
 
             return weightDifference;
         }
+
+        
 
         public decimal ConvertToDecimal(double value)
         {

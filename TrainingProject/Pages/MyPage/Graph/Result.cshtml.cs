@@ -28,7 +28,7 @@ namespace TrainingProject.Pages.MyPage.Result
         }
         public void OnGet()
         {
-            decimal weightLeft = (decimal)UserData.WeightDifference(UserData);
+            decimal weightLeft = (decimal)UserData.WeightDifference(User, UserData, true);
             CalorieCount = UserData.CalorieCalculator(User, UserData);
             WeightDifference = Math.Round(weightLeft); 
         }
