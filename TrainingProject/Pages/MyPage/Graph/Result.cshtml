@@ -13,7 +13,7 @@
 
     var dataPointsRounded = new (decimal xCoordinate, decimal yCoordinate)[11];
 
-    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerDataPoint(Model.UserData);
+    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerCoordinate(Model.UserData);
 
     (double xCoordinate, double yCoordinate) currentDataPoint = Model.UserData.GetCoordinate(Model.UserData, Model.User.CurrentWeight, 0);
 

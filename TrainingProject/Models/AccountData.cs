@@ -121,43 +121,40 @@ namespace TrainingProject.Models
 
         public (double, double)[] GetCoordinates(AccountData userData)
         {
-            var dataPoints = new (double xValue, double yValue)[11];
+            var coordinates = new (double xValue, double yValue)[11];
 
-            double[] weightPerDataPoint = GetWeightPerDataPoint(userData);
+            double[] weightPerCoordinate = GetWeightPerCoordinate(userData);
 
             for (int i = 0; i < 11; i++)
             {
-                dataPoints[i] = GetCoordinate(userData, weightPerDataPoint[i], i);
+                coordinates[i] = GetCoordinate(userData, weightPerCoordinate[i], i);
             }
 
-            return dataPoints;
+            return coordinates;
         }
 
-        public double[] GetWeightPerDataPoint(AccountData userData)
+        public double[] GetWeightPerCoordinate(AccountData userData)
         {
             double[] outputArray = new double[11];
-
             double startWeight = userData.StartWeight;
-            double targetWeight = userData.TargetWeight;
             int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
             double weightDifference = WeightDifference(userData);
 
             double weightDifferencePerDay = weightDifference / totalDayCount;
 
-            double perDataPoint = totalDayCount / 10;
+            double perCoordinate = totalDayCount / 10;
 
             for (int i = 0; i < 11; i++)
             {
-                double weightPerDay = 0;
-
+                double weightPerDay;
                 if (userData.Goal == "Gain")
                 {
-                    weightPerDay = startWeight + (i * perDataPoint * weightDifferencePerDay);
+                    weightPerDay = startWeight + (i * perCoordinate * weightDifferencePerDay);
                 }
 
                 else
                 {
-                    weightPerDay = startWeight - (i * perDataPoint * weightDifferencePerDay);
+                    weightPerDay = startWeight - (i * perCoordinate * weightDifferencePerDay);
                 }
 
                 outputArray[i] = weightPerDay;
