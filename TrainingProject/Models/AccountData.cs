@@ -127,9 +127,7 @@ namespace TrainingProject.Models
 
             for (int i = 0; i < 11; i++)
             {
-                (double xCoordinate, double yCoordinate) coordinates = GetCoordinate(userData, weightPerDataPoint[i], i);
-                dataPoints[i].xValue = coordinates.xCoordinate;
-                dataPoints[i].yValue = coordinates.yCoordinate;
+                dataPoints[i] = GetCoordinate(userData, weightPerDataPoint[i], i);
             }
 
             return dataPoints;
@@ -205,7 +203,7 @@ namespace TrainingProject.Models
             double datePerPixel = graphLength / totalDayCount;
             int totalDaysIntoProgress = DayCount(userData.StartDate, DateTime.Now);
 
-            if (i != 0)
+            if (i > 0)
             {
                 currentDataPoint.xCoordinate = i * graphLength / 10 + 100;
             }                 
