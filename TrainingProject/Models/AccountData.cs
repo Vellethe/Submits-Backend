@@ -187,24 +187,17 @@ namespace TrainingProject.Models
         }
 
         public (double, double) GetCoordinate(AccountData userData, double weight, int i)
-        {
-            int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
-            int graphLength = 1000;
-            double graphHeight = 500;
-            double graphBottomPadding = 100;
-            double distanceBetweenEachYLabel = 50;       
-            double xValueInDays = graphLength / totalDayCount;
-            int totalDaysIntoProgress = DayCount(userData.StartDate, DateTime.Now);
-            double yCoordinate = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
+        {    
+            double yCoordinate = 500 - ((weight - 0) / 20) * 50 + 100;
 
             if (i > 0)
             {
-                return (i * graphLength / 10 + 100, yCoordinate);
+                return (i * 1000 / 10 + 100, yCoordinate);
             }                 
             
             else
             {
-                return (totalDaysIntoProgress / xValueInDays + 100, yCoordinate);
+                return (DayCount(userData.StartDate, DateTime.Now) / (1000 / DayCount(userData.StartDate, userData.EndDate)) + 100, yCoordinate);
             }
         }
     }
