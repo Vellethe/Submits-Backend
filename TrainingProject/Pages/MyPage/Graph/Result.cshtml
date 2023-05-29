@@ -1,0 +1,126 @@
+﻿@page
+@model TrainingProject.Pages.Graph.IndexModel
+@{
+    // Get Y-Axis values from an array
+    string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };
+
+    // Get X-Axis values from the GetXAxisValues() method
+    string[] xValues = @Model.AccountData.GetXAxisValues(Model.UserData.StartDate.ToString("yyyy-MM-dd"), Model.UserData.EndDate.ToString("yyyy-MM-dd"));
+
+    // Calculate progress data
+    (double xValue, double yValue)[] dataPoints = @Model.AccountData.GetDataPoints(Model.UserData);
+
+    var dataPointsRounded = new (decimal xCoordinate, decimal yCoordinate)[11];
+
+    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerDataPoint(Model.UserData); 
+}
+
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/Graph.css">
+<link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@900" &display=swap" rel="stylesheet">
+
+
+@*--------Graph Here-----------*@
+
+<div id="Result">
+
+    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
+        <title id="title">A line chart showing some information</title>
+
+        <g class="grid x-grid" id="xGrid">
+
+            <line x1="50" x2="50" y1="15" y2="352"></line>
+
+        </g>
+
+        <g class="grid y-grid" id="yGrid">
+
+            <line x1="50" x2="750" y1="350" y2="350"></line>
+
+        </g>
+
+          <g class="grid x-grid" id="xGrid">
+
+            <line x1="750" x2="750" y1="15" y2="350"></line>
+
+        </g>
+
+
+
+        <g class="labels x-labels">
+
+            @for (int i = 0; i < xValues.Length; i++)
+            {
+                <text><text x="@((i * 700 / (xValues.Length - 1)) + 50)" y="380">@xValues[i]</text></text>
+                <line x1="@((i * 700 / (xValues.Length - 1)) + 50)" y1="347.5" x2="@((i * 700 / (xValues.Length - 1)) + 50)" y2="352.5" stroke="black" stroke-width="2" />
+            }
+
+            <text x="400" y="440" class="label-title">(Year/Month/Day)</text>
+
+        </g>
+
+       
+
+        <g class="labels y-labels">
+
+            @for (int i = 0; i < yValues.Length; i++)
+            {
+                <text><text x="15" y="@((i * 300 / (yValues.Length - 1)) + 50)">@yValues[i]</text></text>
+
+                if (i < 10)
+                {
+                    <g class="grid per y-value"><line x1="50" x2="750" y1="@((i * 300 / (yValues.Length - 1)) + 50)" y2="@((i * 300 / (yValues.Length - 1)) + 50)"></line></g>
+                }
+
+                <line x1="52.5" y1="@((i * 300 / (yValues.Length - 1)) + 50)" x2="47.5" y2="@((i * 300 / (yValues.Length - 1)) + 50)" stroke="black" stroke-width="2" />
+            }
+
+            <text x="7" y="25" class="label-title">Weight</text>
+        </g>
+
+       
+
+        @for (int v = 0; v < 11; v++)
+        {
+            dataPointsRounded[v].xCoordinate = Model.UserData.ConvertToDecimal(dataPoints[v].xValue);
+            dataPointsRounded[v].yCoordinate = Model.UserData.ConvertToDecimal(dataPoints[v].yValue);
+        }
+
+        <path 
+
+            d="M50,@(dataPointsRounded[0].yCoordinate)
+
+            C@(dataPointsRounded[1].xCoordinate),@(dataPointsRounded[1].yCoordinate),@(dataPointsRounded[2].xCoordinate),
+            @(dataPointsRounded[2].yCoordinate),@(dataPointsRounded[3].xCoordinate),@(dataPointsRounded[3].yCoordinate)
+            
+            C@(dataPointsRounded[4].xCoordinate),@(dataPointsRounded[4].yCoordinate),@(dataPointsRounded[5].xCoordinate),
+            @(dataPointsRounded[5].yCoordinate),@(dataPointsRounded[6].xCoordinate),@(dataPointsRounded[6].yCoordinate)
+
+            C@(dataPointsRounded[7].xCoordinate),@(dataPointsRounded[7].yCoordinate),@(dataPointsRounded[8].xCoordinate),
+            @(dataPointsRounded[8].yCoordinate),@(dataPointsRounded[9].xCoordinate),@(dataPointsRounded[9].yCoordinate)
+
+            C@(dataPointsRounded[9].xCoordinate),@(dataPointsRounded[9].yCoordinate),@(dataPointsRounded[10].xCoordinate),
+            @(dataPointsRounded[10].yCoordinate),@(dataPointsRounded[10].xCoordinate),@(dataPointsRounded[10].yCoordinate)"
+ 
+            fill="none" stroke-width="5"stroke="url(&quot;#SvgjsLinearGradient1000&quot;)"stroke-linecap="round" stroke-dasharray="0 6" stroke-opacity="1">
+
+        </path>
+
+        <defs>
+            <linearGradient id="SvgjsLinearGradient1000" gradientTransform="rotate(39, 0.5, 0.5)">
+                <stop stop-color="hsl(30, 100%, 50%)" offset="0"></stop>
+                <stop stop-color="hsl(30, 100%, 70%)" offset="1"></stop>
+            </linearGradient>
+        </defs>
+
+        <g class="dataPoints" data-setname="Our first data set">
+            @for (int i = 0; i < 11; i++)
+            {                                  
+                <circle cx="@dataPointsRounded[i].xCoordinate" cy="@dataPointsRounded[i].yCoordinate" data-value="@weightPerDataPoint[i]" r="3"></circle>
+            }
+        </g>
+
+    </svg>
+
+
+</div>

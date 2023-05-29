@@ -35,8 +35,13 @@ details summary::-webkit-details-marker {
     color: white;
 }
 
+<<<<<<< HEAD
 #myPage {
     width: 90%;
+=======
+.myPage {
+    width: 700px;
+>>>>>>> Test-Graph2
     margin-left: auto;
     margin-right: auto;
     margin-top: 2rem;
@@ -167,6 +172,64 @@ main form {
 p{
     margin: 1rem;
 }
+<<<<<<< HEAD
+=======
+
+#myPageSubmit {
+    margin-top: 1%;
+}
+
+.selected {
+    border:solid 5px #000000e5; /* Add your desired styling for the selected button */
+}
+
+svg 
+{
+    position:center;
+    background-color: white;
+    height:500px;
+    width:50em;
+    border:solid 10px black;
+    padding:10px;
+}
+
+
+#graph {
+    margin-top: 10%;
+    font-size: 30px;
+}
+
+
+.graph .labels.x-labels {
+    text-anchor: middle;
+}
+
+.graph .labels.y-labels {
+    text-anchor: end;
+}
+
+
+    .graph .grid {
+        stroke: #ccc;
+        stroke-dasharray: 0;
+        stroke-width: 1;
+    }
+
+.labels {
+    font-size: 13px;
+}
+
+.label-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    fill: black;
+}
+
+.data {
+    fill: red;
+    stroke-width: 1;
+>>>>>>> Test-Graph2
 }
 
 @media  (max-width: 1000px) {

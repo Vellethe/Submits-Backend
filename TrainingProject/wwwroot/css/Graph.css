@@ -1,46 +1,86 @@
+﻿body {
+    align-content:center;
+}
+
+#result {
+    font-family: 'Smooch Sans';
+}
+
 svg {
-    position:center;
-    background-color: white;
-    height:500px;
-    width:50em;
-    border:solid 10px black;
-    padding:10px;
+    position: center;
+    align-content: center;
+    text-align: center;
+    background-color:white;
+    height: 400px;
+    width: 49em;
+    border: solid 5px black;
+    padding: 0px;
 }
 
 
 #graph {
-    margin-top: 10%;
+    margin-top: 10%;    
     font-size: 30px;
 }
 
 
 .graph .labels.x-labels {
+    font-size: 13px;
+    font-size: 12px;
     text-anchor: middle;
+    font-family: 'Smooch Sans', sans-serif;
+    
 }
 
 .graph .labels.y-labels {
-    text-anchor: end;
+    font-size: 12px;
+    /*text-anchor: end;*/
+    font-family: 'Smooch Sans';
 }
 
 
-    .graph .grid {
-        stroke: #ccc;
-        stroke-dasharray: 0;
-        stroke-width: 1;
-    }
+.graph .grid {
+    stroke: #ccc;
+    stroke-dasharray: 0;
+    /*stroke-width: 1;*/
+}
 
 .labels {
-    font-size: 13px;
+    font-size: 10px;
 }
 
 .label-title {
     font-weight: bold;
+    text-align:center;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
     fill: black;
 }
 
 .data {
     fill: red;
     stroke-width: 1;
+}
+
+.dataPoints {
+    fill:#0000007e;
+}
+
+@media (max-width: 1000px) 
+{
+    .container {
+        width: 100%;
+    }
+
+    #myPage {
+        width: 100%;
+    }
+
+    #userInfo {
+        display: block;
+    }
+
+        #userInfo p {
+            text-align: center;
+        }
 }

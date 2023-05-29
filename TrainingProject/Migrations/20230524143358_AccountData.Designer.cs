@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingProject.Data;
 
@@ -11,9 +12,10 @@ using TrainingProject.Data;
 namespace TrainingProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230524143358_AccountData")]
+    partial class AccountData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +58,7 @@ namespace TrainingProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts", (string)null);
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.AccountData", b =>
@@ -80,9 +82,6 @@ namespace TrainingProject.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StartWeight")
-                        .HasColumnType("int");
-
                     b.Property<int>("TargetWeight")
                         .HasColumnType("int");
 
@@ -90,7 +89,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("AccountData", (string)null);
+                    b.ToTable("AccountData");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Exercise", b =>
@@ -118,33 +117,7 @@ namespace TrainingProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercises", (string)null);
-                });
-
-            modelBuilder.Entity("TrainingProject.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ChosenRating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RatingAcountId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RatingAcountId");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("Ratings");
+                    b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>
@@ -169,7 +142,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Workouts", (string)null);
+                    b.ToTable("Workouts");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.WorkoutExecise", b =>
@@ -195,7 +168,7 @@ namespace TrainingProject.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("WorkoutExecises", (string)null);
+                    b.ToTable("WorkoutExecises");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.AccountData", b =>
@@ -205,25 +178,6 @@ namespace TrainingProject.Migrations
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TrainingProject.Models.Rating", b =>
-                {
-                    b.HasOne("TrainingProject.Models.Account", "RatingAcount")
-                        .WithMany()
-                        .HasForeignKey("RatingAcountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TrainingProject.Models.Workout", "Workout")
-                        .WithMany("Ratings")
-                        .HasForeignKey("WorkoutId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("RatingAcount");
-
-                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>
@@ -265,8 +219,6 @@ namespace TrainingProject.Migrations
 
             modelBuilder.Entity("TrainingProject.Models.Workout", b =>
                 {
-                    b.Navigation("Ratings");
-
                     b.Navigation("WorkoutExecises");
                 });
 #pragma warning restore 612, 618

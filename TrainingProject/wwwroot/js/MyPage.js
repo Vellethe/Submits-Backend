@@ -5,14 +5,17 @@ let targetWeightLabel = document.getElementById("targetWeightLabel");
 
 function visibilityOfTargetWheight() {
 
-    if (goalSelect.value === "Lose Weight") {
+    if (goalSelect.value === "Lose Weight")
+    {
         targetWeightLabel.style.display = "grid";
         targetWeightInput.style.display = "grid";
-  } 
-  else {
+    } 
+
+    else
+    {
         targetWeightLabel.style.display = "none";
         targetWeightInput.style.display = "none";
-  }
+    }
 }
 
 visibilityOfTargetWheight();

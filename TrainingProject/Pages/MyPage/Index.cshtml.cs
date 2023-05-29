@@ -1,49 +1,85 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 using TrainingProject.Data;
 using TrainingProject.Models;
 
 namespace TrainingProject.Pages.MyPage
 {
-	public class IndexModel : PageModel
-	{
-		public int loggedInID { get; set; }
-		public (string FinishedBMR, string FinishedDate) calorieCount { get; set; }
-		public Account account { get; set; }
-		public Account user { get; set; }
+    public class IndexModel : PageModel
+    {
+        public int LoggedInId { get; set; }
+        public Account Account { get; set; }
+        public Account User { get; set; }
+        public AccountData AccountData { get; set; }
+        public AccountData? UserData { get; set; } 
+        public string ErrorMessage { get; set; } = "";
 
-		private readonly AppDbContext context;
-		public IndexModel(AppDbContext context, AccessControl access)
-		{
-			this.context = context;
-			loggedInID = access.LoggedInAccountID;
-			account = new Account();
-			user = context.Accounts.First(u => u.Id == loggedInID);
+        private readonly AppDbContext context;
+
+        public IndexModel(AppDbContext context, AccessControl access)
+        {
+            this.context = context;
+            LoggedInId = access.LoggedInAccountID;
+            Account = new Account();
+            User = context.Accounts.First(u => u.Id == LoggedInId);
+            AccountData = new AccountData();
+            var userData = context.AccountData.First(c => c.AccountId == LoggedInId);
+
+
         }
-		public void OnGet()
-		{
-			calorieCount = account.CalorieCalculator(user);
+        public void OnGet()
+        {
+            
         }
 
-		public IActionResult OnPost(int age, int height, int weight, bool gender, string goal, int targetWeight)
-		{
-			var user = context.Accounts.First(u => u.Id == loggedInID);
+        public IActionResult OnPost(string goal, int targetWeight)
+        {
+            var userData = context.AccountData.First(c => c.AccountId == LoggedInId);
 
-            user.Age = age;
-			user.Height = height;
-			user.CurrentWeight = weight;
-			user.IsMale = gender;
-			user.TargetWeight = targetWeight;
-			user.Goal = goal;
+            if (ModelState.IsValid)
+            {
+                userData!.Goal = goal;
+                userData.StartWeight = User.CurrentWeight;
+                userData.TargetWeight = targetWeight;
+                userData.StartDate = DateTime.Now.AddDays(1);
+                userData.EndDate = DateTime.Now.AddDays(601);
 
-			calorieCount = account.CalorieCalculator(user);
+                if (goal == "Gain" && targetWeight <= User.CurrentWeight)
+                {
+                    ErrorMessage = "You can't enter a weight below your own if you wanna gain weight!";
+                    return Page();
+                }
 
-			if(calorieCount.FinishedBMR == "0" || !user.IsValid())
-			{
-                return Page();
+                else if (goal == "Lose" && targetWeight >= User.CurrentWeight)
+                {
+                    ErrorMessage = "You can't enter a weight above your own if you wanna lose weight!";
+                    return Page();
+                }
+
+                context.SaveChanges();
             }
 
             return Page();
-		}
-	}
+        }
+
+        public void FirstLogon()
+        {
+
+            AccountData newAccountData = new();           
+            {
+                newAccountData.AccountId = LoggedInId;
+                newAccountData.StartWeight = 0;
+                newAccountData.TargetWeight = 0;
+                newAccountData.Goal = "None";
+                newAccountData.StartDate = DateTime.Now;
+                newAccountData.EndDate = DateTime.Now;           
+            }
+
+            context.AccountData.Add(newAccountData);
+            context.SaveChanges();
+        }
+    }
 }
+

@@ -28,7 +28,6 @@
             <th>Name</th>
             <th>Muscle Group</th>
             <th>Description</th>
-            <th>Instructions</th>
             <th>Intensity</th>
             <th>Remove Button</th>
         </tr>
@@ -38,10 +37,10 @@
         @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
         {
             <tr>
+                //TODO Add instruction to text
                 <td>@workoutExercise.Exercise.Name</td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>
-                <td><button><a href="@workoutExercise.Exercise.Instruction">Click Me!</a></button></td>
                 <td>
                     <form method="post" asp-page-handler="change">
                         <select name="intesnity" onchange="this.form.submit()" asp-for="@workoutExercise.Intensity" asp-items="@(Html.GetEnumSelectList<InetensityLevel>())">
