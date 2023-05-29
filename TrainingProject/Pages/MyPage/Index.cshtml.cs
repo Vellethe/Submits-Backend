@@ -34,29 +34,33 @@ namespace TrainingProject.Pages.MyPage
         }
 
         public IActionResult OnPost(string goal, int targetWeight)
-        {
-            var userData = context.AccountData.First(c => c.AccountId == LoggedInId);
-
+        {   
             if (ModelState.IsValid)
             {
-                userData!.Goal = goal;
-                userData.StartWeight = User.CurrentWeight;
-                userData.TargetWeight = targetWeight;
-                userData.StartDate = DateTime.Now;
-                userData.EndDate = DateTime.Now.AddDays(600);
-
-                if (goal == "Gain" && targetWeight <= User.CurrentWeight)
+                foreach (var userData in context.AccountData.ToList())
                 {
-                    ErrorMessage = "You can't enter a weight below your own if you wanna gain weight!";
-                    return Page();
-                }
+                    if (userData.AccountId == LoggedInId)
+                    {
+                        userData!.Goal = goal;
+                        userData.StartWeight = User.CurrentWeight;
+                        userData.TargetWeight = targetWeight;
+                        userData.StartDate = DateTime.Now;
+                        userData.EndDate = DateTime.Now.AddDays(600);
 
-                else if (goal == "Lose" && targetWeight >= User.CurrentWeight)
-                {
-                    ErrorMessage = "You can't enter a weight above your own if you wanna lose weight!";
-                    return Page();
-                }
+                        if (goal == "Gain" && targetWeight <= User.CurrentWeight)
+                        {
+                            ErrorMessage = "You can't enter a weight below your own if you wanna gain weight!";
+                            return Page();
+                        }
 
+                        else if (goal == "Lose" && targetWeight >= User.CurrentWeight)
+                        {
+                            ErrorMessage = "You can't enter a weight above your own if you wanna lose weight!";
+                            return Page();
+                        }
+                    }
+                }
+     
                 context.SaveChanges();
             }
 
@@ -65,8 +69,10 @@ namespace TrainingProject.Pages.MyPage
 
         public void HandleAccountData()
         {
+            int userData = context.AccountData.Where(c => c.AccountId == LoggedInId).Count();
 
-            if (UserData == null || context.AccountData.First(c => c.AccountId == LoggedInId) == null)
+
+            if (UserData == null && userData == 0)
             {
                 AccountData newAccountData = new();
                 {

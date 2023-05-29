@@ -22,11 +22,6 @@
                 @await Component.InvokeAsync(nameof(FakeLoginMenu))
             </environment>
 
-            @if (Model.UserData == null)
-            {
-                Model.HandleAccountData();
-            }
-
 
             @*
             @if (Model.ErrorMessage != "")
@@ -52,26 +47,6 @@
                     <label for="userWeight">Weight: </label>
                     <p id="userWeight">@Model.User.CurrentWeight kg</p>
                 </li>
-
-                @*<li>
-                <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
-                <p id="goalWeight">@Model.userData.TargetWeight kg</p>
-                </li>
-
-                <li>
-                <label id="goalLabel" for="goal">Goal: </label>
-                <p id="goal">@Model.userData.Goal</p>
-                </li>
-
-                <li>
-                <label for="dailyCalories">Daily Calories: </label>
-                <p id="dailyCalories">@Model.calorieCount.FinishedBMR kcal</p>
-                </li>
-
-                <li>
-                label for="finishDate">Finished Before: </label>
-                <p id="finishDate">@Model.calorieCount.FinishedDate</p>
-                </li>*@
 
             </ul>
 

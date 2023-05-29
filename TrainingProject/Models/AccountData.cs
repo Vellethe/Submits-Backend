@@ -188,31 +188,24 @@ namespace TrainingProject.Models
 
         public (double, double) GetCoordinate(AccountData userData, double weight, int i)
         {
-            (double x, double y) coordinate;
-
             int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
-
             int graphLength = 1000;
             double graphHeight = 500;
             double graphBottomPadding = 100;
-            double distanceBetweenEachYLabel = 50;
-           
+            double distanceBetweenEachYLabel = 50;       
             double xValueInDays = graphLength / totalDayCount;
             int totalDaysIntoProgress = DayCount(userData.StartDate, DateTime.Now);
+            double yCoordinate = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
 
             if (i > 0)
             {
-                coordinate.x = i * graphLength / 10 + 100;
+                return (i * graphLength / 10 + 100, yCoordinate);
             }                 
             
             else
             {
-                coordinate.x = (totalDaysIntoProgress / xValueInDays) + 100;  
+                return (totalDaysIntoProgress / xValueInDays + 100, yCoordinate);
             }
-
-            coordinate.y = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
-
-            return coordinate;
         }
     }
 }
