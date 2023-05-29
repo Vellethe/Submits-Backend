@@ -178,16 +178,18 @@ namespace TrainingProject.Models
         }
 
         public (double, double) GetCoordinate(AccountData userData, double weight, int i)
-        {    
-            double yCoordinate = 500 - ((weight - 0) / 20) * 50 + 100;
+        {
+            // graphHeight - (weight / numberOfYValues) * yDistancePer20kg + yCoordinateStart = yCoordinate.
+            double yCoordinate = 500 - (weight / 20) * 50 + 100;
 
             if (i > 0)
             {
+                // i * graphWidth / xCoordinates.Length + xCoordinateStart = xCoordinate for xLabels/xValues.
                 return (i * 1000 / 10 + 100, yCoordinate);
             }                 
             
             else
-            {
+            {   // daysPassed / (graphWidth / totalNumberOfDays) + xCoordinateStart = Current xCoordinate according to date.
                 return (DayCount(userData.StartDate, DateTime.Now) / (1000 / DayCount(userData.StartDate, userData.EndDate)) + 100, yCoordinate);
             }
         }
