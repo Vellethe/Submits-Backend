@@ -42,8 +42,8 @@ namespace TrainingProject.Pages.MyPage
                 userData!.Goal = goal;
                 userData.StartWeight = User.CurrentWeight;
                 userData.TargetWeight = targetWeight;
-                userData.StartDate = DateTime.Now.AddDays(1);
-                userData.EndDate = DateTime.Now.AddDays(601);
+                userData.StartDate = DateTime.Now;
+                userData.EndDate = DateTime.Now.AddDays(600);
 
                 if (goal == "Gain" && targetWeight <= User.CurrentWeight)
                 {

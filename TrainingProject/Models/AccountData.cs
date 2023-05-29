@@ -148,17 +148,7 @@ namespace TrainingProject.Models
             double startWeight = userData.StartWeight;
             double targetWeight = userData.TargetWeight;
             int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
-            double weightDifference = 0;
-
-            if (userData.Goal == "Gain")
-            {
-                weightDifference = targetWeight - startWeight;
-            }
-
-            else if (userData.Goal == "Lose")
-            {
-                weightDifference = startWeight - targetWeight;
-            }
+            double weightDifference = WeightDifference(userData);
 
             double weightDifferencePerDay = weightDifference / totalDayCount;
 
@@ -184,10 +174,56 @@ namespace TrainingProject.Models
             return outputArray;
         }
 
+        public double WeightDifference(AccountData userData)
+        {
+            double weightDifference = 0;
+
+            if (userData.Goal == "Gain")
+            {
+                weightDifference = userData.TargetWeight - userData.StartWeight;
+            }
+
+            else 
+            {
+                weightDifference = userData.StartWeight - userData.TargetWeight;
+            }
+
+            return weightDifference;
+        }
+
         public decimal ConvertToDecimal(double value)
         {
             decimal output = (decimal)value;
             return Math.Round(output);
+        }
+
+        public (double, double, string) GetDataPointForCurrentDate(Account user, AccountData userData)
+        {
+            (double xCoordinate, double yCoordinate, string date) currentDataPoint;
+
+            int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
+
+            int GraphLength = 1000;
+            double graphHeight = 500;
+            double graphBottomPadding = 100;
+            double distanceBetweenEachYLabel = 50;
+            double currentWeight = user.CurrentWeight;
+
+            double datePerPixel = GraphLength / totalDayCount;
+            int totalDaysIntoProgress = DayCount(userData.StartDate, DateTime.Now);
+
+            double xCoordinate = (totalDaysIntoProgress / datePerPixel) + 100;
+            double yCoordinate = graphHeight - ((currentWeight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
+                              
+            DateTime date = DateTime.Now;
+
+            string currentDate = date.ToString("yyyy-MM-dd");
+            
+            currentDataPoint.xCoordinate = xCoordinate;
+            currentDataPoint.yCoordinate = yCoordinate;
+            currentDataPoint.date = currentDate;
+
+            return currentDataPoint;
         }
 
 

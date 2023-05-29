@@ -30,25 +30,27 @@ h1 {
 }
 
 #ResultValues ul {
-    display:flex;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
     justify-content: center;
-    text-align:center;
+    text-align: center;
+    width:4fr;
 }
 
 #ResultValues li {
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
+    flex-flow:row;
     align-items: center;
     justify-items: center;
     text-align: center;
     background-color: #656565;
-    padding: 10px;
+    width: 4fr;
+    padding: 5px;
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
-
 
 
 svg {
@@ -79,6 +81,11 @@ svg {
     font-size: 18px;
     /*text-anchor: end;*/
     font-family: 'Smooch Sans';
+}
+
+.currentDataPoint {
+    stroke-width: 1;
+    fill: blue;
 }
 
 
