@@ -200,7 +200,7 @@ namespace TrainingProject.Models
             double graphBottomPadding = 100;
             double distanceBetweenEachYLabel = 50;
            
-            double datePerPixel = graphLength / totalDayCount;
+            double xValueInDays = graphLength / totalDayCount;
             int totalDaysIntoProgress = DayCount(userData.StartDate, DateTime.Now);
 
             if (i > 0)
@@ -210,7 +210,7 @@ namespace TrainingProject.Models
             
             else
             {
-                currentDataPoint.xCoordinate = (totalDaysIntoProgress / datePerPixel) + 100;  
+                currentDataPoint.xCoordinate = (totalDaysIntoProgress / xValueInDays) + 100;  
             }
 
             currentDataPoint.yCoordinate = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
