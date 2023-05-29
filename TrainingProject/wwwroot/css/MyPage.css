@@ -68,7 +68,6 @@ h1{
     margin-right: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    grid-area: g;
     width: 30%;
     padding: 1rem;
     color: white;
@@ -80,7 +79,6 @@ h1{
     margin-right: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    grid-area: g;
     width: 15%;
     padding: 1rem;
     color: white;
@@ -96,7 +94,6 @@ h1{
     margin-right: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    grid-area: g;
     width: 30%;
     padding: 1rem;
     color: white;
@@ -109,6 +106,49 @@ main form{
 
 #profileImg{
     width: 200px;
+}
+
+.firstLogon{
+    width: 80%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.firstLogon li{
+    display: grid;
+    grid-template:
+    "a b";
+}
+
+.firstLogon li label{
+    margin: 1rem;
+    width: 248px;
+    margin-top: auto;
+    font-size: 20px;
+    text-align: right;
+}
+
+.firstLogon li div, p{
+    margin: 1rem;
+    width: 248px;
+    margin-top: auto;
+    font-size: 15px;
+    text-align: left;
+}
+.firstLogon li div input, select{
+    width: 70px;
+}
+
+#submitButton, #previousButton{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 20%;
+    padding: 1rem;
+    color: white;
+    background-color: black;
 }
 
 @media  (max-width: 1000px) {
