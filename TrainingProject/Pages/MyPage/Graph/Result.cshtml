@@ -35,33 +35,33 @@
         <ul class="userInput">
 
             <li>
-                <label for="userWeight">Currentweight:  </label>
-                <p id="userWeight">@Model.User.CurrentWeight kg</p>
+                <label for="userWeight">Currentweight: </label>
+                <p id="userWeight"> @Model.User.CurrentWeight kg</p>
             </li>
 
             <li>
-                <label id="goalWeightLabel" for="goalWeight">Goal Weight:  </label>
-                <p id="goalWeight">@Model.UserData.TargetWeight kg</p>
+                <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
+                <p id="goalWeight"> @Model.UserData.TargetWeight kg</p>
             </li>
 
             <li>
-                <label for="weightDifference">Weight Difference:  </label>
-                <p id="weightDifference">@Model.WeightDifference kg</p>
+                <label for="weightDifference">Weight Difference: </label>
+                <p id="weightDifference"> @Model.WeightDifference kg</p>
             </li>
 
             <li>
-                <label id="goalLabel" for="goal">Goal:  </label>
-                <p id="goal">@Model.UserData.Goal</p>
+                <label id="goalLabel" for="goal">Goal: </label>
+                <p id="goal"> @Model.UserData.Goal weight</p>
             </li>
 
             <li>
                 <label for="dailyCalories">Daily Calories:  </label>
-                <p id="dailyCalories">@Model.CalorieCount.FinishedBMR</p>
+                <p id="dailyCalories"> @Model.CalorieCount.FinishedBMR</p>
             </li>
 
             <li>
                 <label for="finishDate">Estimated Completion Date:  </label>
-                <p id="finishDate">@Model.CalorieCount.FinishedDate</p>
+                <p id="finishDate"> @Model.CalorieCount.FinishedDate</p>
             </li>
 
         </ul>
@@ -114,13 +114,7 @@
 
                 @for (int i = 0; i < xValues.Length; i++)
                 {
-                    <text><text x="@((i * 1000 / (xValues.Length - 1)) + 100)" y="650">@xValues[i]</text></text>
-
-                    if (i + 1 == xValues.Length)
-                    {
-                        <title>X: @((i * 1000 / (xValues.Length - 1)) + 100) Y: 500</title>
-                    
-                    }
+                    <text><text x="@((i * 1000 / (xValues.Length - 1)) + 100)" y="650">@xValues[i]</text></text>                  
                     <line x1="@((i * 1000 / (xValues.Length - 1)) + 100)" y1="597.5" x2="@((i * 1000 / (xValues.Length - 1)) + 100)" y2="602.5" stroke="black" stroke-width="2" />
                 }
 
