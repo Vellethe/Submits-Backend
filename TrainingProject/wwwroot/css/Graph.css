@@ -1,18 +1,53 @@
-﻿#Result {
-    font-family: 'Smooch Sans';
+﻿body {
+
 }
 
-#PageTitle {
-    align-content: center;
+
+
+#Result {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
     text-align: center;
-    background-color: #656565;
-    height: 40px;
-    width: 200px;
+    font-family: 'Smooch Sans';
+    padding:20px;
+    margin:10px;
+    
 }
 
 #ResultValues {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
 }
 
+h1 {
+    background-color: #393737;
+}
+
+#ResultValues ul {
+    display:flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    text-align:center;
+}
+
+#ResultValues li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    background-color: #656565;
+    padding: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
 
 
 

@@ -1,5 +1,5 @@
 ﻿@page
-@model TrainingProject.Pages.MyPage.IndexModel
+@model TrainingProject.Pages.MyPage.Result.IndexModel
 
 @{
     // Get X-Axis values from the GetXAxisValues() method
@@ -19,16 +19,45 @@
 
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/Graph.css">
-<link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@900" &display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@900" &display="swap" rel="stylesheet">
 
 
 @*--------Graph Here-----------*@
 
 <div id="Result">
 
-    <div id="PageTitle"><h1>Your results:</h1></div>
-
     <div id="ResultValues">
+
+        <h1>Your estimated progress:</h1>
+
+        <ul class="userInput">
+
+            <li>
+                <label for="userWeight">Currentweight: </label>
+                <p id="userWeight">@Model.User.CurrentWeight kg</p>
+            </li>
+
+            <li>
+                <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
+                <p id="goalWeight">@Model.UserData.TargetWeight kg</p>
+            </li>
+
+            <li>
+                <label id="goalLabel" for="goal">Goal: </label>
+                <p id="goal">@Model.UserData.Goal</p>
+            </li>
+
+            <li>
+                <label for="dailyCalories">Daily Calories: </label>
+                <p id="dailyCalories">@Model.CalorieCount.FinishedBMR</p>
+            </li>
+
+            <li>
+                <label for="finishDate">Estimated Completion Date: </label>
+                <p id="finishDate">@Model.CalorieCount.FinishedDate</p>
+            </li>
+
+        </ul>
     </div>
 
     <div id="Graph">
@@ -120,7 +149,7 @@
 
             <defs>
                 <linearGradient id="SvgjsLinearGradient1000" gradientTransform="rotate(39, 0.5, 0.5)">
-                    <stop stop-color="hsl(30, 100%, 50%)" offset="0"></stop>
+                    <stop stop-color="hsl(20, 100%, 50%)" offset="0"></stop>
                     <stop stop-color="hsl(70, 100%, 30%)" offset="1"></stop>
                 </linearGradient>
             </defs>
