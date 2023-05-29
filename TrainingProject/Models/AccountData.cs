@@ -165,7 +165,7 @@ namespace TrainingProject.Models
 
         public double WeightDifference(AccountData userData)
         {
-            double weightDifference = 0;
+            double weightDifference;
 
             if (userData.Goal == "Gain")
             {
