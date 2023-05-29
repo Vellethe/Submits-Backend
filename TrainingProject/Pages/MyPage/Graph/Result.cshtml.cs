@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TrainingProject.Data;
 using TrainingProject.Models;
 
-namespace TrainingProject.Pages.Graph
+namespace TrainingProject.Pages.MyPage.Result
 {
     public class IndexModel : PageModel
     {

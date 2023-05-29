@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using System.Security.Principal;
-using TrainingProject.Migrations;
 
 namespace TrainingProject.Models
 {

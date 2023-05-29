@@ -60,7 +60,25 @@
                 <button><a asp-page="/MyPage/index">Previous Page</a></button>
 
             </form>
-           
+@*            TODO fix felhantering
+*@
+@*
+            @if(!Model.User.IsValid()){
+                <script>
+                    alert('the underweight BMI category. Please enter new values!');
+                    var loc = window.location;
+                    window.location = loc.protocol + '//' + loc.host + loc.pathname + loc.search;
+                </script>
+            }
+            @if (Model.calorieCount.FinishedBMR == "0")
+            {
+                <script>
+                    alert('For an individual of your height, your goal weight would put you in the underweight BMI category. Please enter new values!');
+                    var loc = window.location;
+                    window.location = loc.protocol + '//' + loc.host + loc.pathname + loc.search;
+                </script>
+            }
+*@           
 
         </div>
 
