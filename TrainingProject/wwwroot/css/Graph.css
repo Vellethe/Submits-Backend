@@ -2,84 +2,77 @@
 
 }
 
-
-
 #Result {
     display: flex;
-    align-items: center;
-    justify-items: center;
+    align-content: center;
+    justify-content: center;
     flex-direction: column;
     text-align: center;
     font-family: 'Smooch Sans';
-    padding:20px;
-    margin:10px;
-    
+    padding: 20px;
+    margin: 10px;
 }
 
 #ResultValues {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    align-items: center;
+    justify-items: center;
     padding: 0px;
     margin: 0px;
 }
 
 h1 {
-    background-color: #393737;
+    background-color: #656565;
 }
 
 #ResultValues ul {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
+    display:inline-flex;
+    flex-flow:row;
     text-align: center;
-    width:4fr;
+    height:auto;
+    width:max-content;
 }
 
 #ResultValues li {
     display: inline-flex;
     flex-flow:row;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
     text-align: center;
     background-color: #656565;
-    width: 4fr;
+    height:10%;
+    width: 100%;
     padding: 5px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+}
+#Graph {
+    display:flex;
+    align-content:center;
+    justify-content:center;
 }
 
 
 svg {
-    position: center;
-    align-content: center;
-    text-align: center;
+    display: inline-block;
+    align-content:center;
     background-color: white;
-    height: 700px;
-    width: 75em;
     border: solid 5px black;
     padding: 0px;
 }
 
-
-#graph {
-    margin-top: 10%;
+.graph {
     font-size: 30px;
+    
 }
 
 
 .graph .labels.x-labels {
-    font-size: 18px;
-    text-anchor: middle;
+    font-size: 18px;   
     font-family: 'Smooch Sans', sans-serif;
 }
 
 .graph .labels.y-labels {
     font-size: 18px;
-    /*text-anchor: end;*/
     font-family: 'Smooch Sans';
 }
 
@@ -116,6 +109,16 @@ svg {
     fill: #000000ca;
 }
 
+
+@media (min-width: 1000px) {
+    .graph {
+        height: 80%;
+        width: 80%;
+    }
+
+
+}
+
 @media (max-width: 1000px) {
     .container {
         width: 100%;
@@ -125,11 +128,31 @@ svg {
         width: 100%;
     }
 
+    .graph {
+        height:350%;
+        width:350%;
+    }
+
     #userInfo {
         display: block;
+        
     }
 
         #userInfo p {
             text-align: center;
         }
+
+   ul {
+      width: 50%;
+   }
+    li {
+        font-size: 50%;
+    }
+}
+
+@media (max-width:500px) {
+    .graph {
+        height: 500%;
+        width: 500%;
+    }
 }
