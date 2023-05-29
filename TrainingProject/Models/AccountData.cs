@@ -119,23 +119,17 @@ namespace TrainingProject.Models
         }
 
 
-        public (double, double)[] GetDataPoints(AccountData userData)
+        public (double, double)[] GetCoordinates(AccountData userData)
         {
             var dataPoints = new (double xValue, double yValue)[11];
 
             double[] weightPerDataPoint = GetWeightPerDataPoint(userData);
 
-            double graphHeight = 500;
-            double graphBottomPadding = 100;
-            double distanceBetweenEachYLabel = 50;
-
             for (int i = 0; i < 11; i++)
             {
-                double xCoordinate = i * 1000 / 10 + 100;
-                double yCoordinate = graphHeight - ((weightPerDataPoint[i] - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
-
-                dataPoints[i].xValue = xCoordinate;
-                dataPoints[i].yValue = yCoordinate;
+                (double xCoordinate, double yCoordinate) coordinates = GetCoordinate(userData, weightPerDataPoint[i], i);
+                dataPoints[i].xValue = coordinates.xCoordinate;
+                dataPoints[i].yValue = coordinates.yCoordinate;
             }
 
             return dataPoints;
@@ -197,36 +191,34 @@ namespace TrainingProject.Models
             return Math.Round(output);
         }
 
-        public (double, double, string) GetDataPointForCurrentDate(Account user, AccountData userData)
+        public (double, double) GetCoordinate(AccountData userData, double weight, int i)
         {
-            (double xCoordinate, double yCoordinate, string date) currentDataPoint;
+            (double xCoordinate, double yCoordinate) currentDataPoint;
 
             int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
 
-            int GraphLength = 1000;
+            int graphLength = 1000;
             double graphHeight = 500;
             double graphBottomPadding = 100;
             double distanceBetweenEachYLabel = 50;
-            double currentWeight = user.CurrentWeight;
-
-            double datePerPixel = GraphLength / totalDayCount;
+           
+            double datePerPixel = graphLength / totalDayCount;
             int totalDaysIntoProgress = DayCount(userData.StartDate, DateTime.Now);
 
-            double xCoordinate = (totalDaysIntoProgress / datePerPixel) + 100;
-            double yCoordinate = graphHeight - ((currentWeight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
-                              
-            DateTime date = DateTime.Now;
-
-            string currentDate = date.ToString("yyyy-MM-dd");
+            if (i != 0)
+            {
+                currentDataPoint.xCoordinate = i * graphLength / 10 + 100;
+            }                 
             
-            currentDataPoint.xCoordinate = xCoordinate;
-            currentDataPoint.yCoordinate = yCoordinate;
-            currentDataPoint.date = currentDate;
+            else
+            {
+                currentDataPoint.xCoordinate = (totalDaysIntoProgress / datePerPixel) + 100;  
+            }
+
+            currentDataPoint.yCoordinate = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
 
             return currentDataPoint;
         }
-
-
     }
 }
 

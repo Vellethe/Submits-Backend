@@ -9,13 +9,15 @@
     string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };
 
     // Get X/Y coordinates
-    (double xValue, double yValue)[] dataPoints = @Model.AccountData.GetDataPoints(Model.UserData);
+    (double xValue, double yValue)[] dataPoints = @Model.AccountData.GetCoordinates(Model.UserData);
 
     var dataPointsRounded = new (decimal xCoordinate, decimal yCoordinate)[11];
 
     double[] weightPerDataPoint = @Model.AccountData.GetWeightPerDataPoint(Model.UserData);
 
-    (double xCoordinate, double yCoordinate, string currentDate) currentDataPoint = Model.UserData.GetDataPointForCurrentDate(Model.User, Model.UserData);
+    (double xCoordinate, double yCoordinate) currentDataPoint = Model.UserData.GetCoordinate(Model.UserData, Model.User.CurrentWeight, 0);
+
+    string dateTimeNow = DateTime.Now.ToString("yyyy-MM-dd");
 
 }
 
@@ -163,7 +165,7 @@
             </g>
 
             <g class"currentDataPoint" data-setname="Current Date/Weight">
-                <circle cx="@currentDataPoint.xCoordinate" cy="@currentDataPoint.yCoordinate" r="5" fill="blue"><title>Date: @currentDataPoint.currentDate Weight: @Model.User.CurrentWeight kg</title></circle>
+                <circle cx="@currentDataPoint.xCoordinate" cy="@currentDataPoint.yCoordinate" r="5" fill="blue"><title>Date: @dateTimeNow Weight: @Model.User.CurrentWeight kg</title></circle>
             </g>
 
         </svg>
