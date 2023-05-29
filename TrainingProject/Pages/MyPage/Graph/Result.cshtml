@@ -3,7 +3,7 @@
 
 @{
     // Get X-Axis values from the GetXAxisValues() method
-    string[] xValues = @Model.AccountData.GetXAxisValues(Model.UserData.StartDate.ToString("yyyy-MM-dd"), Model.UserData.EndDate.ToString("yyyy-MM-dd"));
+    string[] xValues = @Model.AccountData.GetXAxisValues(Model.UserData);
 
     // Get Y-Axis values from an array
     string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };

@@ -77,19 +77,14 @@ namespace TrainingProject.Models
         }
 
 
-        public string[] GetXAxisValues(string start, string end)
+        public string[] GetXAxisValues(AccountData userData)
         {
-            DateTime startDate = DateTime.Parse(start);
-            DateTime endDate = DateTime.Parse(end);
-
-            TimeSpan interval = endDate - startDate;
-
-            int days = interval.Days / 10;
+            int days = DayCount(userData.StartDate, userData.EndDate) / 10;
 
             string[] dates = new string[11];
             for (int i = 0; i <= 10; i++)
             {
-                DateTime date = startDate.AddDays(i * days);
+                DateTime date = userData.StartDate.AddDays(i * days);
                 string outputDate = date.ToString("yyyy-MM-dd");
                 string[] formatArray = outputDate.Split("-");
 
