@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using System.Security.Principal;
+using TrainingProject.Migrations;
 
 namespace TrainingProject.Models
 {
@@ -12,9 +13,6 @@ namespace TrainingProject.Models
         public string Goal { get; set; } = "None";
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
-        // public Account User { get; set; }
-
         public int AccountId { get; set; }
 
         public AccountData()
@@ -92,7 +90,16 @@ namespace TrainingProject.Models
             for (int i = 0; i <= 10; i++)
             {
                 DateTime date = startDate.AddDays(i * days);
-                dates[i] = date.ToString("yy/MM/dd");
+                string outputDate = date.ToString("yyyy-MM-dd");
+                string[] formatArray = outputDate.Split("-");
+
+                if (formatArray[1].Contains('0'))
+                {
+                    formatArray[1] = formatArray[1].Replace("0", "");
+                }
+
+                outputDate = formatArray[2] + "/" + formatArray[1] + " - " + formatArray[0];
+                dates[i] = outputDate;
             }
 
             return dates;
@@ -118,13 +125,14 @@ namespace TrainingProject.Models
 
             double[] weightPerDataPoint = GetWeightPerDataPoint(userData);
 
-            double graphHeight = 300;
-            double graphBottomPadding = 50;
+            double graphHeight = 500;
+            double graphBottomPadding = 100;
+            double distanceBetweenEachYLabel = 50;
 
             for (int i = 0; i < 11; i++)
             {
-                double xCoordinate = i * 700 / 10 + 50;
-                double yCoordinate = graphHeight - ((weightPerDataPoint[i] - 0) / 20) * 30 + graphBottomPadding;
+                double xCoordinate = i * 1000 / 10 + 100;
+                double yCoordinate = graphHeight - ((weightPerDataPoint[i] - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
 
                 dataPoints[i].xValue = xCoordinate;
                 dataPoints[i].yValue = yCoordinate;
@@ -169,7 +177,7 @@ namespace TrainingProject.Models
                 {
                     weightPerDay = startWeight - (i * perDataPoint * weightDifferencePerDay);
                 }
-                         
+
                 outputArray[i] = weightPerDay;
             }
 
@@ -185,4 +193,5 @@ namespace TrainingProject.Models
 
     }
 }
+
 

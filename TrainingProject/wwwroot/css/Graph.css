@@ -1,39 +1,47 @@
-﻿body {
-    align-content:center;
-}
-
-#result {
+﻿#Result {
     font-family: 'Smooch Sans';
 }
+
+#PageTitle {
+    align-content: center;
+    text-align: center;
+    background-color: #656565;
+    height: 40px;
+    width: 200px;
+}
+
+#ResultValues {
+}
+
+
+
 
 svg {
     position: center;
     align-content: center;
     text-align: center;
-    background-color:white;
-    height: 400px;
-    width: 49em;
+    background-color: white;
+    height: 700px;
+    width: 75em;
     border: solid 5px black;
     padding: 0px;
 }
 
 
 #graph {
-    margin-top: 10%;    
+    margin-top: 10%;
     font-size: 30px;
 }
 
 
 .graph .labels.x-labels {
-    font-size: 13px;
-    font-size: 12px;
+    font-size: 18px;
     text-anchor: middle;
     font-family: 'Smooch Sans', sans-serif;
-    
 }
 
 .graph .labels.y-labels {
-    font-size: 12px;
+    font-size: 18px;
     /*text-anchor: end;*/
     font-family: 'Smooch Sans';
 }
@@ -51,9 +59,9 @@ svg {
 
 .label-title {
     font-weight: bold;
-    text-align:center;
+    text-align: center;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 18px;
     fill: black;
 }
 
@@ -63,11 +71,10 @@ svg {
 }
 
 .dataPoints {
-    fill:#0000007e;
+    fill: #000000ca;
 }
 
-@media (max-width: 1000px) 
-{
+@media (max-width: 1000px) {
     .container {
         width: 100%;
     }
