@@ -121,7 +121,7 @@ namespace TrainingProject.Models
 
         public (double, double)[] GetCoordinates(AccountData userData)
         {
-            var coordinates = new (double xValue, double yValue)[11];
+            var coordinates = new (double x, double y)[11];
 
             double[] weightPerCoordinate = GetWeightPerCoordinate(userData);
 
@@ -188,7 +188,7 @@ namespace TrainingProject.Models
 
         public (double, double) GetCoordinate(AccountData userData, double weight, int i)
         {
-            (double xCoordinate, double yCoordinate) currentDataPoint;
+            (double x, double y) coordinate;
 
             int totalDayCount = DayCount(userData.StartDate, userData.EndDate);
 
@@ -202,17 +202,17 @@ namespace TrainingProject.Models
 
             if (i > 0)
             {
-                currentDataPoint.xCoordinate = i * graphLength / 10 + 100;
+                coordinate.x = i * graphLength / 10 + 100;
             }                 
             
             else
             {
-                currentDataPoint.xCoordinate = (totalDaysIntoProgress / xValueInDays) + 100;  
+                coordinate.x = (totalDaysIntoProgress / xValueInDays) + 100;  
             }
 
-            currentDataPoint.yCoordinate = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
+            coordinate.y = graphHeight - ((weight - 0) / 20) * distanceBetweenEachYLabel + graphBottomPadding;
 
-            return currentDataPoint;
+            return coordinate;
         }
     }
 }
