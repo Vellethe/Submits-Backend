@@ -155,13 +155,42 @@ main form{
     .container{
         width: 100%;
     }
-    #myPage{
+    .myPage{
         width: 100%;
     }
-    #userInfo{
+    }
+@media (max-width: 700px){
+    .imgDiv img{
+        width: 100%;
+    }
+    .firstLogon li{
         display: block;
     }
-    #userInfo p{
+    .firstLogon li div, p{
         text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
+    #submitButton, #previousButton{
+        width: 40%;
     }
+    .userInput li{
+        display: block;
+    }
+    .userInput li label{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .userInput li p{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #goal button{
+        width: 30%;
+    }
+    #graphButton, #editProfile{
+        width: 50%;
+    }
+}
