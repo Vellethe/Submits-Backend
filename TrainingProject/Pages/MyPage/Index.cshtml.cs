@@ -45,7 +45,9 @@ namespace TrainingProject.Pages.MyPage
                         userData.StartWeight = User.CurrentWeight;
                         userData.TargetWeight = targetWeight;
                         userData.StartDate = DateTime.Now;
-                        userData.EndDate = DateTime.Now.AddDays(600);
+                        (_, string date) = AccountData.CalorieCalculator(User, userData);
+                        userData.EndDate = DateTime.Parse(date);
+
 
                         if (goal == "Gain" && targetWeight <= User.CurrentWeight)
                         {

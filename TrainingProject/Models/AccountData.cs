@@ -78,7 +78,8 @@ namespace TrainingProject.Models
 
 
         public string[] GetXAxisValues(AccountData userData)
-        {
+        {   
+
             int days = DayCount(userData.StartDate, userData.EndDate) / 10;
 
             string[] dates = new string[11];
@@ -86,11 +87,16 @@ namespace TrainingProject.Models
             {
                 DateTime date = userData.StartDate.AddDays(i * days);
                 string outputDate = date.ToString("yyyy-MM-dd");
-                string[] formatArray = outputDate.Split("-");
+                string[] formatArray = outputDate.Split("-"); 
 
                 if (formatArray[1].Contains('0'))
                 {
                     formatArray[1] = formatArray[1].Replace("0", "");
+                }
+
+                if (formatArray[2].Contains('0'))
+                {
+                    formatArray[2] = formatArray[2].Replace("0", "");
                 }
 
                 outputDate = formatArray[2] + "/" + formatArray[1] + " - " + formatArray[0];
