@@ -40,7 +40,7 @@ namespace TrainingProject.Pages.MyPage.Profile
             }
 
             context.SaveChanges();
-            return Page();            
+            return RedirectToPage();            
         }
     }
 }
