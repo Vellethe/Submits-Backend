@@ -20,18 +20,21 @@
     justify-items: center;
     padding: 0px;
     margin: 0px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
     background-color: #656565;
+    padding: 1rem;
 }
 
 #ResultValues ul {
     display:inline-flex;
     flex-flow:row;
     text-align: center;
-    height:auto;
-    width:max-content;
+    padding: 0;
 }
 
 #ResultValues li {
@@ -41,7 +44,6 @@ h1 {
     justify-content: center;
     text-align: center;
     background-color: #656565;
-    height:10%;
     width: 100%;
     padding: 10px;
 }
