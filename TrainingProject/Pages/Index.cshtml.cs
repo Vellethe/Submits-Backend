@@ -58,7 +58,7 @@ namespace TrainingProject.Pages
             RandomTip = Tips[randomTipIndex];
 
             //Random Workouts
-            var allWorkouts = database.Workouts.Include(x => x.Owner).Where(x => x.AccessLevel == AccessLevel.Everyone && x.Owner.Id != accessControl.LoggedInAccountID).ToList();
+            var allWorkouts = database.Workouts.Include(x=>x.Ratings).Include(x => x.Owner).Where(x => x.AccessLevel == AccessLevel.Everyone && x.Owner.Id != accessControl.LoggedInAccountID).ToList();
             Random randomWorkout = new Random();
             var shuffledWorkouts = allWorkouts.OrderBy(x => randomWorkout.Next()).ToList();
             Workouts = shuffledWorkouts.Take(5).Select(x => x).ToList();
