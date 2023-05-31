@@ -37,7 +37,6 @@
         @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
         {
             <tr>
-                //TODO Add instruction to text
                 <td><a class="underline" href="@workoutExercise.Exercise.Instruction">@workoutExercise.Exercise.Name</a></td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>

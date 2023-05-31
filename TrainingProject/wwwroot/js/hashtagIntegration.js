@@ -39,6 +39,7 @@ image.src = x.imageURL;
 description.textContent = x.postContent;
 link.href = x.postURL;
 link.text = "link to facegram";
+link.classList.add("underline")
 
 author.textContent = x.poster;
 
