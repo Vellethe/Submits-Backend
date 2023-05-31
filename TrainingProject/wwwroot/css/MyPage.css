@@ -30,6 +30,12 @@ h1{
     border-radius: 5px;
 }
 
+#fakeLogin button{
+    padding: 10px;
+    color: white;
+    background-color: black;
+}
+
 .userInput{
     width: 80%;
     padding: 0;
@@ -136,8 +142,21 @@ main form{
     font-size: 15px;
     text-align: left;
 }
+
+#gender{
+    width: 248px;
+}
+
 .firstLogon li div input, select{
-    width: 70px;
+    width: 206px;
+    border: 1px solid #ccc;
+    color: white;
+    background-color: #1b1b1bbe;
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 #submitButton, #previousButton{
