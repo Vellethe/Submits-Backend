@@ -37,32 +37,56 @@ namespace TrainingProject.Pages.MyPage
         {   
             if (ModelState.IsValid)
             {
-                foreach (var userData in context.AccountData.ToList())
+                if (User.Age == 0 || User.CurrentWeight == 0 || User.Height == 0)
                 {
-                    if (userData.AccountId == LoggedInId)
+                    ErrorMessage = "You must first enter your Age, Weight and Height in order to choose a goal.";
+                    return Page();
+                }
+
+                else if (goal == "Gain" && targetWeight <= User.CurrentWeight)
+                {
+                    ErrorMessage = @"You can't enter a weight below your own if you wanna gain weight!";
+                    return Page();
+                }
+
+                else if (goal == "Lose" && targetWeight >= User.CurrentWeight)
+                {
+                    ErrorMessage = @"You can't enter a weight above your own if you wanna lose weight!";
+                    return Page();
+                }
+
+
+                else
+                {
+                    foreach (var userData in context.AccountData.ToList())
                     {
-                        userData!.Goal = goal;
-                        userData.StartWeight = User.CurrentWeight;
-                        userData.TargetWeight = targetWeight;
-                        userData.StartDate = DateTime.Now;
-                        (_, string date) = AccountData.CalorieCalculator(User, userData);
-                        userData.EndDate = DateTime.Parse(date);
-
-
-                        if (goal == "Gain" && targetWeight <= User.CurrentWeight)
+                        if (userData.AccountId == LoggedInId)
                         {
-                            ErrorMessage = "You can't enter a weight below your own if you wanna gain weight!";
-                            return Page();
-                        }
+                            if (targetWeight == 0 && goal != "Maintain")
+                            {
+                                userData!.Goal = goal;                       
+                            }                           
 
-                        else if (goal == "Lose" && targetWeight >= User.CurrentWeight)
-                        {
-                            ErrorMessage = "You can't enter a weight above your own if you wanna lose weight!";
-                            return Page();
+                            else
+                            {                                                                                         
+                                if (goal == "Maintain")
+                                {
+                                    targetWeight = User.CurrentWeight;
+                                }
+                               
+                                userData!.Goal = goal;
+                                userData.StartWeight = User.CurrentWeight;                                
+                                userData.TargetWeight = targetWeight;
+                                userData.StartDate = DateTime.Now;
+                                (_, string date) = AccountData.CalorieCalculator(User, UserData!, goal, targetWeight);
+                                DateTime endDate = DateTime.Parse(date);                              
+                                userData.EndDate = endDate;
+                            }                          
                         }
                     }
+
                 }
-     
+
                 context.SaveChanges();
             }
 
@@ -79,9 +103,9 @@ namespace TrainingProject.Pages.MyPage
                 AccountData newAccountData = new();
                 {
                     newAccountData.AccountId = LoggedInId;
-                    newAccountData.StartWeight = 0;
-                    newAccountData.TargetWeight = 0;
-                    newAccountData.Goal = "Maintain";
+                    newAccountData.StartWeight = User.CurrentWeight;
+                    newAccountData.TargetWeight = User.CurrentWeight;
+                    newAccountData.Goal = "None";
                     newAccountData.StartDate = DateTime.Now;
                     newAccountData.EndDate = DateTime.Now;
                 }

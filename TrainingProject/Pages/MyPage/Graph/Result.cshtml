@@ -3,19 +3,19 @@
 
 @{
     // Get X-Axis values from the GetXAxisValues() method
-    string[] xValues = @Model.AccountData.GetXAxisValues(Model.UserData);
+    string[] xValues = @Model.XValues;
 
     // Get Y-Axis values from an array
     string[] yValues = { "200kg", "180kg", "160kg", "140kg", "120kg", "100kg", "80kg", "60kg", "40kg", "20kg", "0kg" };
 
     // Get X/Y coordinates
-    (double xCoordinate, double yCoordinate)[] coordinates = @Model.AccountData.GetCoordinates(Model.User, Model.UserData);
+    (double xCoordinate, double yCoordinate)[] coordinates = @Model.Coordinates;
 
     var roundedCoordinates = new (decimal xCoordinate, decimal yCoordinate)[11];
 
-    double[] weightPerDataPoint = @Model.AccountData.GetWeightPerCoordinate(Model.User, Model.UserData);
+    double[] weightPerDataPoint = @Model.WeightPerDataPoint;
 
-    (double xCoordinate, double yCoordinate) currentCoordinate = Model.UserData.GetCoordinate(Model.UserData, Model.User.CurrentWeight, 0);
+    (double xCoordinate, double yCoordinate) currentCoordinate = @Model.CurrentCoordinate;
 
     string dateTimeNow = DateTime.Now.ToString("yyyy-MM-dd");
 
@@ -136,30 +136,47 @@
 
             @for (int v = 0; v < 11; v++)
             {
-                roundedCoordinates[v].xCoordinate = Model.UserData.ConvertToDecimal(coordinates[v].xCoordinate);
-                roundedCoordinates[v].yCoordinate = Model.UserData.ConvertToDecimal(coordinates[v].yCoordinate);
+                roundedCoordinates[v].xCoordinate = @Model.AccountData.ConvertToDecimal(coordinates[v].xCoordinate);
+                roundedCoordinates[v].yCoordinate = @Model.AccountData.ConvertToDecimal(coordinates[v].yCoordinate);
             }
 
-            <path d="M100,@(roundedCoordinates[0].yCoordinate)
+            @if (Model.UserData.Goal == "Gain" || Model.UserData.Goal == "Lose")
+            {
+                <path d="M100,@(roundedCoordinates[0].yCoordinate)
 
-               C@(roundedCoordinates[1].xCoordinate),@(roundedCoordinates[1].yCoordinate),
-                @(roundedCoordinates[2].xCoordinate),@(roundedCoordinates[2].yCoordinate),
-                @(roundedCoordinates[3].xCoordinate),@(roundedCoordinates[3].yCoordinate)
 
-                C@(roundedCoordinates[4].xCoordinate),@(roundedCoordinates[4].yCoordinate),
-                @(roundedCoordinates[5].xCoordinate),@(roundedCoordinates[5].yCoordinate),
-                @(roundedCoordinates[6].xCoordinate),@(roundedCoordinates[6].yCoordinate)
+                   C@(roundedCoordinates[1].xCoordinate),@(roundedCoordinates[1].yCoordinate),
+                    @(roundedCoordinates[2].xCoordinate),@(roundedCoordinates[2].yCoordinate),
+                    @(roundedCoordinates[3].xCoordinate),@(roundedCoordinates[3].yCoordinate)
 
-                C@(roundedCoordinates[7].xCoordinate),@(roundedCoordinates[7].yCoordinate),
-                @(roundedCoordinates[8].xCoordinate),@(roundedCoordinates[8].yCoordinate),
-                @(roundedCoordinates[9].xCoordinate),@(roundedCoordinates[9].yCoordinate)
+                    C@(roundedCoordinates[4].xCoordinate),@(roundedCoordinates[4].yCoordinate),
+                    @(roundedCoordinates[5].xCoordinate),@(roundedCoordinates[5].yCoordinate),
+                    @(roundedCoordinates[6].xCoordinate),@(roundedCoordinates[6].yCoordinate)
 
-                C@(roundedCoordinates[9].xCoordinate),@(roundedCoordinates[9].yCoordinate),
-                @(roundedCoordinates[10].xCoordinate),@(roundedCoordinates[10].yCoordinate),
-                @(roundedCoordinates[10].xCoordinate),@(roundedCoordinates[10].yCoordinate)"
-                  fill="none" stroke-width="10" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)" stroke-linecap="round" stroke-dasharray="0 10" stroke-opacity="1">
+                    C@(roundedCoordinates[7].xCoordinate),@(roundedCoordinates[7].yCoordinate),
+                    @(roundedCoordinates[8].xCoordinate),@(roundedCoordinates[8].yCoordinate),
+                    @(roundedCoordinates[9].xCoordinate),@(roundedCoordinates[9].yCoordinate)
 
-            </path>
+                    C@(roundedCoordinates[9].xCoordinate),@(roundedCoordinates[9].yCoordinate),
+                    @(roundedCoordinates[10].xCoordinate),@(roundedCoordinates[10].yCoordinate),
+                    @(roundedCoordinates[10].xCoordinate),@(roundedCoordinates[10].yCoordinate)"
+
+                    fill="none" stroke-width="10" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)" 
+                    stroke-linecap="round" stroke-dasharray="0 10" stroke-opacity="1">
+                </path>
+
+                
+            }
+
+            @if (Model.UserData.Goal == "Maintain")
+            {
+                <path d="M100, @(roundedCoordinates[0].yCoordinate)
+                    L@(roundedCoordinates[10].xCoordinate), @(roundedCoordinates[10].yCoordinate)Z"
+                    fill="none" stroke-width="10" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)"
+                    stroke-linecap="round" stroke-dasharray="0 10" stroke-opacity="1">
+                </path>
+            }
+            
 
             <defs>
                 <linearGradient id="SvgjsLinearGradient1000" gradientTransform="rotate(39, 0.5, 0.5)">
