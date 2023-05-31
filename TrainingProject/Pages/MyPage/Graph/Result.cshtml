@@ -37,13 +37,23 @@
         <ul class="userInput">
 
             <li>
-                <label for="userWeight">Currentweight: </label>
+                <label for="userWeight">Current weight: </label>
                 <p id="userWeight"> @Model.User.CurrentWeight kg</p>
+            </li>
+
+            <li>
+                <label for="userCurrentBmi">Current BMI: </label>
+                <p id="userCurrentBmi"> @Model.BMI.CurrentBMI</p>
             </li>
 
             <li>
                 <label id="goalWeightLabel" for="goalWeight">Goal Weight: </label>
                 <p id="goalWeight"> @Model.UserData.TargetWeight kg</p>
+            </li>
+
+            <li>
+                <label for="userTargetBmi">Target BMI: </label>
+                <p id="userTargetBmi"> @Model.BMI.TargetBMI</p>
             </li>
 
             <li>
