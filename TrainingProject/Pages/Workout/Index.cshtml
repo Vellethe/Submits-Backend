@@ -67,7 +67,7 @@
                 <tr id="existingWorkout">
                     <td>@workout.Name</td>
                     <td>@workout.Owner.Name</td>
-                    <td>@(workout.GetAvrageRating()+(workout.GetAvrageRating().Length == 1?"/5":""))</td>
+                    <td>@(workout.GetAvrageRating()+(double.TryParse(workout.GetAvrageRating(),out var temp)?"/5":""))</td>
                     <td>
                         @*<a asp-page="Show" asp-route-id="@workout.Id">Show</a>*@
                         <form>

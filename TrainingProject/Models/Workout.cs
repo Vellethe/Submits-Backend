@@ -59,7 +59,7 @@ namespace TrainingProject.Models
                 return "no ratings submited yet";
             }
 
-            int sumRating = Ratings.Sum(x => (int)x.ChosenRating);
+            double sumRating = Ratings.Sum(x => (double)x.ChosenRating);
             return (sumRating / listLen).ToString();
         }
 
