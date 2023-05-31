@@ -37,8 +37,7 @@
         @foreach (var workoutExercise in Model.SelectedWorkout.WorkoutExecises)
         {
             <tr>
-                //TODO Add instruction to text
-                <td>@workoutExercise.Exercise.Name</td>
+                <td><a class="underline" href="@workoutExercise.Exercise.Instruction">@workoutExercise.Exercise.Name</a></td>
                 <td>@workoutExercise.Exercise.MuscleGroup</td>
                 <td>@workoutExercise.Exercise.Description</td>
                 <td>
@@ -86,7 +85,7 @@
             <form method="post">
 
             <tr>
-                <td>@exersie.Name</td>
+                <td><a class="underline" href="@exersie.Instruction">@exersie.Name</a></td>
                 <td>@exersie.MuscleGroup</td>
                 <td>@exersie.Description</td>
                 <td>
