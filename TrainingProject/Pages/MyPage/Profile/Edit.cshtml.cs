@@ -36,11 +36,10 @@ namespace TrainingProject.Pages.MyPage.Profile
                 user.Age = age;
                 user.Height = height;
                 user.CurrentWeight = weight;
-                user.IsMale = gender;
-
-                context.SaveChanges();
+                user.IsMale = gender;   
             }
-            
+
+            context.SaveChanges();
             return Page();            
         }
     }

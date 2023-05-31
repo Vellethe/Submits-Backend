@@ -2,7 +2,11 @@
 @using TrainingProject.Pages.Shared.Components.LoginMenu;
 @model TrainingProject.Pages.MyPage.IndexModel
 @{
-
+    @if (Model.ErrorMessage != "")
+    {
+        <script>alert("@Model.ErrorMessage");</script>
+        Model.ErrorMessage = "";
+    }
 }
 
 <link rel="stylesheet" href="~/css/site.css">
@@ -21,14 +25,6 @@
             <environment names="Development">
                 @await Component.InvokeAsync(nameof(FakeLoginMenu))
             </environment>
-
-
-            @*
-            @if (Model.ErrorMessage != "")
-            {
-            <script>alert(Model.ErrorMessage);</script>
-            Model.ErrorMessage = "";
-            }*@
 
             <ul class="userInput">
                 <li>
@@ -66,13 +62,11 @@
                 </form>
             </div>
 
-            @if (Model.UserData!.Goal != "None" || Model.UserData!.TargetWeight > 0)
-            {
-                <form>
-                    <button id="editProfile" asp-page="./Profile/Edit">Edit Profile</button>
-                </form>
-            }
 
+            <form>
+                <button id="editProfile" asp-page="./Profile/Edit">Edit Profile</button>
+            </form>
+              
             @if (Model.UserData!.Goal != "None")
             {
                 <form>

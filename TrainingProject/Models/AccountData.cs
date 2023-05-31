@@ -20,35 +20,14 @@ namespace TrainingProject.Models
 
         }
 
-        public int DayCount(DateTime curentDate, DateTime targetDate)
+        public int DayCount(DateTime currentDate, DateTime targetDate)
         {
-            TimeSpan timeSpan = targetDate - curentDate;
+            TimeSpan timeSpan = targetDate - currentDate;
             int numberOfDays = timeSpan.Days;
 
             return numberOfDays;
         }
 
-        public int CalorieCut(Account user, AccountData userData)
-        {
-            int curentWeight = user.CurrentWeight;
-            int targetWeight = userData.TargetWeight;
-            int caloriesTotal = (curentWeight - targetWeight) * 7700;
-            int numberOfDays = caloriesTotal / DayCount(userData.StartDate, userData.EndDate);
-
-            if (userData.Goal == "Lose")
-            {
-                return caloriesTotal / numberOfDays;
-            }
-            else if (userData.Goal == "Gain")
-            {
-                return 0;
-            }
-            else
-            {
-                return 0;
-            }
-
-        }
 
         public double BMICalculator(Account user, AccountData userData, bool currentBMI)
         {
@@ -62,12 +41,19 @@ namespace TrainingProject.Models
 
 
 
-        public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account user, AccountData userData)
+        public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account user, AccountData userData, string goal, int targetWeight)
         {
- 
-            double bmi = BMICalculator(user, userData, false);
 
-            int calorieCut = this.CalorieCut(user, userData);
+            double bmr = CalculateBMR(user);
+            double finishedBMR;
+            int caloriesTotal;
+
+            if (goal == "Maintain")
+            {
+                return (bmr.ToString(), DateTime.Now.AddMonths(6).ToString("yyyy/MM/dd"));
+            }          
+
+            double bmi = BMICalculator(user, userData, false);
 
             if (bmi < 19.5)
             {
@@ -75,16 +61,34 @@ namespace TrainingProject.Models
             }
             else
             {
-                //Calculating according to gender
+                if (goal == "Gain")
+                {
+                    finishedBMR = Math.Round(bmr) + 500;
+                    caloriesTotal = (targetWeight - user.CurrentWeight) * 7700;
+                }
 
-
-                double bmr = CalculateBMR(user);
-                double finishedBMR = Math.Round(bmr) - calorieCut;
-                int caloriesTotal = (user.CurrentWeight - userData.TargetWeight) * 7700;
-                int numberOfDays = caloriesTotal / 600;
+                else 
+                {
+                    finishedBMR = Math.Round(bmr) - 500;
+                    caloriesTotal = (user.CurrentWeight - targetWeight) * 7700;
+                }
+              
+                int numberOfDays = caloriesTotal / 500;
                 DateTime finishedDate = DateTime.Now.AddDays(numberOfDays);
 
-                return (finishedBMR.ToString(), finishedDate.ToString("yyyy/MM/dd"));
+                int totalAmountOfDays = userData.DayCount(DateTime.Now, finishedDate);
+                int daysToAdd = 0;
+
+                while (totalAmountOfDays % 10 != 0)
+                {
+                    totalAmountOfDays++;
+                    daysToAdd++;
+                }
+
+                DateTime outputDate = finishedDate.AddDays(daysToAdd);
+
+
+                return (finishedBMR.ToString(), outputDate.ToString("yyyy-MM-dd"));
             }
         }
 
@@ -93,11 +97,15 @@ namespace TrainingProject.Models
         {   
 
             int days = DayCount(userData.StartDate, userData.EndDate) / 10;
-
             string[] dates = new string[11];
             for (int i = 0; i <= 10; i++)
             {
-                DateTime date = userData.StartDate.AddDays(i * days);
+                int extraDay = 0;
+                if (i == 10)
+                {
+                    extraDay++;
+                }
+                DateTime date = userData.StartDate.AddDays(i * days + extraDay);              
                 string outputDate = date.ToString("yyyy-MM-dd");
                 string[] formatArray = outputDate.Split("-"); 
 
@@ -120,14 +128,15 @@ namespace TrainingProject.Models
 
         public double CalculateBMR(Account account)
         {
+            // * 1,55
             if (account.IsMale)
             {
-                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5) * 1.55;
+                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5);
             }
 
             else
             {
-                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161) * 1.55;
+                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161);
             }
         }
 
@@ -138,7 +147,7 @@ namespace TrainingProject.Models
 
             double[] weightPerCoordinate = GetWeightPerCoordinate(user, userData);
 
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i <= 10; i++)
             {
                 coordinates[i] = GetCoordinate(userData, weightPerCoordinate[i], i);
             }
@@ -154,7 +163,7 @@ namespace TrainingProject.Models
 
             double perCoordinate = totalDayCount / 10;
 
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i <= 10; i++)
             {
                 double weightPerDay = userData.StartWeight - (i * perCoordinate * weightDifferencePerDay); 
 
