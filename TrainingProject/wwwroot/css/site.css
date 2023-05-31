@@ -87,6 +87,10 @@ table,th,td{
     border: 1px solid;
 }
 
+.underline{
+    text-decoration:underline;
+}
+
 @media  (max-width: 700px) {
     #menuToggleLabel {
         display: block;
