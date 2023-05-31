@@ -49,11 +49,23 @@ namespace TrainingProject.Models
             }
 
         }
+
+        public double BMICalculator(Account user, AccountData userData, bool currentBMI)
+        {
+            double weight = userData.TargetWeight;
+            if (currentBMI)
+            {
+                weight = user.CurrentWeight;
+            }
+            return weight / ((user.Height / 100.0) * (user.Height / 100.0));
+        }
+
+
+
         public (string FinishedBMR, string FinishedDate) CalorieCalculator(Account user, AccountData userData)
         {
-
-            double heightInMeters = user.Height / 100.0;
-            double bmi = userData.TargetWeight / (heightInMeters * heightInMeters);
+ 
+            double bmi = BMICalculator(user, userData, false);
 
             int calorieCut = this.CalorieCut(user, userData);
 

@@ -10,6 +10,7 @@ namespace TrainingProject.Pages.MyPage.Result
         public int LoggedInId { get; set; }
         public (string FinishedBMR, string FinishedDate) CalorieCount { get; set; }
         public decimal WeightDifference { get; set; }
+        public (string TargetBMI, string CurrentBMI) BMI { get; set; }
         public Account Account { get; set; }
         public Account User { get; set; }
         public AccountData AccountData { get; set; }
@@ -30,7 +31,9 @@ namespace TrainingProject.Pages.MyPage.Result
         {
             decimal weightLeft = (decimal)UserData.WeightDifference(User, UserData, true);
             CalorieCount = UserData.CalorieCalculator(User, UserData);
-            WeightDifference = Math.Round(weightLeft); 
+            WeightDifference = Math.Round(weightLeft);
+            BMI = ((UserData.BMICalculator(User, UserData, false).ToString("0.00")), (UserData.BMICalculator(User, UserData, true).ToString("0.00")));
+            //BMI = (UserData.ConvertToDecimal(UserData.BMICalculator(User, UserData, false)), UserData.ConvertToDecimal(UserData.BMICalculator(User, UserData, true)));
         }
 
         public IActionResult OnPost()
