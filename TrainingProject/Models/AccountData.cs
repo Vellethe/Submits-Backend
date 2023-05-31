@@ -213,5 +213,3 @@ namespace TrainingProject.Models
         }
     }
 }
-
-
