@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.19.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16">
@@ -23,6 +24,10 @@
 	<ItemGroup>
 	  <Folder Include="Migrations\" />
 	  <Folder Include="wwwroot\Pictures\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\WorkoutFuntions\WorkoutFuntions.csproj" />
 	</ItemGroup>
 
 </Project>

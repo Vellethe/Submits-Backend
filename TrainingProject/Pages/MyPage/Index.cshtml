@@ -1,5 +1,6 @@
 @page
 @using TrainingProject.Pages.Shared.Components.LoginMenu;
+@using Data;
 @model TrainingProject.Pages.MyPage.IndexModel
 @{
     @if (Model.ErrorMessage != "")
@@ -15,6 +16,7 @@
 
 <div class="container">
 
+    <h1>@await FunctionRunner.HelloWorld(Model.User.Name))</h1>
 
     <div class="myPage">
 

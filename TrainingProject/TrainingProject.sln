@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingProject", "TrainingProject.csproj", "{37D39594-3C5F-4E06-BB08-4EB7AB18459B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3A0A3C57-63A0-4349-B4CC-455496DEBE31} = {3A0A3C57-63A0-4349-B4CC-455496DEBE31}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutFuntions", "..\WorkoutFuntions\WorkoutFuntions.csproj", "{3A0A3C57-63A0-4349-B4CC-455496DEBE31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutFuntions", "..\WorkoutFuntions\WorkoutFuntions.csproj", "{3A0A3C57-63A0-4349-B4CC-455496DEBE31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
