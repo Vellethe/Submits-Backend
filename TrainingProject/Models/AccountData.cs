@@ -131,12 +131,12 @@ namespace TrainingProject.Models
             // * 1,55
             if (account.IsMale)
             {
-                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5);
+                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) + 5)*1.55;
             }
 
             else
             {
-                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161);
+                return ((10 * account.CurrentWeight) + (6.25 * account.Height) - (5 * account.Age) - 161)*1.55;
             }
         }
 

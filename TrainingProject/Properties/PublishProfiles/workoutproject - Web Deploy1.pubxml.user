@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAIh8WA+E9jUO/4p//aaZ6VQAAAAACAAAAAAAQZgAAAAEAACAAAAAXWeydExJ+sHfd1CqwtOWcEitCKzqFMkJ8CAcNq1j9VQAAAAAOgAAAAAIAACAAAADviqO9fLreT626lXSYSHFIxc+3TzeZrLbFfqbcTYZU8YAAAAC7wLYd8WeFpxBowabtYW8In+M6xQMap0oVjMWMGh9Oas5OtlkNL3OPzD4t2rR7cZ6Mpg6i9VfPRqVngsxmR9v0CCtuK5jUiVCoIMNWCc7A5ubrc5/pnMRnz4rqFQnoEg/aYik33Geor5kPAkLneLrA51dbvGXODQ/1I8aKmCPwh0AAAAAYdGiE5ymeJFbjfD/NH4HxLZhs+qEturF8BB8cwMujWYjc3DiyRIaP/GL2om9fk0U19k4bXF/o2yEa0CmMhYnF</EncryptedPassword>
+    <History>True|2023-10-09T11:46:06.5620223Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=workoutdb1234.database.windows.net,1433%3bInitial Catalog=WorkoutDb%3bUser ID=admina%3bPassword=P%40ssword</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="TrainingProject.Data.AppDbContext">
+      <Value>Data Source=workoutdb1234.database.windows.net,1433%3bInitial Catalog=WorkoutDb%3bUser ID=admina%3bPassword=P%40ssword</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
