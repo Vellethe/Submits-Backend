@@ -12,3 +12,4 @@ namespace Backend.Data
 
         public DbSet<Note> Notes { get; set; }
     }
+}
